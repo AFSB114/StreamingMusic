@@ -1,41 +1,18 @@
-package com.sena.basic_crud.model;
-
-import jakarta.persistence.*;
-import org.hibernate.annotations.ColumnDefault;
+package com.sena.basic_crud.DTO;
 
 import java.sql.Date;
 
-@Entity(name = "user_account")
-public class user_account {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
+public class userDTO {
+
     private int user_id;
-
-    @Column(name = "name", length = 255, nullable = false)
     private String name;
-
-    @Column(name = "email", length = 255, nullable = false, unique = true)
     private String email;
-
-    @Column(name = "password", length = 255, nullable = false)
     private String password;
-
-    @Column(name = "registration_date", nullable = false)
-    @ColumnDefault("CURRENT_DATE")
     private Date registration_date;
-
-    @Column(name = "country", length = 100)
     private String country;
-
-    @Column(name = "profile_image", length = 255)
     private String profile_image;
 
-    public user_account() {
-
-    }
-
-    public user_account(int user_id, String name, String email, String password, Date registration_date, String country, String profile_image) {
+    public userDTO(int user_id, String name, String email, String password, Date registration_date, String country, String profile_image) {
         this.user_id = user_id;
         this.name = name;
         this.email = email;
@@ -100,4 +77,5 @@ public class user_account {
     public void setProfile_image(String profile_image) {
         this.profile_image = profile_image;
     }
+
 }

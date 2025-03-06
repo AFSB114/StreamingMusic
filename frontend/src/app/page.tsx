@@ -5,6 +5,8 @@ import Song from "@/components/Song";
 import { getMusics } from "@/services/musics";
 
 export default function Home() {
+  let count = 0;
+
   const [musics, setMusics] = useState([]);
 
   useEffect(() => {
@@ -14,9 +16,8 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 bg-zinc-900 p-6 rounded-2xl ">
-      {
-        musics.map((song, index) => (
+    <div className="relative overflow-y-auto max-h-full rounded-xl bg-zinc-900 p-3 shadow-sm grid md:grid-cols-3 lg:grid-cols-5  gap-3">
+      {musics.map((song, index) => (
         <Song key={index} song={song} />
       ))}
     </div>

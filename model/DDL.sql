@@ -1,4 +1,4 @@
--- Creation of tables for a music streaming platform in PostgreSQL
+    -- Creation of tables for a music streaming platform in PostgreSQL
 
 -- ARTIST Table
 CREATE TABLE ARTIST (
