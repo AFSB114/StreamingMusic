@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.sql.Date;
+import java.util.List;
 
 @Entity(name = "user_account")
 public class user_account {
@@ -30,6 +31,15 @@ public class user_account {
 
     @Column(name = "profile_image", length = 255)
     private String profile_image;
+
+    @OneToMany(mappedBy = "user_id", cascade = CascadeType.ALL)
+    private List<subscription> subscriptions;
+
+    @OneToMany(mappedBy = "user_id", cascade = CascadeType.ALL)
+    private List<playlist> playlists;
+
+    @OneToMany(mappedBy = "user_id", cascade = CascadeType.ALL)
+    private List<playback> playbacks;
 
     public user_account() {
 

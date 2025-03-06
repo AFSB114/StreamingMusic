@@ -30,8 +30,14 @@ public class artist {
     @Column(name = "image_url", length = 255, nullable = false)
     private String image_url;
 
-    @OneToMany(mappedBy = "artists", cascade = CascadeType.ALL, orphanRemoval = false)
+    @OneToMany(mappedBy = "artist_id", cascade = CascadeType.ALL)
     private List<album> albums;
+
+    @OneToMany(mappedBy = "artist_id", cascade = CascadeType.ALL)
+    private List<artist_genre> artist_genres;
+
+    @OneToMany(mappedBy = "artist_id", cascade = CascadeType.ALL)
+    private List<song> songs;
 
     public artist() {
 

@@ -2,6 +2,8 @@ package com.sena.basic_crud.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity(name = "genre")
 public class genre {
     @Id
@@ -15,14 +17,21 @@ public class genre {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "parent_genre_id")
-    private int parent_genre_id;
+    @ManyToOne
+    @JoinColumn(name = "parent_genre_id")
+    private genre parent_genre_id;
+
+    @OneToMany(mappedBy = "genre_id", cascade = CascadeType.ALL)
+    private List<artist_genre> artist_genres;
+
+    @OneToMany(mappedBy = "genre_id", cascade = CascadeType.ALL)
+    private List<song_genre> song_genres;
 
     public  genre() {
 
     }
 
-    public genre(int genre_id, String name, String description, int parent_genre_id) {
+    public genre(int genre_id, String name, String description, genre parent_genre_id) {
         this.genre_id = genre_id;
         this.name = name;
         this.description = description;
@@ -53,11 +62,11 @@ public class genre {
         this.description = description;
     }
 
-    public int getParent_genre_id() {
+    public genre getParent_genre_id() {
         return parent_genre_id;
     }
 
-    public void setParent_genre_id(int parent_genre_id) {
+    public void setParent_genre_id(genre parent_genre_id) {
         this.parent_genre_id = parent_genre_id;
     }
 }

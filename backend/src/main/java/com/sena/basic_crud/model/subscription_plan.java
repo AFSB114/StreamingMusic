@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity(name = "subscription_plan")
 public class subscription_plan {
@@ -32,6 +33,9 @@ public class subscription_plan {
 
     @Column(name = "ad_free")
     private boolean adFree;
+
+    @OneToMany(mappedBy = "subscription_plan_id", cascade = CascadeType.ALL)
+    private List<subscription> subscriptions;
 
     public subscription_plan() {
 

@@ -3,6 +3,7 @@ package com.sena.basic_crud.model;
 import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.util.List;
 
 @Entity(name = "album")
 public class album {
@@ -13,10 +14,11 @@ public class album {
 
     @ManyToOne
     @JoinColumn(name = "artist_id", nullable = false)
-    private int artist_id;
+    private artist artist_id;
 
-    @Column(name = "record_label_id", nullable = false)
-    private int record_label_id;
+    @ManyToOne
+    @JoinColumn(name = "record_label_id", nullable = false)
+    private record_label record_label_id;
 
     @Column(name = "title", nullable = false)
     private String title;
@@ -36,11 +38,14 @@ public class album {
     @Column(name = "description")
     private String description;
 
+    @OneToMany(mappedBy = "album_id", cascade = CascadeType.ALL)
+    private List<song> songs;
+
     public album() {
 
     }
 
-    public album(int album_id, int artist_id, int record_label_id, String title, Date release_date, String cover_url, String type, int total_duration, String description) {
+    public album(int album_id, artist artist_id, record_label record_label_id, String title, Date release_date, String cover_url, String type, int total_duration, String description) {
         this.album_id = album_id;
         this.artist_id = artist_id;
         this.record_label_id = record_label_id;
@@ -60,19 +65,19 @@ public class album {
         this.album_id = album_id;
     }
 
-    public int getArtist_id() {
+    public artist getArtist_id() {
         return artist_id;
     }
 
-    public void setArtist_id(int artist_id) {
+    public void setArtist_id(artist artist_id) {
         this.artist_id = artist_id;
     }
 
-    public int getRecord_label_id() {
+    public record_label getRecord_label_id() {
         return record_label_id;
     }
 
-    public void setRecord_label_id(int record_label_id) {
+    public void setRecord_label_id(record_label record_label_id) {
         this.record_label_id = record_label_id;
     }
 

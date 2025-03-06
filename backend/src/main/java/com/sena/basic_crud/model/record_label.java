@@ -11,7 +11,7 @@ public class record_label {
     @Column(name = "record_label_id")
     private int record_label_id;
 
-    @Column(name = "name", length = 255, nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "country", length = 100)
