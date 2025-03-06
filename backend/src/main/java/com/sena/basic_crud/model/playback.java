@@ -14,7 +14,7 @@ public class playback {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private user_account user_id;
+    private user user_id;
 
     @ManyToOne
     @JoinColumn(name = "song_id", nullable = false)
@@ -37,7 +37,7 @@ public class playback {
 
     }
 
-    public playback(int playback_id, user_account user_id, song song_id, Timestamp date_time, int listened_duration, String device, String location) {
+    public playback(int playback_id, user user_id, song song_id, Timestamp date_time, int listened_duration, String device, String location) {
         this.playback_id = playback_id;
         this.user_id = user_id;
         this.song_id = song_id;
@@ -55,11 +55,11 @@ public class playback {
         this.playback_id = playback_id;
     }
 
-    public user_account getUser_id() {
+    public user getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(user_account user_id) {
+    public void setUser_id(user user_id) {
         this.user_id = user_id;
     }
 

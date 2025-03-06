@@ -14,7 +14,7 @@ public class subscription {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private user_account user_id;
+    private user user_id;
 
     @ManyToOne
     @JoinColumn(name = "subscription_plan_id", nullable = false)
@@ -37,7 +37,7 @@ public class subscription {
 
     }
 
-    public subscription(int subscription_id, user_account user_id, subscription_plan subscription_plan_id, Date start_date, Date renewal_date, String status, String payment_method) {
+    public subscription(int subscription_id, user user_id, subscription_plan subscription_plan_id, Date start_date, Date renewal_date, String status, String payment_method) {
         this.subscription_id = subscription_id;
         this.user_id = user_id;
         this.subscription_plan_id = subscription_plan_id;
@@ -55,11 +55,11 @@ public class subscription {
         this.subscription_id = subscription_id;
     }
 
-    public user_account getUser_id() {
+    public user getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(user_account user_id) {
+    public void setUser_id(user user_id) {
         this.user_id = user_id;
     }
 

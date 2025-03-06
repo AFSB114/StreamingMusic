@@ -7,7 +7,7 @@ import java.sql.Date;
 import java.util.List;
 
 @Entity(name = "user_account")
-public class user_account {
+public class user {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
@@ -41,11 +41,11 @@ public class user_account {
     @OneToMany(mappedBy = "user_id", cascade = CascadeType.ALL)
     private List<playback> playbacks;
 
-    public user_account() {
+    public user() {
 
     }
 
-    public user_account(int user_id, String name, String email, String password, Date registration_date, String country, String profile_image) {
+    public user(int user_id, String name, String email, String password, Date registration_date, String country, String profile_image) {
         this.user_id = user_id;
         this.name = name;
         this.email = email;

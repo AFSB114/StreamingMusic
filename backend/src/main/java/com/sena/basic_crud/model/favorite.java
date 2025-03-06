@@ -14,7 +14,7 @@ public class favorite {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private user_account user_id;
+    private user user_id;
 
     @Column(name = "object_type", nullable = false, length = 50)
     private String object_type;
@@ -30,7 +30,7 @@ public class favorite {
 
     }
 
-    public favorite(int favorite_id, user_account user_id, String object_type, int object_id, Timestamp date_marked) {
+    public favorite(int favorite_id, user user_id, String object_type, int object_id, Timestamp date_marked) {
         this.favorite_id = favorite_id;
         this.user_id = user_id;
         this.object_type = object_type;
@@ -46,11 +46,11 @@ public class favorite {
         this.favorite_id = favorite_id;
     }
 
-    public user_account getUser_id() {
+    public user getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(user_account user_id) {
+    public void setUser_id(user user_id) {
         this.user_id = user_id;
     }
 

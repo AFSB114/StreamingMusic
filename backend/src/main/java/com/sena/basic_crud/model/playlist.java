@@ -15,7 +15,7 @@ public class playlist {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private user_account user_id;
+    private user user_id;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -41,7 +41,7 @@ public class playlist {
 
     }
 
-    public playlist(int playlist_id, user_account user_id, String name, String description, Date creation_date, boolean is_public, String image_url) {
+    public playlist(int playlist_id, user user_id, String name, String description, Date creation_date, boolean is_public, String image_url) {
         this.playlist_id = playlist_id;
         this.user_id = user_id;
         this.name = name;
@@ -59,11 +59,11 @@ public class playlist {
         this.playlist_id = playlist_id;
     }
 
-    public user_account getUser_id() {
+    public user getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(user_account user) {
+    public void setUser_id(user user) {
         this.user_id = user;
     }
 
