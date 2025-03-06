@@ -33,6 +33,10 @@ public class playback {
     @Column(name = "location")
     private String location;
 
+    public playback(){
+
+    }
+
     public playback(int playback_id, user_account user_id, song song_id, Timestamp date_time, int listened_duration, String device, String location) {
         this.playback_id = playback_id;
         this.user_id = user_id;
