@@ -1,5 +1,3 @@
-    -- Creation of tables for a music streaming platform in PostgreSQL
-
 -- ARTIST Table
 CREATE TABLE ARTIST (
     artist_id SERIAL PRIMARY KEY,
@@ -21,9 +19,9 @@ CREATE TABLE GENRE (
 
 -- ARTIST_GENRE Table (bridge table)
 CREATE TABLE ARTIST_GENRE (
+    artist_genre_id SERIAL PRIMARY KEY,
     artist_id INTEGER NOT NULL,
     genre_id INTEGER NOT NULL,
-    PRIMARY KEY (artist_id, genre_id),
     FOREIGN KEY (artist_id) REFERENCES ARTIST(artist_id) ON DELETE CASCADE,
     FOREIGN KEY (genre_id) REFERENCES GENRE(genre_id) ON DELETE CASCADE
 );
@@ -67,9 +65,9 @@ CREATE TABLE SONG (
 
 -- SONG_GENRE Table (bridge table)
 CREATE TABLE SONG_GENRE (
+    song_genre_id SERIAL PRIMARY KEY,
     song_id INTEGER NOT NULL,
     genre_id INTEGER NOT NULL,
-    PRIMARY KEY (song_id, genre_id),
     FOREIGN KEY (song_id) REFERENCES SONG(song_id) ON DELETE CASCADE,
     FOREIGN KEY (genre_id) REFERENCES GENRE(genre_id) ON DELETE CASCADE
 );
@@ -121,11 +119,11 @@ CREATE TABLE PLAYLIST (
 
 -- PLAYLIST_SONG Table (bridge table)
 CREATE TABLE PLAYLIST_SONG (
+    playlist_song_id SERIAL PRIMARY KEY,
     playlist_id INTEGER NOT NULL,
     song_id INTEGER NOT NULL,
     position INTEGER NOT NULL,
     date_added TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (playlist_id, song_id),
     FOREIGN KEY (playlist_id) REFERENCES PLAYLIST(playlist_id) ON DELETE CASCADE,
     FOREIGN KEY (song_id) REFERENCES SONG(song_id) ON DELETE CASCADE
 );
@@ -150,28 +148,3 @@ CREATE TABLE FAVORITE (
     date_marked TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     UNIQUE (user_id, object_type, object_id)
 );
-
--- Indexes to improve performance
-
--- Indexes for frequent searches
-CREATE INDEX idx_song_title ON SONG(title);
-CREATE INDEX idx_album_title ON ALBUM(title);
-CREATE INDEX idx_artist_name ON ARTIST(name);
-
--- Indexes for foreign keys
-CREATE INDEX idx_album_artist ON ALBUM(artist_id);
-CREATE INDEX idx_song_album ON SONG(album_id);
-CREATE INDEX idx_song_artist ON SONG(artist_id);
-
--- Indexes for playback analysis
-CREATE INDEX idx_playback_song ON PLAYBACK(song_id);
-CREATE INDEX idx_playback_user ON PLAYBACK(user_id);
-CREATE INDEX idx_playback_date ON PLAYBACK(date_time);
-
--- Indexes for playlist management
-CREATE INDEX idx_playlist_user ON PLAYLIST(user_id);
-CREATE INDEX idx_playlist_public ON PLAYLIST(is_public);
-
--- Indexes for subscriptions
-CREATE INDEX idx_subscription_user ON SUBSCRIPTION(user_id);
-CREATE INDEX idx_subscription_status ON SUBSCRIPTION(status);
