@@ -1,46 +1,19 @@
-package com.sena.basic_crud.model;
-
-import jakarta.persistence.*;
+package com.sena.basic_crud.DTO;
 
 import java.math.BigDecimal;
-import java.util.List;
 
-@Entity(name = "subscription_plan")
-public class subscription_plan {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "plan_id")
+public class subscription_planDTO {
+
     private int plan_id;
-
-    @Column(name = "name", length = 100, nullable = false)
     private String name;
-
-    @Column(name = "price", precision = 10, scale = 2, nullable = false)
     private BigDecimal price;
-
-    @Column(name = "duration", length = 50, nullable = false)
     private String duration;
-
-    @Column(name = "features")
     private String features;
-
-    @Column(name = "audio_quality")
     private int audio_quality;
-
-    @Column(name = "allows_downloads")
     private boolean allows_downloads;
-
-    @Column(name = "ad_free")
     private boolean ad_free;
 
-    @OneToMany(mappedBy = "subscription_plan_id", cascade = CascadeType.ALL)
-    private List<subscription> subscriptions;
-
-    public subscription_plan() {
-
-    }
-
-    public subscription_plan(int plan_id, String name, BigDecimal price, String duration, String features, int audio_quality, boolean allows_downloads, boolean ad_free) {
+    public subscription_planDTO(int plan_id, String name, BigDecimal price, String duration, String features, int audio_quality, boolean allows_downloads, boolean ad_free) {
         this.plan_id = plan_id;
         this.name = name;
         this.price = price;
@@ -55,8 +28,8 @@ public class subscription_plan {
         return plan_id;
     }
 
-    public void setPlan_id(int planId) {
-        this.plan_id = planId;
+    public void setPlan_id(int plan_id) {
+        this.plan_id = plan_id;
     }
 
     public String getName() {
@@ -95,23 +68,23 @@ public class subscription_plan {
         return audio_quality;
     }
 
-    public void setAudio_quality(int audioQuality) {
-        this.audio_quality = audioQuality;
+    public void setAudio_quality(int audio_quality) {
+        this.audio_quality = audio_quality;
     }
 
     public boolean isAllows_downloads() {
         return allows_downloads;
     }
 
-    public void setAllows_downloads(boolean allowsDownloads) {
-        this.allows_downloads = allowsDownloads;
+    public void setAllows_downloads(boolean allows_downloads) {
+        this.allows_downloads = allows_downloads;
     }
 
     public boolean isAd_free() {
         return ad_free;
     }
 
-    public void setAd_free(boolean adFree) {
-        this.ad_free = adFree;
+    public void setAd_free(boolean ad_free) {
+        this.ad_free = ad_free;
     }
 }
