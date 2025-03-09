@@ -6,9 +6,9 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'lastfm.freetls.fastly.net',
+        hostname: 'picsum.photos',
         port: '',
-        pathname: '/i/u/**',
+        pathname: '/seed/**',
         search: '',
       },
     ]

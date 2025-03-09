@@ -14,8 +14,9 @@ public class SongDTO {
     private String composer;
     private String lyrics;
     private String fileUrl;
+    private String imageUrl;
 
-    public SongDTO(int id, int albumId, int artistId, String title, int duration, int trackNumber, Date releaseDate, String composer, String lyrics, String fileUrl) {
+    public SongDTO(int id, int albumId, int artistId, String title, int duration, int trackNumber, Date releaseDate, String composer, String lyrics, String fileUrl, String imageUrl) {
         this.id = id;
         this.albumId = albumId;
         this.artistId = artistId;
@@ -26,6 +27,7 @@ public class SongDTO {
         this.composer = composer;
         this.lyrics = lyrics;
         this.fileUrl = fileUrl;
+        this.imageUrl = imageUrl;
     }
 
     public int getId() {
@@ -106,5 +108,13 @@ public class SongDTO {
 
     public void setFileUrl(String fileUrl) {
         this.fileUrl = fileUrl;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

@@ -41,6 +41,9 @@ public class Song {
     @Column(name = "file_url")
     private String fileUrl;
 
+    @Column(name = "image_url")
+    private String imageUrl;
+
     @OneToMany(mappedBy = "songId", cascade = CascadeType.ALL)
     private List<SongGenre> SongGenres;
 
@@ -54,7 +57,7 @@ public class Song {
 
     }
 
-    public Song(int songId, Album albumId, Artist artistId, String title, int duration, int trackNumber, Date releaseDate, String composer, String lyrics, String fileUrl) {
+    public Song(int songId, Album albumId, Artist artistId, String title, int duration, int trackNumber, Date releaseDate, String composer, String lyrics, String fileUrl, String imageUrl) {
         this.songId = songId;
         this.albumId = albumId;
         this.artistId = artistId;
@@ -65,6 +68,7 @@ public class Song {
         this.composer = composer;
         this.lyrics = lyrics;
         this.fileUrl = fileUrl;
+        this.imageUrl = imageUrl;
     }
 
     public int getSongId() {
@@ -145,5 +149,13 @@ public class Song {
 
     public void setFileUrl(String file_url) {
         this.fileUrl = file_url;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

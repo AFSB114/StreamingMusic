@@ -1,0 +1,49 @@
+{
+  "artists": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "biography": "A famous rock singer.",
+      "country_of_origin": "USA",
+      "debut_date": "2010-06-15",
+      "image_url": "https://example.com/john_doe.jpg",
+      "type": "Solo"
+    },
+    {
+      "id": 2,
+      "name": "The Sound Waves",
+      "biography": "An alternative rock band.",
+      "country_of_origin": "UK",
+      "debut_date": "2015-03-22",
+      "image_url": "https://example.com/sound_waves.jpg",
+      "type": "Band"
+    },
+    {
+      "id": 3,
+      "name": "Luna Martinez",
+      "biography": "Latin pop artist with a strong voice.",
+      "country_of_origin": "Mexico",
+      "debut_date": "2012-09-10",
+      "image_url": "https://example.com/luna_martinez.jpg",
+      "type": "Solo"
+    },
+    {
+      "id": 4,
+      "name": "DJ Bass",
+      "biography": "A top electronic music DJ.",
+      "country_of_origin": "Germany",
+      "debut_date": "2018-07-05",
+      "image_url": "https://example.com/dj_bass.jpg",
+      "type": "DJ"
+    },
+    {
+      "id": 5,
+      "name": "Horizon",
+      "biography": "A progressive metal band.",
+      "country_of_origin": "Canada",
+      "debut_date": "2008-11-20",
+      "image_url": "https://example.com/horizon.jpg",
+      "type": "Band"
+    }
+  ]
+}

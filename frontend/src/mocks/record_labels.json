@@ -1,0 +1,20 @@
+{
+  "record_labels": [
+    {
+      "id": 1,
+      "name": "Rock Nation",
+      "country": "USA",
+      "foundation_date": "2000-05-10",
+      "logo_url": "https://example.com/rock_nation.jpg",
+      "website": "https://rocknation.com"
+    },
+    {
+      "id": 2,
+      "name": "Indie Sound",
+      "country": "UK",
+      "foundation_date": "2015-09-17",
+      "logo_url": "https://example.com/indie_sound.jpg",
+      "website": "https://indiesound.com"
+    }
+  ]
+}

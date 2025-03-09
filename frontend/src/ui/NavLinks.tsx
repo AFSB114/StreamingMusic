@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 // Depending on the size of the application, this would be stored in a database.
 const links = [
   { name: "Home", href: "/" },
+  { name: "Songs", href: "/songs" },
   { name: "Albums", href: "/albums" },
   { name: "Artists", href: "/artists" },
   { name: "Playlists", href: "/playlists" },

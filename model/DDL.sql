@@ -60,6 +60,7 @@ CREATE TABLE SONG (
     release_date DATE,
     composer VARCHAR(255),
     lyrics TEXT,
+    image_url VARCHAR(255),
     file_url VARCHAR(255) NOT NULL
 );
 
