@@ -1,34 +1,13 @@
 "use client";
 
-import { useState } from "react";
-import { useMusic } from "@/context/MusicContext";  // Importa desde el contexto
-
 import { Heart, Music, Edit, Trash2 } from "lucide-react";
 import Image from "next/image";
-import { type Song } from "@/utils/const.def";
+import { type songType } from "@/types";
+import useSong from "@/hooks/useSong";
 import Link from "next/link";
 
-export default function Song({
-  song,
-}: {
-  song: Song
-  }) {
-  const { deleteMusic } = useMusic();  // Usa el contexto compartido
-  const [liked, setLiked] = useState(false);
-
-  const handleLike = () => {
-    setLiked(!liked);
-  };
-
-  const handleDelete = () => {
-    deleteMusic(song.id);
-  };
-
-  function formatDuration(duration: number) {
-    const minutes = Math.floor(duration / 60);
-    const seconds = duration % 60;
-    return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
-  }
+export default function Song({ song }: { song: songType }) {
+  const { handleLike, handleDelete, liked, formatDuration } = useSong({ song });
 
   return (
     <div className="w-full box-border rounded-md border-2 border-zinc-800 bg-zinc-900 p-3 shadow-sm hover:border-red-500 hover:shadow-md transition-all duration-200">

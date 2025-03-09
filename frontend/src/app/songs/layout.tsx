@@ -1,12 +1,10 @@
 // app/layout.js
 "use client";
 
-import { MusicProvider } from '@/context/MusicContext';
+import { SongProvider } from "@/context/providers/SongProvider";
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return (
-    <MusicProvider>
-      {children}
-    </MusicProvider>
-  );
+export default function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
+  return <SongProvider>{children}</SongProvider>;
 }
