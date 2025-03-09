@@ -35,7 +35,7 @@ public class Song {
     @Column(name = "composer")
     private String composer;
 
-    @Column(name = "lyrics")
+    @Column(name = "lyrics", columnDefinition = "TEXT")
     private String lyrics;
 
     @Column(name = "file_url")

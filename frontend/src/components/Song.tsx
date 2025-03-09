@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useMusic } from "@/context/MusicContext";  // Importa desde el contexto
 
 import { Heart, Music, Edit, Trash2 } from "lucide-react";
 import Image from "next/image";
@@ -9,11 +10,10 @@ import Link from "next/link";
 
 export default function Song({
   song,
-  deleteMusic,
 }: {
   song: Song
-  deleteMusic: (id: number) => void
-}) {
+  }) {
+  const { deleteMusic } = useMusic();  // Usa el contexto compartido
   const [liked, setLiked] = useState(false);
 
   const handleLike = () => {
@@ -73,7 +73,7 @@ export default function Song({
       </div>
       <div className="grid grid-cols-2 p-3 pb-0 gap-2">
         <Link
-          href={`/song/${song.id}/edit`}
+          href={`/songs/${song.id}/edit`}
           className="flex items-center justify-center gap-2 rounded-xl transition-colors duration-200 hover:bg-green-600 p-2"
         >
           <Edit className="h-4 w-4" />
