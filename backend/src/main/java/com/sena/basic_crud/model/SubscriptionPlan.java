@@ -21,7 +21,7 @@ public class SubscriptionPlan {
     @Column(name = "duration", length = 50, nullable = false)
     private String duration;
 
-    @Column(name = "features")
+    @Column(name = "features", columnDefinition = "TEXT")
     private String features;
 
     @Column(name = "audio_quality")

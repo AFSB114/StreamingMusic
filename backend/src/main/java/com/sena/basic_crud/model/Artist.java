@@ -24,7 +24,7 @@ public class Artist {
     @Column(name = "debut_date")
     private Date debutDate;
 
-    @Column(name = "biography")
+    @Column(name = "biography", columnDefinition = "TEXT")
     private String biography;
 
     @Column(name = "image_url", length = 255, nullable = false)

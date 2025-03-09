@@ -35,7 +35,7 @@ public class Album {
     @Column(name = "total_duration")
     private int totalDuration;
 
-    @Column(name = "description")
+    @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
     @OneToMany(mappedBy = "albumId", cascade = CascadeType.ALL)

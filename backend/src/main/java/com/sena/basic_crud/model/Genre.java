@@ -14,7 +14,7 @@ public class Genre {
     @Column(name = "name", length = 255, nullable = false)
     private String name;
 
-    @Column(name = "description")
+    @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
     @ManyToOne
