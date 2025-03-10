@@ -1,6 +1,7 @@
 "use client";
 
 import { useEditSong } from "@/hooks/useEditSong";
+import Image from "next/image";
 
 export default function Edit() {
   const { song, formData, isLoading, handleChange, handleSubmit, router } = useEditSong();
@@ -10,7 +11,7 @@ export default function Edit() {
   }
 
   return (
-    <div className="w-full mx-auto p-6 bg-zinc-900 rounded-xl">
+    <div className="w-full mx-auto p-6 bg-zinc-900 rounded-xl overflow-y-auto">
       <h1 className="text-2xl font-bold mb-6">Editar Canción</h1>
 
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -62,6 +63,16 @@ export default function Edit() {
             className="w-full p-2 rounded bg-zinc-800 border border-zinc-700"
             required
             disabled
+          />
+        </div>
+
+        <div>
+          <Image
+            src={formData.image_url}
+            alt="Image Song"
+            width={300}
+            height={300}
+            className="object-fit"
           />
         </div>
 

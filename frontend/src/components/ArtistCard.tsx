@@ -22,7 +22,7 @@ export default function ArtistCard({ artist }: { artist: ArtistType }) {
       <div className="relative z-20">
         <div className="pt-4 px-3">
           <div className="flex justify-center">
-            <div className="text-amber-500 text-xs font-bold bg-zinc-500/50 rounded-full w-20 h-20"></div>
+            <div className="text-xs font-bold bg-zinc-500/50 rounded-full w-20 h-20"></div>
           </div>
         </div>
         <div className="text-center mt-2 px-3">

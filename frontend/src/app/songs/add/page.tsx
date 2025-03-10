@@ -17,9 +17,11 @@ export default function AddSongPage() {
   });
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
-    
+
     // Actualizar el estado según el campo que cambió
     if (name === "title") {
       // Si el título cambia, actualizar tanto el título como la URL de la imagen
@@ -42,7 +44,33 @@ export default function AddSongPage() {
     e.preventDefault();
     setIsLoading(true);
 
-    // addSong(formData);
+    addSong({
+      album_id: 1,
+      title: formData.title,
+      composer: "",
+      duration: formData.duration,
+      lyrics: formData.lyrics,
+      release_date: "",
+      track_number: 0,
+      album_id: null,
+      artist_id: 1,
+      file_url: "",
+      image_url: formData.image_url,
+    });
+
+    // id: number;
+    // title: string;
+    // composer: string;
+    // duration: number;
+    // lyrics: string;
+    // release_date: string;
+    // track_number: number;
+    // album_id: number | null;
+    // artist_id: number;
+    // file_url: string;
+    // image_url: string;
+
+    console.log(formData);
 
     setTimeout(() => {
       setIsLoading(false);
@@ -91,7 +119,7 @@ export default function AddSongPage() {
             type="number"
             id="duration"
             name="duration"
-            value={formData.duration}
+            value={formData.duration > 0 ? formData.duration : 1}
             onChange={handleChange}
             className="w-full p-2 rounded bg-zinc-800 border border-zinc-700"
             min="1"

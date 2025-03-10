@@ -42,10 +42,23 @@ export function useEditSong() {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: name === "duration" ? parseInt(value) : value,
-    }));
+
+    // Actualizar el estado según el campo que cambió
+    if (name === "title") {
+      // Si el título cambia, actualizar tanto el título como la URL de la imagen
+      const formattedTitle = value.trim().replace(/\s+/g, "").toLowerCase(); // Eliminar espacios
+      setFormData((prev) => ({
+        ...prev,
+        title: value,
+        image_url: `https://picsum.photos/seed/${formattedTitle}/300/300`,
+      }));
+    } else {
+      // Para otros campos, actualizar normalmente
+      setFormData((prev) => ({
+        ...prev,
+        [name]: name === "duration" ? parseInt(value) : value,
+      }));
+    }
   };
 
   // Manejar envío del formulario
