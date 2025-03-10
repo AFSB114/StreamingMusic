@@ -1,16 +1,19 @@
 package com.sena.basic_crud.DTO;
 
+import com.sena.basic_crud.model.Genre;
+
 public class GenreDTO {
 
     private int id;
     private String name;
     private String description;
+    private Genre parentGenreId;
 
-    public GenreDTO(int id, String name, String description, int parent_genre_id) {
+    public GenreDTO(int id, String name, String description, Genre parentGenreId) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.parent_genre_id = parent_genre_id;
+        this.parentGenreId = parentGenreId;
     }
 
     private int parent_genre_id;
@@ -39,11 +42,11 @@ public class GenreDTO {
         this.description = description;
     }
 
-    public int getParent_genre_id() {
-        return parent_genre_id;
+    public Genre getParentGenreId() {
+        return parentGenreId;
     }
 
-    public void setParent_genre_id(int parent_genre_id) {
-        this.parent_genre_id = parent_genre_id;
+    public void setParentGenreId(Genre parentGenreId) {
+        this.parentGenreId = parentGenreId;
     }
 }

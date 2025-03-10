@@ -1,18 +1,21 @@
 package com.sena.basic_crud.DTO;
 
+import com.sena.basic_crud.model.Song;
+import com.sena.basic_crud.model.User;
+
 import java.sql.Timestamp;
 
 public class PlaybackDTO {
 
     private int id;
-    private int userId;
-    private int songId;
+    private User userId;
+    private Song songId;
     private Timestamp dateTime;
     private int listenedDuration;
     private String device;
     private String location;
 
-    public PlaybackDTO(int id, int userId, int songId, Timestamp dateTime, int listenedDuration, String device, String location) {
+    public PlaybackDTO(int id, User userId, Song songId, Timestamp dateTime, int listenedDuration, String device, String location) {
         this.id = id;
         this.userId = userId;
         this.songId = songId;
@@ -30,19 +33,19 @@ public class PlaybackDTO {
         this.id = id;
     }
 
-    public int getUserId() {
+    public User getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(User userId) {
         this.userId = userId;
     }
 
-    public int getSongId() {
+    public Song getSongId() {
         return songId;
     }
 
-    public void setSongId(int songId) {
+    public void setSongId(Song songId) {
         this.songId = songId;
     }
 

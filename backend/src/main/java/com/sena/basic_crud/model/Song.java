@@ -10,7 +10,7 @@ public class Song {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int songId;
+    private int id;
 
     @ManyToOne
     @JoinColumn(name = "album_id")
@@ -57,8 +57,8 @@ public class Song {
 
     }
 
-    public Song(int songId, Album albumId, Artist artistId, String title, int duration, int trackNumber, Date releaseDate, String composer, String lyrics, String fileUrl, String imageUrl) {
-        this.songId = songId;
+    public Song(int id, Album albumId, Artist artistId, String title, int duration, int trackNumber, Date releaseDate, String composer, String lyrics, String fileUrl, String imageUrl) {
+        this.id = id;
         this.albumId = albumId;
         this.artistId = artistId;
         this.title = title;
@@ -71,12 +71,12 @@ public class Song {
         this.imageUrl = imageUrl;
     }
 
-    public int getSongId() {
-        return songId;
+    public int getId() {
+        return id;
     }
 
-    public void setSongId(int song_id) {
-        this.songId = song_id;
+    public void setId(int song_id) {
+        this.id = song_id;
     }
 
     public Album getAlbumId() {

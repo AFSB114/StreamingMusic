@@ -1,18 +1,20 @@
 package com.sena.basic_crud.DTO;
 
+import com.sena.basic_crud.model.User;
+
 import java.sql.Date;
 
 public class PlaylistDTO {
 
     private int id;
-    private int userId;
+    private User userId;
     private String name;
     private String description;
     private Date creationDate;
     private boolean isPublic;
     private String imageUrl;
 
-    public PlaylistDTO(int id, int userId, String name, String description, Date creationDate, boolean isPublic, String imageUrl) {
+    public PlaylistDTO(int id, User userId, String name, String description, Date creationDate, boolean isPublic, String imageUrl) {
         this.id = id;
         this.userId = userId;
         this.name = name;
@@ -30,11 +32,11 @@ public class PlaylistDTO {
         this.id = id;
     }
 
-    public int getUserId() {
+    public User getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(User userId) {
         this.userId = userId;
     }
 

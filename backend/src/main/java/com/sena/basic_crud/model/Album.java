@@ -73,11 +73,11 @@ public class Album {
         this.artistId = artist_id;
     }
 
-    public RecordLabel getRecord_label_id() {
+    public RecordLabel getRecordLabelId() {
         return recordLabelId;
     }
 
-    public void setRecord_label_id(RecordLabel recordLabel_id) {
+    public void setRecordLabelId(RecordLabel recordLabel_id) {
         this.recordLabelId = recordLabel_id;
     }
 

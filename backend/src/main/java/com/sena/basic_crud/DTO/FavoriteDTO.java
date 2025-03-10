@@ -1,23 +1,24 @@
 package com.sena.basic_crud.DTO;
 
+import com.sena.basic_crud.model.User;
+
 import java.sql.Timestamp;
 
 public class FavoriteDTO {
 
     private int id;
-    private int userId;
+    private User userId;
     private String objectType;
     private int objectId;
+    private Timestamp dateMarked;
 
-    public FavoriteDTO(int id, int userId, String objectType, int objectId, Timestamp date_marked) {
+    public FavoriteDTO(int id, User userId, String objectType, int objectId, Timestamp dateMarked) {
         this.id = id;
         this.userId = userId;
         this.objectType = objectType;
         this.objectId = objectId;
-        this.date_marked = date_marked;
+        this.dateMarked = dateMarked;
     }
-
-    private Timestamp date_marked;
 
     public int getId() {
         return id;
@@ -27,11 +28,11 @@ public class FavoriteDTO {
         this.id = id;
     }
 
-    public int getUserId() {
+    public User getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(User userId) {
         this.userId = userId;
     }
 
@@ -51,11 +52,11 @@ public class FavoriteDTO {
         this.objectId = objectId;
     }
 
-    public Timestamp getDate_marked() {
-        return date_marked;
+    public Timestamp getDateMarked() {
+        return dateMarked;
     }
 
-    public void setDate_marked(Timestamp date_marked) {
-        this.date_marked = date_marked;
+    public void setDateMarked(Timestamp dateMarked) {
+        this.dateMarked = dateMarked;
     }
 }

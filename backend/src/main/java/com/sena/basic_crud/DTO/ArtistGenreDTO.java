@@ -1,12 +1,15 @@
 package com.sena.basic_crud.DTO;
 
+import com.sena.basic_crud.model.Artist;
+import com.sena.basic_crud.model.Genre;
+
 public class ArtistGenreDTO {
 
     private int id;
-    private int artistId;
-    private int genreId;
+    private Artist artistId;
+    private Genre genreId;
 
-    public ArtistGenreDTO(int id, int artistId, int genreId) {
+    public ArtistGenreDTO(int id, Artist artistId, Genre genreId) {
         this.id = id;
         this.artistId = artistId;
         this.genreId = genreId;
@@ -20,19 +23,19 @@ public class ArtistGenreDTO {
         this.id = id;
     }
 
-    public int getArtistId() {
+    public Artist getArtistId() {
         return artistId;
     }
 
-    public void setArtistId(int artistId) {
+    public void setArtistId(Artist artistId) {
         this.artistId = artistId;
     }
 
-    public int getGenreId() {
+    public Genre getGenreId() {
         return genreId;
     }
 
-    public void setGenreId(int genreId) {
+    public void setGenreId(Genre genreId) {
         this.genreId = genreId;
     }
 }

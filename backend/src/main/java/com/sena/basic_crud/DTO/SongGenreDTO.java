@@ -1,12 +1,15 @@
 package com.sena.basic_crud.DTO;
 
+import com.sena.basic_crud.model.Genre;
+import com.sena.basic_crud.model.Song;
+
 public class SongGenreDTO {
 
     private int id;
-    private int songId;
-    private int genreId;
+    private Song songId;
+    private Genre genreId;
 
-    public SongGenreDTO(int id, int songId, int genreId) {
+    public SongGenreDTO(int id, Song songId, Genre genreId) {
         this.id = id;
         this.songId = songId;
         this.genreId = genreId;
@@ -20,19 +23,19 @@ public class SongGenreDTO {
         this.id = id;
     }
 
-    public int getSongId() {
+    public Song getSongId() {
         return songId;
     }
 
-    public void setSongId(int songId) {
+    public void setSongId(Song songId) {
         this.songId = songId;
     }
 
-    public int getGenreId() {
+    public Genre getGenreId() {
         return genreId;
     }
 
-    public void setGenreId(int genreId) {
+    public void setGenreId(Genre genreId) {
         this.genreId = genreId;
     }
 }

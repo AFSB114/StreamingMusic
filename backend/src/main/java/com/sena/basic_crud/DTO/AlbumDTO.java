@@ -1,12 +1,15 @@
 package com.sena.basic_crud.DTO;
 
+import com.sena.basic_crud.model.Artist;
+import com.sena.basic_crud.model.RecordLabel;
+
 import java.sql.Date;
 
 public class AlbumDTO {
 
     private int id;
-    private int artistId;
-    private int recordLabelId;
+    private Artist artistId;
+    private RecordLabel recordLabelId;
     private String title;
     private Date releaseDate;
     private String coverUrl;
@@ -14,7 +17,7 @@ public class AlbumDTO {
     private int totalDuration;
     private String description;
 
-    public AlbumDTO(int id, int artistId, int recordLabelId, String title, Date releaseDate, String coverUrl, String type, int totalDuration, String description) {
+    public AlbumDTO(int id, Artist artistId, RecordLabel recordLabelId, String title, Date releaseDate, String coverUrl, String type, int totalDuration, String description) {
         this.id = id;
         this.artistId = artistId;
         this.recordLabelId = recordLabelId;
@@ -34,19 +37,19 @@ public class AlbumDTO {
         this.id = id;
     }
 
-    public int getArtistId() {
+    public Artist getArtistId() {
         return artistId;
     }
 
-    public void setArtistId(int artistId) {
+    public void setArtistId(Artist artistId) {
         this.artistId = artistId;
     }
 
-    public int getRecordLabelId() {
+    public RecordLabel getRecordLabelId() {
         return recordLabelId;
     }
 
-    public void setRecordLabelId(int recordLabelId) {
+    public void setRecordLabelId(RecordLabel recordLabelId) {
         this.recordLabelId = recordLabelId;
     }
 
