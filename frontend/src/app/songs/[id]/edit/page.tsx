@@ -59,9 +59,9 @@ export default function Edit() {
             id="image_url"
             name="image_url"
             value={formData.image_url}
-            onChange={handleChange}
             className="w-full p-2 rounded bg-zinc-800 border border-zinc-700"
             required
+            disabled
           />
         </div>
 

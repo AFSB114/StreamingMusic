@@ -19,7 +19,6 @@ export interface songType {
 
 export interface SongContextType {
   songsList: songType[];
-  setSongsList: React.Dispatch<React.SetStateAction<songType[]>>;
   deleteSong: (id: number) => void;
   getSongById: (id: number) => songType | null;
   updateSongsList: (id: number, updatedSong: Partial<songType>) => void;
@@ -37,11 +36,10 @@ export interface ArtistType {
 }
 
 export interface ArtistContextType {
-  artists: ArtistType[];
-  setArtists: React.Dispatch<React.SetStateAction<ArtistType[]>>;
+  artistsList: ArtistType[];
   deleteArtist: (id: number) => void;
   getArtistById: (id: number) => ArtistType | null;
-  updateArtist: (id: number, updatedArtist: Partial<ArtistType>) => void;
+  updateArtistsList: (id: number, updatedArtist: Partial<ArtistType>) => void;
   addArtist: (newArtist: Omit<ArtistType, "id">) => number;
 }
 

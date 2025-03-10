@@ -3,14 +3,17 @@
 import { Heart, Music, Edit, Trash2 } from "lucide-react";
 import Image from "next/image";
 import { type songType } from "@/types";
-import useSong from "@/hooks/useSong";
+import useSongCard from "@/hooks/useSongCard";
 import Link from "next/link";
+import Card from "@/ui/Card";
 
-export default function Song({ song }: { song: songType }) {
-  const { handleLike, handleDelete, liked, formatDuration } = useSong({ song });
+export default function SongCard({ song }: { song: songType }) {
+  const { handleLike, handleDelete, liked, formatDuration } = useSongCard({
+    song,
+  });
 
   return (
-    <div className="w-full box-border rounded-md border-2 border-zinc-800 bg-zinc-900 p-3 shadow-sm hover:border-red-500 hover:shadow-md transition-all duration-200">
+    <Card className="w-full ">
       <div className="relative">
         <Image
           src={`${song.image_url}`}
@@ -66,6 +69,6 @@ export default function Song({ song }: { song: songType }) {
           <span>Delete</span>
         </button>
       </div>
-    </div>
+    </Card>
   );
 }

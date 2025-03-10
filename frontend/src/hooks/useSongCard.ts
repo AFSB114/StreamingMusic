@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useSongsList } from "@/hooks/useSongsList";
 import type { songType } from "@/types";
 
-export default function useSong({ song }: { song: songType }) {
+export default function useSongCard({ song }: { song: songType }) {
   const { deleteSong } = useSongsList();
   const [liked, setLiked] = useState(false);
 
