@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 
 public class SubscriptionPlanDTO {
 
-    private int id;
     private String name;
     private BigDecimal price;
     private String duration;
@@ -13,8 +12,7 @@ public class SubscriptionPlanDTO {
     private boolean allowsDownloads;
     private boolean adFree;
 
-    public SubscriptionPlanDTO(int id, String name, BigDecimal price, String duration, String features, int audioQuality, boolean allowsDownloads, boolean adFree) {
-        this.id = id;
+    public SubscriptionPlanDTO(String name, BigDecimal price, String duration, String features, int audioQuality, boolean allowsDownloads, boolean adFree) {
         this.name = name;
         this.price = price;
         this.duration = duration;
@@ -22,14 +20,6 @@ public class SubscriptionPlanDTO {
         this.audioQuality = audioQuality;
         this.allowsDownloads = allowsDownloads;
         this.adFree = adFree;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {

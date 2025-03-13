@@ -2,7 +2,7 @@ import Card from "@/ui/Card";
 import Image from "next/image";
 import { Edit, Trash2 } from "lucide-react";
 import Link from "next/link";
-import useArtistCard from "@/hooks/useArtistCard";
+import { useArtistCard } from "@/hooks";
 
 import { type ArtistType } from "@/types";
 

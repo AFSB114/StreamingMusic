@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { useSongsList } from "@/hooks/useSongsList";
-import type { songType } from "@/types";
+import { useSongsList } from "@/hooks/song/useSongsList";
+import type { SongType } from "@/types";
 
-export default function useSongCard({ song }: { song: songType }) {
+export default function useSongCard({ song }: { song: SongType }) {
   const { deleteSong } = useSongsList();
   const [liked, setLiked] = useState(false);
 

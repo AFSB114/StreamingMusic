@@ -40,8 +40,7 @@ public class SubscriptionPlan {
 
     }
 
-    public SubscriptionPlan(int id, String name, BigDecimal price, String duration, String features, int audioQuality, boolean allowsDownloads, boolean adFree) {
-        this.id = id;
+    public SubscriptionPlan(String name, BigDecimal price, String duration, String features, int audioQuality, boolean allowsDownloads, boolean adFree) {
         this.name = name;
         this.price = price;
         this.duration = duration;

@@ -18,7 +18,6 @@ public class SubscriptionPlanService {
 
     public SubscriptionPlan convertToModel(SubscriptionPlanDTO planDTO) {
         SubscriptionPlan plan = new SubscriptionPlan(
-                planDTO.getId(),
                 planDTO.getName(),
                 planDTO.getPrice(),
                 planDTO.getDuration(),
@@ -28,19 +27,5 @@ public class SubscriptionPlanService {
                 planDTO.isAdFree()
         );
         return plan;
-    }
-
-    public SubscriptionPlanDTO convertToDTO(SubscriptionPlan plan) {
-        SubscriptionPlanDTO planDTO = new SubscriptionPlanDTO(
-                plan.getId(),
-                plan.getName(),
-                plan.getPrice(),
-                plan.getDuration(),
-                plan.getFeatures(),
-                plan.getAudioQuality(),
-                plan.isAllowsDownloads(),
-                plan.isAdFree()
-        );
-        return planDTO;
     }
 }

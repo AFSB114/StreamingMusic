@@ -1,6 +1,6 @@
 "use client";
 
-import { useArtistsList } from "@/hooks/useArtistsList";
+import { useArtistsList } from "@/hooks";
 import ArtistCard from "@/components/ArtistCard";
 
 export default function ArtistsPage() {

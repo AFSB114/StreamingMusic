@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useSongsList } from "@/hooks/useSongsList";
+import { useSongsList } from "@/hooks/song/useSongsList";
 import SongCard from "@/components/SongCard";
 import { Disc3 } from "lucide-react";
 

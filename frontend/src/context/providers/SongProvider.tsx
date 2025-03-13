@@ -1,17 +1,12 @@
 import { type ReactNode } from "react";
 import { SongContext } from "@/context/SongContext";
-import { useEntity } from "@/hooks/useEntity";
-import type { songType } from "@/types";
+import { useEntity } from "@/hooks";
+import type { SongType } from "@/types";
 import songMock from "@/mocks/songMock.json";
 
 export const SongProvider = ({ children }: { children: ReactNode }) => {
-  const {
-    state,
-    addEntity,
-    deleteEntity,
-    updateEntity,
-    getEntityById,
-  } = useEntity<songType>(songMock.songs);
+  const { state, addEntity, deleteEntity, updateEntity, getEntityById } =
+    useEntity<SongType>(songMock.songs);
 
   return (
     <SongContext.Provider

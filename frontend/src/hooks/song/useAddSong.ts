@@ -1,43 +1,21 @@
 "use client";
 
-import { useSongsList } from "@/hooks/useSongsList";
-import type { songType } from "@/types";
-import { useState, useEffect, FormEvent } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useSongsList } from "@/hooks/song/useSongsList";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
-export function useEditSong() {
-  const { getSongById, updateSongsList } = useSongsList();
-  const params = useParams();
+export default function useAddSong() {
+  const { addSong } = useSongsList();
   const router = useRouter();
-  const id = parseInt(params.id as string);
 
-  const [song, setSong] = useState<songType | null>(null);
   const [formData, setFormData] = useState({
     title: "",
     lyrics: "",
     duration: 0,
-    image_url: "",
+    image_url: "https://picsum.photos/seed//300/300",
   });
   const [isLoading, setIsLoading] = useState(false);
 
-  // Cargar datos de la canción cuando se monta el componente
-  useEffect(() => {
-    if (id) {
-      const songData = getSongById(id);
-      setSong(songData);
-
-      if (songData) {
-        setFormData({
-          title: songData.title,
-          lyrics: songData.lyrics,
-          duration: songData.duration,
-          image_url: songData.image_url,
-        });
-      }
-    }
-  }, [id, getSongById]);
-
-  // Manejar cambios en los campos del formulario
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -61,12 +39,22 @@ export function useEditSong() {
     }
   };
 
-  // Manejar envío del formulario
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
-    updateSongsList(id, formData);
+    addSong({
+      title: formData.title,
+      composer: "",
+      duration: formData.duration,
+      lyrics: formData.lyrics,
+      release_date: "",
+      track_number: 0,
+      album_id: null,
+      artist_id: 1,
+      file_url: "",
+      image_url: formData.image_url,
+    });
 
     setTimeout(() => {
       setIsLoading(false);
@@ -74,5 +62,5 @@ export function useEditSong() {
     }, 500);
   };
 
-  return { song, formData, isLoading, handleChange, handleSubmit, router };
+  return { formData, handleChange, handleSubmit, isLoading };
 }

@@ -1,82 +1,12 @@
 "use client";
 
-import { useSongsList } from "@/hooks/useSongsList";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useRouter } from "next/navigation"
+import useAddSong from "@/hooks/song/useAddSong";
 
 export default function AddSongPage() {
-  const { addSong } = useSongsList();
   const router = useRouter();
-
-  const [formData, setFormData] = useState({
-    title: "",
-    lyrics: "",
-    duration: 0,
-    image_url: "https://picsum.photos/seed//300/300",
-  });
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-
-    // Actualizar el estado según el campo que cambió
-    if (name === "title") {
-      // Si el título cambia, actualizar tanto el título como la URL de la imagen
-      const formattedTitle = value.trim().replace(/\s+/g, "").toLowerCase(); // Eliminar espacios
-      setFormData((prev) => ({
-        ...prev,
-        title: value,
-        image_url: `https://picsum.photos/seed/${formattedTitle}/300/300`,
-      }));
-    } else {
-      // Para otros campos, actualizar normalmente
-      setFormData((prev) => ({
-        ...prev,
-        [name]: name === "duration" ? parseInt(value) : value,
-      }));
-    }
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-
-    addSong({
-      album_id: 1,
-      title: formData.title,
-      composer: "",
-      duration: formData.duration,
-      lyrics: formData.lyrics,
-      release_date: "",
-      track_number: 0,
-      album_id: null,
-      artist_id: 1,
-      file_url: "",
-      image_url: formData.image_url,
-    });
-
-    // id: number;
-    // title: string;
-    // composer: string;
-    // duration: number;
-    // lyrics: string;
-    // release_date: string;
-    // track_number: number;
-    // album_id: number | null;
-    // artist_id: number;
-    // file_url: string;
-    // image_url: string;
-
-    console.log(formData);
-
-    setTimeout(() => {
-      setIsLoading(false);
-      router.push("/songs");
-    }, 500);
-  };
+  const { formData, handleChange, handleSubmit, isLoading } = useAddSong();
 
   return (
     <div className="w-full mx-auto p-6 bg-zinc-900 rounded-xl overflow-y-auto">
@@ -165,7 +95,7 @@ export default function AddSongPage() {
             className="px-4 py-2 rounded bg-red-600 hover:bg-red-500 transition-colors"
             disabled={isLoading}
           >
-            {isLoading ? "Guardando..." : "Agregar"}
+            {isLoading ? "Agregando..." : "Agregar"}
           </button>
         </div>
       </form>

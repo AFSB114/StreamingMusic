@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity(name = "user_account")
@@ -45,12 +46,11 @@ public class User {
 
     }
 
-    public User(int id, String name, String email, String password, Date registrationDate, String country, String profileImage) {
-        this.id = id;
+    public User(String name, String email, String password, String country, String profileImage) {
         this.name = name;
         this.email = email;
         this.password = password;
-        this.registrationDate = registrationDate;
+        this.registrationDate = Date.valueOf(LocalDate.now());
         this.country = country;
         this.profileImage = profileImage;
     }

@@ -44,6 +44,51 @@
       "debut_date": "2008-11-20",
       "image_url": "https://picsum.photos/seed/horizon/300/300",
       "type": "Band"
+    },
+    {
+      "id": 6,
+      "name": "Eclipse",
+      "biography": "A synthwave duo with a futuristic sound.",
+      "country_of_origin": "France",
+      "debut_date": "2016-04-18",
+      "image_url": "https://picsum.photos/seed/eclipse/300/300",
+      "type": "Duo"
+    },
+    {
+      "id": 7,
+      "name": "Sakura Melody",
+      "biography": "Japanese pop idol with a massive fanbase.",
+      "country_of_origin": "Japan",
+      "debut_date": "2019-08-30",
+      "image_url": "https://picsum.photos/seed/sakura_melody/300/300",
+      "type": "Solo"
+    },
+    {
+      "id": 8,
+      "name": "Neon Vibes",
+      "biography": "A funk and electronic fusion band.",
+      "country_of_origin": "Australia",
+      "debut_date": "2013-02-14",
+      "image_url": "https://picsum.photos/seed/neon_vibes/300/300",
+      "type": "Band"
+    },
+    {
+      "id": 9,
+      "name": "Raphael Costa",
+      "biography": "A Brazilian jazz guitarist known for his smooth sound.",
+      "country_of_origin": "Brazil",
+      "debut_date": "2011-06-22",
+      "image_url": "https://picsum.photos/seed/raphael_costa/300/300",
+      "type": "Solo"
+    },
+    {
+      "id": 10,
+      "name": "Arctic Echo",
+      "biography": "An indie rock band with melancholic melodies.",
+      "country_of_origin": "Norway",
+      "debut_date": "2017-10-12",
+      "image_url": "https://picsum.photos/seed/arctic_echo/300/300",
+      "type": "Band"
     }
   ]
 }

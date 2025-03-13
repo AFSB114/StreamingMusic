@@ -1,6 +1,6 @@
 "use client";
 
-import useEditArtist from "@/hooks/useEditArtist";
+import useEditArtist from "@/hooks/artist/useEditArtist";
 
 export default function EditArtistPage() {
   const { id } = useEditArtist();

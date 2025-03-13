@@ -1,6 +1,6 @@
 "use client";
 
-import { useEditSong } from "@/hooks/useEditSong";
+import { useEditSong } from "@/hooks";
 import Image from "next/image";
 
 export default function Edit() {

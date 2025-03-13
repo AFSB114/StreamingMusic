@@ -3,7 +3,12 @@ export type EntityAction<T> =
   | { type: "DELETE"; payload: number }
   | { type: "UPDATE"; payload: { id: number; updatedEntity: Partial<T> } };
 
-export interface songType {
+// Definimos una interfaz base que requiere un campo 'id'
+interface EntityWithId {
+  id: number;
+}
+
+export interface SongType {
   id: number;
   title: string;
   composer: string;
@@ -11,18 +16,18 @@ export interface songType {
   lyrics: string;
   release_date: string;
   track_number: number;
-  album_id: number | null;
+  album_id: number | null
   artist_id: number;
   file_url: string;
   image_url: string;
 }
 
 export interface SongContextType {
-  songsList: songType[];
+  songsList: SongType[];
   deleteSong: (id: number) => void;
-  getSongById: (id: number) => songType | null;
-  updateSongsList: (id: number, updatedSong: Partial<songType>) => void;
-  addSong: (newSong: Omit<songType, "id">) => number;
+  getSongById: (id: number) => SongType | null;
+  updateSongsList: (id: number, updatedSong: Partial<SongType>) => void;
+  addSong: (newSong: Omit<SongType, "id">) => void;
 }
 
 export interface ArtistType {
@@ -40,7 +45,7 @@ export interface ArtistContextType {
   deleteArtist: (id: number) => void;
   getArtistById: (id: number) => ArtistType | null;
   updateArtistsList: (id: number, updatedArtist: Partial<ArtistType>) => void;
-  addArtist: (newArtist: Omit<ArtistType, "id">) => number;
+  addArtist: (newArtist: Omit<ArtistType, "id">) => void;
 }
 
 export interface LinkType {

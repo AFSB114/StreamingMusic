@@ -2,12 +2,12 @@
 
 import { Heart, Music, Edit, Trash2 } from "lucide-react";
 import Image from "next/image";
-import { type songType } from "@/types";
-import useSongCard from "@/hooks/useSongCard";
+import { type SongType } from "@/types";
+import useSongCard from "@/hooks/song/useSongCard";
 import Link from "next/link";
 import Card from "@/ui/Card";
 
-export default function SongCard({ song }: { song: songType }) {
+export default function SongCard({ song }: { song: SongType }) {
   const { handleLike, handleDelete, liked, formatDuration } = useSongCard({
     song,
   });

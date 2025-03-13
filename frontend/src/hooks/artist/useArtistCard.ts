@@ -1,4 +1,5 @@
-import { useArtistsList } from "@/hooks/useArtistsList";
+
+import { useArtistsList } from "@/hooks/";
 import type { ArtistType } from "@/types";
 
 export default function useArtistCard({ artist }: { artist: ArtistType }) {
@@ -8,5 +9,5 @@ export default function useArtistCard({ artist }: { artist: ArtistType }) {
     deleteArtist(artist.id);
   };
 
-  return {  handleDelete };
+  return { handleDelete };
 }
