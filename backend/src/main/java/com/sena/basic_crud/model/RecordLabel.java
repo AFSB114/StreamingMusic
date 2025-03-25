@@ -30,8 +30,7 @@ public class RecordLabel {
 
     }
 
-    public RecordLabel(int id, String name, String country, Date foundationDate, String website, String logoUrl) {
-        this.id = id;
+    public RecordLabel(String name, String country, Date foundationDate, String website, String logoUrl) {
         this.name = name;
         this.country = country;
         this.foundationDate = foundationDate;

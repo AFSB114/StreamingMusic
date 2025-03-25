@@ -31,8 +31,7 @@ public class Genre {
 
     }
 
-    public Genre(int id, String name, String description, Genre parentGenreId) {
-        this.id = id;
+    public Genre(String name, String description, Genre parentGenreId) {
         this.name = name;
         this.description = description;
         this.parentGenreId = parentGenreId;

@@ -33,6 +33,10 @@ public class User {
     @Column(name = "profile_image", length = 255)
     private String profileImage;
 
+    @Column(name = "is_active", nullable = false)
+    @ColumnDefault("TRUE")
+    private boolean isActive;
+
     @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL)
     private List<Subscription> Subscriptions;
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useSongsList } from "@/hooks/song/useSongsList";
+import { useSongsList } from "@/hooks";
 import type { SongType } from "@/types";
 
 export default function useSongCard({ song }: { song: SongType }) {

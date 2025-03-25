@@ -12,6 +12,9 @@ public class SubscriptionPlanDTO {
     private boolean allowsDownloads;
     private boolean adFree;
 
+    public SubscriptionPlanDTO() {
+    }
+
     public SubscriptionPlanDTO(String name, BigDecimal price, String duration, String features, int audioQuality, boolean allowsDownloads, boolean adFree) {
         this.name = name;
         this.price = price;

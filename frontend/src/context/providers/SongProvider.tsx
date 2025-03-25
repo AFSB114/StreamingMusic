@@ -1,7 +1,7 @@
-import { type ReactNode } from "react";
+import { ReactNode } from "react";
 import { SongContext } from "@/context/SongContext";
 import { useEntity } from "@/hooks";
-import type { SongType } from "@/types";
+import { SongType } from "@/types";
 import songMock from "@/mocks/songMock.json";
 
 export const SongProvider = ({ children }: { children: ReactNode }) => {

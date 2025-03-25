@@ -21,8 +21,7 @@ public class SongGenre {
 
     }
 
-    public SongGenre(int id, Song songId, Genre genreId) {
-        this.id = id;
+    public SongGenre(Song songId, Genre genreId) {
         this.songId = songId;
         this.genreId = genreId;
     }

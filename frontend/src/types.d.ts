@@ -4,7 +4,7 @@ export type EntityAction<T> =
   | { type: "UPDATE"; payload: { id: number; updatedEntity: Partial<T> } };
 
 // Definimos una interfaz base que requiere un campo 'id'
-interface EntityWithId {
+export interface EntityWithId {
   id: number;
 }
 

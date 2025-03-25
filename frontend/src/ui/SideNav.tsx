@@ -2,7 +2,7 @@ import Link from "next/link";
 import NavLinks from "./NavLinks";
 import Image from "next/image";
 
-import logo from "@/assets/images/logo-1.png";
+const logo = require("@/assets/images/logo-1.png");
 
 export default function SideNav() {
   return (

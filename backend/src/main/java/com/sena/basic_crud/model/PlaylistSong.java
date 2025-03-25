@@ -21,8 +21,7 @@ public class PlaylistSong {
 
     }
 
-    public PlaylistSong(int id, Playlist playlistId, Song songId) {
-        this.id = id;
+    public PlaylistSong(Playlist playlistId, Song songId) {
         this.playlistId = playlistId;
         this.songId = songId;
     }

@@ -43,8 +43,7 @@ public class Artist {
 
     }
 
-    public Artist(int id, String name, String type, String countryOfOrigin, Date debutDate, String biography, String imageUrl) {
-        this.id = id;
+    public Artist(String name, String type, String countryOfOrigin, Date debutDate, String biography, String imageUrl) {
         this.name = name;
         this.type = type;
         this.countryOfOrigin = countryOfOrigin;

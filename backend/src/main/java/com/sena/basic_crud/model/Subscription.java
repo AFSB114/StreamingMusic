@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity(name = "subscription")
 public class Subscription {
@@ -37,12 +38,11 @@ public class Subscription {
 
     }
 
-    public Subscription(int id, User userId, SubscriptionPlan subscriptionPlanId, Date startDate, Date renewalDate, String status, String paymentMethod) {
-        this.id = id;
+    public Subscription(User userId, SubscriptionPlan subscriptionPlanId, String status, String paymentMethod) {
         this.userId = userId;
         this.subscriptionPlanId = subscriptionPlanId;
-        this.startDate = startDate;
-        this.renewalDate = renewalDate;
+        this.startDate = Date.valueOf(LocalDate.now());
+        this.renewalDate = this.startDate;
         this.status = status;
         this.paymentMethod = paymentMethod;
     }
@@ -51,9 +51,6 @@ public class Subscription {
         return id;
     }
 
-    public void setId(int subscription_id) {
-        this.id = subscription_id;
-    }
 
     public User getUserId() {
         return userId;

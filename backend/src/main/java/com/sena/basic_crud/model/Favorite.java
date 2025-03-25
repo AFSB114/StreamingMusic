@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity(name = "favorite")
 public class Favorite {
@@ -30,12 +31,11 @@ public class Favorite {
 
     }
 
-    public Favorite(int id, User userId, String objectType, int objectId, Timestamp dateMarked) {
-        this.id = id;
+    public Favorite(User userId, String objectType, int objectId) {
         this.userId = userId;
         this.objectType = objectType;
         this.objectId = objectId;
-        this.dateMarked = dateMarked;
+        this.dateMarked = Timestamp.valueOf(LocalDateTime.now());
     }
 
     public int getId() {

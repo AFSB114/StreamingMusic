@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity(name = "playback")
 public class Playback {
@@ -37,11 +38,10 @@ public class Playback {
 
     }
 
-    public Playback(int id, User userId, Song songId, Timestamp dateTime, int listenedDuration, String device, String location) {
-        this.id = id;
+    public Playback(User userId, Song songId, int listenedDuration, String device, String location) {
         this.userId = userId;
         this.songId = songId;
-        this.dateTime = dateTime;
+        this.dateTime = Timestamp.valueOf(LocalDateTime.now());
         this.listenedDuration = listenedDuration;
         this.device = device;
         this.location = location;

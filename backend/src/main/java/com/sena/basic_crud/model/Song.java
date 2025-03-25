@@ -57,8 +57,7 @@ public class Song {
 
     }
 
-    public Song(int id, Album albumId, Artist artistId, String title, int duration, int trackNumber, Date releaseDate, String composer, String lyrics, String fileUrl, String imageUrl) {
-        this.id = id;
+    public Song(Album albumId, Artist artistId, String title, int duration, int trackNumber, Date releaseDate, String composer, String lyrics, String fileUrl, String imageUrl) {
         this.albumId = albumId;
         this.artistId = artistId;
         this.title = title;

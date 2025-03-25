@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity(name = "playlist")
@@ -41,12 +42,11 @@ public class Playlist {
 
     }
 
-    public Playlist(int id, User userId, String name, String description, Date creationDate, boolean isPublic, String imageUrl) {
-        this.id = id;
+    public Playlist(User userId, String name, String description, boolean isPublic, String imageUrl) {
         this.userId = userId;
         this.name = name;
         this.description = description;
-        this.creationDate = creationDate;
+        this.creationDate = Date.valueOf(LocalDate.now());
         this.isPublic = isPublic;
         this.imageUrl = imageUrl;
     }

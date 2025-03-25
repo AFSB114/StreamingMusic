@@ -1,6 +1,6 @@
 import { useReducer, useCallback } from "react";
 import { entityReducer } from "@/reducers/entityReducer";
-import type { EntityWithId } from "@/types";
+import { EntityWithId } from "@/types";
 
 export default function useEntity<T extends EntityWithId>(initialState: T[]) {
   const [state, dispatch] = useReducer(entityReducer<T>, initialState);

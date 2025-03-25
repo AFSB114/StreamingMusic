@@ -45,8 +45,7 @@ public class Album {
 
     }
 
-    public Album(int id, Artist artistId, RecordLabel recordLabelId, String title, Date releaseDate, String coverUrl, String type, int totalDuration, String description) {
-        this.id = id;
+    public Album(Artist artistId, RecordLabel recordLabelId, String title, Date releaseDate, String coverUrl, String type, int totalDuration, String description) {
         this.artistId = artistId;
         this.recordLabelId = recordLabelId;
         this.title = title;

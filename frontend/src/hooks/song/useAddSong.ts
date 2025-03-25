@@ -1,6 +1,6 @@
 "use client";
 
-import { useSongsList } from "@/hooks/song/useSongsList";
+import { useSongsList } from "@/hooks";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 

@@ -1,24 +1,48 @@
 package com.sena.basic_crud.controller;
 
+import com.sena.basic_crud.DTO.ResponseDTO;
 import com.sena.basic_crud.DTO.ArtistDTO;
+import com.sena.basic_crud.model.Artist;
 import com.sena.basic_crud.service.ArtistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/artist")
 public class ArtistController {
+
+    private final ArtistService artistService;
+
     @Autowired
-    private ArtistService artistService;
+    public ArtistController(ArtistService artistService) {
+        this.artistService = artistService;
+    }
 
     @PostMapping("/")
-    private ResponseEntity<Object> registerArtist(@RequestBody ArtistDTO artist) {
-        artistService.save(artist);
-        return new ResponseEntity<>("Register OK", HttpStatus.OK);
+    public ResponseEntity<Object> addArtist(@ModelAttribute ArtistDTO artist) {
+        ResponseDTO res = artistService.save(artist);
+        return new ResponseEntity(res, res.getStatus());
     }
+
+    @GetMapping("/")
+    public ResponseEntity<Object> getAllArtists() {
+        List<Artist> artists = artistService.findAll();
+        return new ResponseEntity(artists, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getArtistById(@PathVariable int id) {
+        ResponseDTO res = artistService.findById(id);
+        return new ResponseEntity(res, res.getStatus());
+    }
+
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity<Object> deleteArtist(@PathVariable int id) {
+//        ResponseDTO res = artistService.delete(id);
+//        return new ResponseEntity(res, res.getStatus());
+//    }
 }

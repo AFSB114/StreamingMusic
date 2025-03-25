@@ -10,12 +10,24 @@ public class UserDTO {
     private String country;
     private String profileImage;
 
+    public UserDTO() {
+
+    }
+
     public UserDTO(String name, String email, String password, String country, String profileImage) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.country = country;
         this.profileImage = profileImage;
+    }
+
+    public UserDTO(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.country = null;
+        this.profileImage = null;
     }
 
     public String getName() {
