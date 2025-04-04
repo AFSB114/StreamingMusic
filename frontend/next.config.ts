@@ -12,7 +12,8 @@ const nextConfig: NextConfig = {
         search: '',
       },
     ]
-  }
+  },
+  reactStrictMode: false,
 };
 
 export default nextConfig;

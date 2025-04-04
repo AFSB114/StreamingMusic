@@ -2,8 +2,8 @@ import { LinkType } from "@/types";
 
 export const links: LinkType[] = [
   { name: "Home", href: "/" },
-  { name: "Songs", href: "/songs" },
-  { name: "Albums", href: "/albums" },
-  { name: "Artists", href: "/artists" },
-  { name: "Playlists", href: "/playlists" },
+  { name: "Songs", href: "/sections/songs" },
+  { name: "Albums", href: "/sections/albums" },
+  { name: "Artists", href: "/sections/artists" },
+  { name: "Playlists", href: "/sections/playlists" },
 ];

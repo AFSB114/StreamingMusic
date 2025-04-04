@@ -4,7 +4,6 @@ import java.sql.Date;
 
 public class ArtistDTO {
 
-    private int id;
     private String name;
     private String type;
     private String countryOfOrigin;
@@ -12,22 +11,13 @@ public class ArtistDTO {
     private String biography;
     private String imageUrl;
 
-    public ArtistDTO(int id, String name, String type, String countryOfOrigin, Date debutDate, String biography, String imageUrl) {
-        this.id = id;
+    public ArtistDTO(String name, String type, String countryOfOrigin, Date debutDate, String biography, String imageUrl) {
         this.name = name;
         this.type = type;
         this.countryOfOrigin = countryOfOrigin;
         this.debutDate = debutDate;
         this.biography = biography;
         this.imageUrl = imageUrl;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {

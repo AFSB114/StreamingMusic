@@ -57,6 +57,7 @@ public class User {
         this.registrationDate = Date.valueOf(LocalDate.now());
         this.country = country;
         this.profileImage = profileImage;
+        this.isActive = true;
     }
 
     public int getId() {
@@ -113,5 +114,13 @@ public class User {
 
     public void setProfileImage(String profile_image) {
         this.profileImage = profile_image;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 }

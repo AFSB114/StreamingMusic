@@ -7,11 +7,18 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
-public interface IUser extends JpaRepository <User, Integer>{
+import java.util.List;
 
+public interface IUser extends JpaRepository <User, Integer>{
     @Modifying
     @Transactional
     @Query("UPDATE user_account u SET u.isActive = FALSE WHERE u.id = :id ")
     void deleteById(int id);
+
+    @Query("SELECT u FROM user_account u WHERE u.isActive = true")
+    List<User> findAllActive();
+
+    @Query("SELECT u FROM user_account u WHERE u.isActive = false")
+    List<User> findAllInactive();
 
 }

@@ -1,11 +1,40 @@
 export type EntityAction<T> =
-  | { type: "ADD"; payload: Omit<T, "id"> }
+  | { type: "GET"; payload: T[] }
+  | { type: "ADD"; payload: Response<T> }
+  | { type: "UPDATE"; payload: { id: number; updatedEntity: Response<T> } }
   | { type: "DELETE"; payload: number }
-  | { type: "UPDATE"; payload: { id: number; updatedEntity: Partial<T> } };
+  | { type: "SEARCH"; payload: Response<T> };
 
-// Definimos una interfaz base que requiere un campo 'id'
-export interface EntityWithId {
+export interface Response<T> {
+  httpStatus: string;
+  message: string;
+  ok: boolean;
+  errors: string[];
+  data: T[];
+}
+
+export interface ArtistType {
   id: number;
+  name: string;
+  biography: string | undefined | null;
+  countryOfOrigin: string | undefined | null;
+  debutDate: string | undefined | null;
+  imageUrl: string;
+  type: string | undefined | null;
+}
+
+export interface ArtistContextType {
+  artistsList: ArtistType[];
+  addArtist: (newArtist: Omit<ArtistType, "id">) => void;
+  deleteArtist: (id: number) => void;
+  getArtistById: (id: number) => ArtistType | null;
+  updateArtist: (id: number, updatedArtist: Partial<ArtistType>) => void;
+  searchArtists: (params: Record<string, string>) => void;
+}
+
+export interface ArtistParams {
+  name: string;
+  type: unknown;
 }
 
 export interface SongType {
@@ -24,31 +53,26 @@ export interface SongType {
 
 export interface SongContextType {
   songsList: SongType[];
+  addSong: (newSong: Omit<SongType, "id">) => void;
   deleteSong: (id: number) => void;
   getSongById: (id: number) => SongType | null;
-  updateSongsList: (id: number, updatedSong: Partial<SongType>) => void;
-  addSong: (newSong: Omit<SongType, "id">) => void;
-}
-
-export interface ArtistType {
-  id: number;
-  name: string;
-  biography: string;
-  country_of_origin: string;
-  debut_date: string;
-  image_url: string;
-  type: string;
-}
-
-export interface ArtistContextType {
-  artistsList: ArtistType[];
-  deleteArtist: (id: number) => void;
-  getArtistById: (id: number) => ArtistType | null;
-  updateArtistsList: (id: number, updatedArtist: Partial<ArtistType>) => void;
-  addArtist: (newArtist: Omit<ArtistType, "id">) => void;
+  updateSongsList: (id: number, updatedSong: Partial<SongType>) => Response;
 }
 
 export interface LinkType {
   name: string;
   href: string;
+}
+
+export interface DropdownItem {
+  label: string;
+  value: string | number;
+  disabled?: boolean;
+}
+
+export interface DropdownProps {
+  items: DropdownItem[];
+  placeholder?: string;
+  onSelect?: (item: DropdownItem) => void;
+  className?: string;
 }

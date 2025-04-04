@@ -2,7 +2,7 @@
 
 import { useSongsList } from "@/hooks";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, type ChangeEvent, type FormEvent } from "react";
 
 export default function useAddSong() {
   const { addSong } = useSongsList();
@@ -17,7 +17,7 @@ export default function useAddSong() {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
 
@@ -39,11 +39,11 @@ export default function useAddSong() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     setIsLoading(true);
 
-    addSong({
+    const newSong = {
       title: formData.title,
       composer: "",
       duration: formData.duration,
@@ -54,13 +54,23 @@ export default function useAddSong() {
       artist_id: 1,
       file_url: "",
       image_url: formData.image_url,
+    };
+
+    await fetch("http://localhost:8080/songs", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newSong),
     });
+
+    addSong(newSong);
 
     setTimeout(() => {
       setIsLoading(false);
-      router.push("/songs");
+      router.push("/sections/songs");
     }, 500);
-  };
+  }
 
   return { formData, handleChange, handleSubmit, isLoading };
 }

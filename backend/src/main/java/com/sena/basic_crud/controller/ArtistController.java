@@ -22,8 +22,8 @@ public class ArtistController {
         this.artistService = artistService;
     }
 
-    @PostMapping("/")
-    public ResponseEntity<Object> addArtist(@ModelAttribute ArtistDTO artist) {
+    @PostMapping(value = "/", consumes = {"application/json"})
+    public ResponseEntity<Object> addArtist(@RequestBody ArtistDTO artist) {
         ResponseDTO res = artistService.save(artist);
         return new ResponseEntity(res, res.getStatus());
     }
@@ -40,9 +40,27 @@ public class ArtistController {
         return new ResponseEntity(res, res.getStatus());
     }
 
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<Object> deleteArtist(@PathVariable int id) {
-//        ResponseDTO res = artistService.delete(id);
-//        return new ResponseEntity(res, res.getStatus());
-//    }
+    @GetMapping("/search")
+    public ResponseEntity<Object> getArtistByFilters(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String type
+    ) {
+        ResponseDTO res = artistService.search(name, type);
+        return new ResponseEntity(res, res.getStatus());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteArtist(@PathVariable int id) {
+        ResponseDTO res = artistService.delete(id);
+        return new ResponseEntity(res, res.getStatus());
+    }
+
+    @PutMapping(value = "/{id}", consumes = {"application/json"})
+    public ResponseEntity<Object> updateArtist(
+            @PathVariable int id,
+            @RequestBody ArtistDTO artist
+    ) {
+        ResponseDTO res = artistService.update(id, artist);
+        return new ResponseEntity(res, res.getStatus());
+    }
 }

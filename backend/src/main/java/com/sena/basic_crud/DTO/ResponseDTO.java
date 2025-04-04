@@ -7,9 +7,9 @@ import java.util.List;
 public class ResponseDTO {
     private HttpStatus status;
     private String message;
-    private boolean success;
+    private boolean ok;
     private List<String> errors;
-    private Object data;
+    private List<Object> data;
 
     // Constructor vacío
     public ResponseDTO() {
@@ -20,7 +20,7 @@ public class ResponseDTO {
     public ResponseDTO(HttpStatus status, String message) {
         this.status = status;
         this.message = message;
-        this.success = status.is2xxSuccessful();
+        this.ok = status.is2xxSuccessful();
         this.errors = new ArrayList<>();
     }
 
@@ -28,16 +28,24 @@ public class ResponseDTO {
     public ResponseDTO(HttpStatus status, String message, Object data) {
         this.status = status;
         this.message = message;
-        this.success = status.is2xxSuccessful();
-        this.data = data;
+        this.ok = status.is2xxSuccessful();
         this.errors = new ArrayList<>();
+
+        // Verifica si el objeto data es una List
+        if (data instanceof List) {
+            // Si es una lista, asigna directamente
+            this.data = (List<Object>) data;
+        } else {
+            // Si es un objeto único, agrégalo a la lista
+            this.data.add(data);
+        }
     }
 
     // Constructor para respuestas con errores
     public ResponseDTO(HttpStatus status, String message, List<String> errors) {
         this.status = status;
         this.message = message;
-        this.success = status.is2xxSuccessful();
+        this.ok = status.is2xxSuccessful();
         this.errors = errors != null ? errors : new ArrayList<>();
     }
 
@@ -65,7 +73,7 @@ public class ResponseDTO {
 
     public void setStatus(HttpStatus status) {
         this.status = status;
-        this.success = status.is2xxSuccessful();
+        this.ok = status.is2xxSuccessful();
     }
 
     public String getMessage() {
@@ -76,8 +84,8 @@ public class ResponseDTO {
         this.message = message;
     }
 
-    public boolean isSuccess() {
-        return success;
+    public boolean isOk() {
+        return ok;
     }
 
     public List<String> getErrors() {
@@ -95,11 +103,11 @@ public class ResponseDTO {
         this.errors.add(error);
     }
 
-    public Object getData() {
+    public List<Object> getData() {
         return data;
     }
 
     public void setData(Object data) {
-        this.data = data;
+        this.data.add(data);
     }
 }

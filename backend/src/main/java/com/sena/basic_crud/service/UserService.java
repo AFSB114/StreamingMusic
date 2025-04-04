@@ -57,6 +57,28 @@ public class UserService {
         return res;
     }
 
+    public ResponseDTO update(int id, UserDTO userDTO){
+        ResponseDTO res;
+        Optional<User> optionalUser = data.findById(id);
+        if (!optionalUser.isPresent()) {
+            res = ResponseDTO.error("This user don't exist in the database");
+        }  else {
+            User currentUser = optionalUser.get();
+
+            currentUser.setName((userDTO.getName() != null) ? userDTO.getName() : currentUser.getName());
+            currentUser.setEmail((userDTO.getEmail() != null) ? userDTO.getEmail() : currentUser.getEmail());
+            currentUser.setPassword((userDTO.getPassword() != null) ? userDTO.getPassword() : currentUser.getPassword());
+            currentUser.setCountry((userDTO.getCountry() != null) ? userDTO.getCountry() : currentUser.getCountry());
+            currentUser.setProfileImage((userDTO.getProfileImage() != null) ? userDTO.getProfileImage() : currentUser.getProfileImage());
+
+            data.save(currentUser);
+
+            res = ResponseDTO.ok("User updated successfully");
+        }
+
+        return res;
+    }
+
     public List<String> validateUser(UserDTO userDTO) {
         List<String> errors = new ArrayList<>();
 

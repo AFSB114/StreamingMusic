@@ -45,4 +45,10 @@ public class UserController {
         ResponseDTO res = userService.delete(id);
         return new ResponseEntity(res, res.getStatus());
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updateUser(@PathVariable int id, @ModelAttribute UserDTO user) {
+        ResponseDTO res = userService.update(id, user);
+        return new ResponseEntity(res, res.getStatus());
+    }
 }

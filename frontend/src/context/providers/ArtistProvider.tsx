@@ -2,11 +2,10 @@ import { ReactNode } from "react";
 import { ArtistContext } from "@/context/ArtistContext";
 import { useEntity } from "@/hooks";
 import { ArtistType } from "@/types";
-import artistMock from "@/mocks/artistMock.json";
 
 export const ArtistProvider = ({ children }: { children: ReactNode }) => {
-  const { state, addEntity, deleteEntity, updateEntity, getEntityById } =
-    useEntity<ArtistType>(artistMock.artists);
+  const { state, addEntity, deleteEntity, updateEntity, getEntityById, searchEntityBy } =
+    useEntity<ArtistType>("http://localhost:8085/api/v1/artist");
 
   return (
     <ArtistContext.Provider
@@ -14,8 +13,9 @@ export const ArtistProvider = ({ children }: { children: ReactNode }) => {
         artistsList: state,
         addArtist: addEntity,
         deleteArtist: deleteEntity,
-        updateArtistsList: updateEntity,
+        updateArtist: updateEntity,
         getArtistById: getEntityById,
+        searchArtists: searchEntityBy,
       }}
     >
       {children}

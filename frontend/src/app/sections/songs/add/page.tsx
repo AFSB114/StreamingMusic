@@ -10,12 +10,12 @@ export default function AddSongPage() {
 
   return (
     <div className="w-full mx-auto p-6 bg-zinc-900 rounded-xl overflow-y-auto">
-      <h1 className="text-2xl font-bold mb-6">Editar Canción</h1>
+      <h1 className="text-2xl font-bold mb-6">Edit song</h1>
 
       <form className="space-y-4" onSubmit={handleSubmit}>
         <div>
           <label htmlFor="title" className="block mb-1">
-            Título
+            Title
           </label>
           <input
             type="text"
@@ -30,20 +30,21 @@ export default function AddSongPage() {
 
         <div>
           <label htmlFor="lyrics" className="block mb-1">
-            Letra
+            Lyrics
           </label>
           <textarea
             id="lyrics"
             name="lyrics"
             value={formData.lyrics}
             onChange={handleChange}
-            className="w-full p-2 rounded bg-zinc-800 border border-zinc-700 h-32"
+            className="w-full p-2 rounded bg-zinc-800 border border-zinc-700"
+            rows={4}
           />
         </div>
 
         <div>
           <label htmlFor="duration" className="block mb-1">
-            Duración (segundos)
+            Duration (seconds)
           </label>
           <input
             type="number"
@@ -59,7 +60,7 @@ export default function AddSongPage() {
 
         <div>
           <label htmlFor="image_url" className="block mb-1">
-            URL de la imagen
+            The image&apos;s URL
           </label>
           <input
             type="text"
@@ -67,6 +68,7 @@ export default function AddSongPage() {
             name="image_url"
             value={formData.image_url}
             onChange={handleChange}
+            disabled
             className="w-full p-2 rounded bg-zinc-800 border border-zinc-700"
             required
           />
@@ -86,16 +88,16 @@ export default function AddSongPage() {
           <button
             type="button"
             className="px-4 py-2 rounded bg-zinc-700 hover:bg-zinc-600 transition-colors"
-            onClick={() => router.push("/songs")}
+            onClick={() => router.push("/sections/songs")}
           >
-            Cancelar
+            Cancel
           </button>
           <button
             type="submit"
             className="px-4 py-2 rounded bg-red-600 hover:bg-red-500 transition-colors"
             disabled={isLoading}
           >
-            {isLoading ? "Agregando..." : "Agregar"}
+            {isLoading ? "Saving..." : "Save"}
           </button>
         </div>
       </form>

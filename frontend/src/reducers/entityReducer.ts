@@ -1,17 +1,25 @@
 import type { EntityAction } from "@/types";
 
-export const entityReducer = <T>(state: T[], action: EntityAction<T>): T[] => {
+export const entityReducer = <T extends { id: number }>(
+  state: T[],
+  action: EntityAction<T>
+): T[] => {
   switch (action.type) {
-    case "ADD": {
-      const newId = state.length > 0 ? Math.max(...state.map(item => item.id)) + 1 : 1;
-      return [...state, { ...action.payload, id: newId }];
-    }
-    case "DELETE":
-      return state.filter(item => item.id !== action.payload);
+    case "GET":
+      return action.payload;
+    case "ADD":
+      console.log(action.payload);
+      return [...state, ...action.payload.data];
     case "UPDATE":
-      return state.map(item =>
-        item.id === action.payload.id ? { ...item, ...action.payload.updatedEntity } : item
+      return state.map((item) =>
+        item.id === action.payload.id
+          ? { ...item, ...action.payload.updatedEntity.data[0] }
+          : item
       );
+    case "DELETE":
+      return state.filter((item) => item.id !== action.payload);
+    case "SEARCH":
+      return action.payload.data;
     default:
       return state;
   }
