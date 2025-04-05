@@ -16,8 +16,12 @@ import java.util.Optional;
 @Service
 public class ArtistService {
 
-    @Autowired
     private IArtist data;
+
+    @Autowired
+    public ArtistService(IArtist data) {
+        this.data = data;
+    }
 
     public ResponseDTO save(ArtistDTO artistDTO) {
         ResponseDTO res;
@@ -26,7 +30,7 @@ public class ArtistService {
         if (!errors.isEmpty()) {
             res = ResponseDTO.error("Request made wrong", errors);
         } else {
-            data.save(artist);
+            artist = data.save(artist);
             res = ResponseDTO.ok("Request made successful, new Artist created", artist);
         }
         return res;

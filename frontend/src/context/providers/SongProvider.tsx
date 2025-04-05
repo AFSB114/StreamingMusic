@@ -5,7 +5,7 @@ import { SongType } from "@/types";
 
 export const SongProvider = ({ children }: { children: ReactNode }) => {
   const { state, addEntity, deleteEntity, updateEntity, getEntityById } =
-    useEntity<SongType>( "http://localhost:8085/api/v1/song/json");
+    useEntity<SongType>( "http://localhost:8085/api/v1/song");
 
   return (
     <SongContext.Provider

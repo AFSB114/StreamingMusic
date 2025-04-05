@@ -8,7 +8,6 @@ export const entityReducer = <T extends { id: number }>(
     case "GET":
       return action.payload;
     case "ADD":
-      console.log(action.payload);
       return [...state, ...action.payload.data];
     case "UPDATE":
       return state.map((item) =>

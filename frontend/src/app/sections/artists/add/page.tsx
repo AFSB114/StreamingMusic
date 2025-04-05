@@ -35,7 +35,7 @@ export default function AddArtistPage() {
           <textarea
             id="biography"
             name="biography"
-            value={formData.biography === null ? undefined : formData.biography}
+            value={formData.biography === null ? "" : formData.biography}
             onChange={handleChange}
             className="w-full p-2 rounded bg-zinc-800 border border-zinc-700 focus:outline-none focus:ring-red-800 focus:border-red-800 caret-red-500"
             rows={4}
@@ -52,7 +52,7 @@ export default function AddArtistPage() {
             name="countryOfOrigin"
             value={
               formData.countryOfOrigin === null
-                ? undefined
+                ? ""
                 : formData.countryOfOrigin
             }
             onChange={handleChange}

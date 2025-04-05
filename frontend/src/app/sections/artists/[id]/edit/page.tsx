@@ -51,7 +51,7 @@ export default function EditArtistPage() {
           <textarea
             id="biography"
             name="biography"
-            value={formData.biography === null ? undefined : formData.biography}
+            value={formData.biography === null ? "" : formData.biography}
             onChange={handleChange}
             className="w-full p-2 rounded bg-zinc-800 border border-zinc-700 focus:outline-none focus:ring-red-800 focus:border-red-800 caret-red-500"
             rows={4}
@@ -68,7 +68,7 @@ export default function EditArtistPage() {
             name="countryOfOrigin"
             value={
               formData.countryOfOrigin === null
-                ? undefined
+                ? ""
                 : formData.countryOfOrigin
             }
             onChange={handleChange}
@@ -84,7 +84,7 @@ export default function EditArtistPage() {
             type="date"
             id="debutDate"
             name="debutDate"
-            value={formData.debutDate || ""} // Asegurar que no sea null
+            value={formData.debutDate || ""}
             onChange={handleChange}
             max={new Date().toISOString().split("T")[0]}
             min={new Date(1900, 0, 1).toISOString().split("T")[0]}

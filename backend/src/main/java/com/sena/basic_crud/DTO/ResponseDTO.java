@@ -30,6 +30,7 @@ public class ResponseDTO {
         this.message = message;
         this.ok = status.is2xxSuccessful();
         this.errors = new ArrayList<>();
+        this.data = new ArrayList<>();  // Inicializa la lista
 
         // Verifica si el objeto data es una List
         if (data instanceof List) {
@@ -108,6 +109,9 @@ public class ResponseDTO {
     }
 
     public void setData(Object data) {
+        if (this.data == null) {
+            this.data = new ArrayList<>();
+        }
         this.data.add(data);
     }
 }
