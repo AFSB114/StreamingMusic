@@ -4,16 +4,16 @@
       "id": 1,
       "name": "Rock Nation",
       "country": "USA",
-      "foundation_date": "2000-05-10",
-      "logo_url": "https://example.com/rock_nation.jpg",
+      "foundationDate": "2000-05-10",
+      "logoUrl": "https://picsum.photos/seed/john_doe/300/300",
       "website": "https://rocknation.com"
     },
     {
       "id": 2,
       "name": "Indie Sound",
       "country": "UK",
-      "foundation_date": "2015-09-17",
-      "logo_url": "https://example.com/indie_sound.jpg",
+      "foundationDate": "2015-09-17",
+      "logoUrl": "https://picsum.photos/seed/john_doe/300/300",
       "website": "https://indiesound.com"
     }
   ]

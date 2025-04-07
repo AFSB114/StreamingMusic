@@ -1,15 +1,15 @@
 "use client";
 
 import { useState, ChangeEvent, type FormEvent } from "react";
-import { useArtistsList } from "@/hooks";
+import { useRecordLabelsList } from "@/hooks";
 import { filterEmptyValues } from "@/utils";
 
-export default function useFiltersArtist() {
-  const { searchArtists } = useArtistsList();
+export default function useFiltersRecordLabel() {
+  const { searchRecordLabels } = useRecordLabelsList();
 
   const [filters, setFilters] = useState({
     search: "",
-    type: "",
+    country: "",
   });
 
   const handleChange = (
@@ -28,10 +28,10 @@ export default function useFiltersArtist() {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    searchArtists(
+    searchRecordLabels(
       filterEmptyValues({
         name: filters.search,
-        type: filters.type,
+        country: filters.country,
       })
     );
   };

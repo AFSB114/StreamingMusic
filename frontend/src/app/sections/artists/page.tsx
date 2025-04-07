@@ -2,7 +2,7 @@
 
 import { useArtistsList, useFiltersArtist } from "@/hooks";
 import ArtistCard from "@/components/ArtistCard";
-import { Plus, Search } from "lucide-react";
+import { PlusCircle, Search } from "lucide-react";
 import Link from "next/link";
 
 export default function ArtistsPage() {
@@ -15,7 +15,7 @@ export default function ArtistsPage() {
         <div className="w-max">
           <Link href="/sections/artists/add">
             <button className="text-1xl sm:text-2xl gap-2 rounded-xl flex flex-row items-center justify-center transition-colors duration-200 hover:bg-green-600 p-3 hover:cursor-pointer">
-              <Plus className="h-6 w-6" />
+              <PlusCircle className="h-6 w-6" />
               <span>Add Artist</span>
             </button>
           </Link>
@@ -56,7 +56,7 @@ export default function ArtistsPage() {
         </form>
       </div>
 
-      <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
         {artistsList
           .sort((a, b) => a.id - b.id)
           .map((artist, index) => (

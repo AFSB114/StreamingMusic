@@ -16,11 +16,5 @@ export default function useSongCard({ song }: { song: SongType }) {
     deleteSong(song.id);
   };
 
-  function formatDuration(duration: number) {
-    const minutes = Math.floor(duration / 60);
-    const seconds = duration % 60;
-    return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
-  }
-
-  return { handleLike, handleDelete, liked, formatDuration };
+  return { handleLike, handleDelete, liked };
 }

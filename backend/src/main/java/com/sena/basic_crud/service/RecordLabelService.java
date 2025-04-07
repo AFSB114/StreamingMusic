@@ -4,7 +4,9 @@ import com.sena.basic_crud.DTO.ResponseDTO;
 import com.sena.basic_crud.DTO.RecordLabelDTO;
 import com.sena.basic_crud.model.RecordLabel;
 import com.sena.basic_crud.repository.IRecordLabel;
+import com.sena.basic_crud.specification.RecordLabelSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,8 +15,13 @@ import java.util.Optional;
 
 @Service
 public class RecordLabelService {
-    @Autowired
+
     private IRecordLabel data;
+
+    @Autowired
+    public RecordLabelService(IRecordLabel data) {
+        this.data = data;
+    }
 
     public ResponseDTO save(RecordLabelDTO recordLabelDTO) {
         ResponseDTO res;
@@ -24,7 +31,7 @@ public class RecordLabelService {
         } else {
             RecordLabel recordLabel = convertToModel(recordLabelDTO);
             data.save(recordLabel);
-            res = ResponseDTO.ok("Request made successful, new RecordLabel created");
+            res = ResponseDTO.ok("Request made successful, new RecordLabel created", recordLabel);
         }
         return res;
     }
@@ -42,6 +49,38 @@ public class RecordLabelService {
             res = ResponseDTO.error("RecordLabel with id: " + id + " not found");
         }
         return res;
+    }
+
+    public ResponseDTO search(String name, String country){
+        Specification<RecordLabel> spec = Specification.where(RecordLabelSpecification.hasName(name)).and(RecordLabelSpecification.hasCountry(country));
+        List<RecordLabel> recordLabels = data.findAll(spec);
+
+        return ResponseDTO.ok("RecordLabels found", recordLabels);
+    }
+
+    public ResponseDTO update(int id,RecordLabelDTO recordLabelDTO) {
+        Optional<RecordLabel> optionalRecordLabel = data.findById(id);
+
+        if (!optionalRecordLabel.isPresent()) return ResponseDTO.error("RecordLabel with id: " + recordLabelDTO.getId() + " not found");
+
+        RecordLabel currentRecordLabel = optionalRecordLabel.get();
+
+        currentRecordLabel.setName((recordLabelDTO.getName() != null) ? recordLabelDTO.getName() : currentRecordLabel.getName());
+        currentRecordLabel.setCountry(recordLabelDTO.getCountry() != null ? recordLabelDTO.getCountry() : currentRecordLabel.getCountry());
+        currentRecordLabel.setFoundationDate((recordLabelDTO.getFoundationDate() != null) ? recordLabelDTO.getFoundationDate() : currentRecordLabel.getFoundationDate());
+        currentRecordLabel.setWebsite((recordLabelDTO.getWebsite() != null) ? recordLabelDTO.getWebsite() : currentRecordLabel.getWebsite());
+        currentRecordLabel.setLogoUrl((recordLabelDTO.getLogoUrl() != null) ? recordLabelDTO.getLogoUrl() : currentRecordLabel.getLogoUrl());
+
+        data.save(currentRecordLabel);
+
+        return ResponseDTO.ok("RecordLabel updated", currentRecordLabel);
+    }
+
+    public ResponseDTO delete(int id) {
+        Optional<RecordLabel> recordLabel = data.findById(id);
+        if (!recordLabel.isPresent()) return ResponseDTO.error("RecordLabel with id: " + id + " not found");
+        data.deleteById(id);
+        return ResponseDTO.ok("RecordLabel deleted");
     }
 
     public List<String> validate(RecordLabelDTO recordLabelDTO) {

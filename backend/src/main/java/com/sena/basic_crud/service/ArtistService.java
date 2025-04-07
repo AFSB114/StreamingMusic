@@ -80,9 +80,8 @@ public class ArtistService {
     public  ResponseDTO delete(int id) {
         Optional<Artist> optionalArtist = data.findById(id);
         if (!optionalArtist.isPresent()) return ResponseDTO.error("Artist with id: " + id + " not found");
-        Artist currentArtist = optionalArtist.get();
-        data.delete(currentArtist);
-        return ResponseDTO.ok("Delete successfully", currentArtist);
+        data.deleteById(id);
+        return ResponseDTO.ok("Delete successfully");
     }
 
     public List<String> validate(Artist artist) {

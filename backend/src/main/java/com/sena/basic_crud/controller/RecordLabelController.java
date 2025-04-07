@@ -23,7 +23,7 @@ public class RecordLabelController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Object> addRecordLabel(@ModelAttribute RecordLabelDTO recordLabel) {
+    public ResponseEntity<Object> addRecordLabel(@RequestBody RecordLabelDTO recordLabel) {
         ResponseDTO res = recordLabelService.save(recordLabel);
         return new ResponseEntity(res, res.getStatus());
     }
@@ -40,9 +40,27 @@ public class RecordLabelController {
         return new ResponseEntity(res, res.getStatus());
     }
 
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<Object> deleteRecordLabel(@PathVariable int id) {
-//        ResponseDTO res = recordLabelService.delete(id);
-//        return new ResponseEntity(res, res.getStatus());
-//    }
+    @GetMapping("/search")
+    public ResponseEntity<Object> getArtistByFilters(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String country
+    ) {
+        ResponseDTO res = recordLabelService.search(name, country);
+        return new ResponseEntity(res, res.getStatus());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteRecordLabel(@PathVariable int id) {
+        ResponseDTO res = recordLabelService.delete(id);
+        return new ResponseEntity(res, res.getStatus());
+    }
+
+    @PutMapping(value = "/{id}", consumes = {"application/json"})
+    public ResponseEntity<Object> updateRecordLabel(
+            @PathVariable int id,
+            @RequestBody RecordLabelDTO recordLabel
+    ) {
+        ResponseDTO res = recordLabelService.update(id, recordLabel);
+        return new ResponseEntity(res, res.getStatus());
+    }
 }

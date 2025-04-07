@@ -1,14 +1,15 @@
 "use client";
 
-import { Heart, Music, Edit, Trash2 } from "lucide-react";
-import Image from "next/image";
-import { type SongType } from "@/types";
 import useSongCard from "@/hooks/song/useSongCard";
+import { type SongType } from "@/types";
+import { Card } from "@/ui/Card";
+import formatTime from "@/utils/formatTime";
+import { Edit, Heart, Music, Trash2 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
-import Card from "@/ui/Card";
 
 export default function SongCard({ song }: { song: SongType }) {
-  const { handleLike, handleDelete, liked, formatDuration } = useSongCard({
+  const { handleLike, handleDelete, liked } = useSongCard({
     song,
   });
 
@@ -53,7 +54,7 @@ export default function SongCard({ song }: { song: SongType }) {
         <div className="p-3 pt-0 text-xs text-muted-foreground">
           <div className="flex items-center gap-1">
             <Music className="h-3 w-3 flex-shrink-0" />
-            <span className="truncate">{formatDuration(song.duration)}</span>
+            <span className="truncate">{formatTime(song.duration)}</span>
           </div>
         </div>
 

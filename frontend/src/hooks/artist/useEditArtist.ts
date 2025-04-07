@@ -2,8 +2,8 @@
 
 import { useArtistsList } from "@/hooks";
 import type { ArtistType } from "@/types";
-import { useState, useEffect, FormEvent } from "react";
 import { useParams, useRouter } from "next/navigation";
+import { FormEvent, useEffect, useState } from "react";
 
 
 export default function useEditArtist() {
@@ -27,7 +27,7 @@ export default function useEditArtist() {
     async function fetchArtist() {
       setIsFound(null); // Indicar que está cargando
   
-      const artistData = await getArtistById(id);
+      const artistData = getArtistById(id);
       if (artistData) {
         setIsFound(true);
         setFormData({
