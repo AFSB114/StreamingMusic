@@ -43,9 +43,6 @@ public class User {
     @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL)
     private List<Playlist> Playlists;
 
-    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL)
-    private List<Playback> Playbacks;
-
     public User() {
 
     }

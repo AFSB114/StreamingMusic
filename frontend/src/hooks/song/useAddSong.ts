@@ -1,6 +1,7 @@
 "use client";
 
 import { useSongsList } from "@/hooks";
+import { SongType } from "@/types";
 import { useRouter } from "next/navigation";
 import { useState, type ChangeEvent, type FormEvent } from "react";
 
@@ -8,11 +9,20 @@ export default function useAddSong() {
   const { addSong } = useSongsList();
   const router = useRouter();
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<Omit<SongType, "id">>({
+    albumId: {
+      id: undefined,
+    },
+    artistId: {
+      id: undefined,
+    },
     title: "",
-    lyrics: "",
+    composer: "",
     duration: 0,
-    image_url: "https://picsum.photos/seed//300/300",
+    lyrics: "",
+    releaseDate: "",
+    fileUrl: "songs/.mp3",
+    imageUrl: "https://picsum.photos/seed//300/300",
   });
   const [isLoading, setIsLoading] = useState(false);
 
@@ -21,22 +31,41 @@ export default function useAddSong() {
   ) => {
     const { name, value } = e.target;
 
-    // Actualizar el estado según el campo que cambió
     if (name === "title") {
-      // Si el título cambia, actualizar tanto el título como la URL de la imagen
-      const formattedTitle = value.trim().replace(/\s+/g, "").toLowerCase(); // Eliminar espacios
+      const formattedTitle = value.trim().replace(/\s+/g, "").toLowerCase();
       setFormData((prev) => ({
         ...prev,
         title: value,
-        image_url: `https://picsum.photos/seed/${formattedTitle}/300/300`,
+        imageUrl: `https://picsum.photos/seed/${formattedTitle}/300/300`,
+        fileUrl: `songs/${formattedTitle}.mp3`,
       }));
-    } else {
-      // Para otros campos, actualizar normalmente
+      return;
+    } 
+
+    if (name === "artistId") {
+      setFormData((prev) => ({
+        ...prev,
+        artistId: {
+          id: parseInt(value),
+        },
+      }));
+      return;
+    }
+
+    if (name === "albumId") {
+      setFormData((prev) => ({
+        ...prev,
+        albumId: {
+          id: parseInt(value),
+        },
+      }));
+      return;
+    }
+
       setFormData((prev) => ({
         ...prev,
         [name]: name === "duration" ? parseInt(value) : value,
       }));
-    }
   };
 
   async function handleSubmit(e: FormEvent) {
@@ -48,12 +77,12 @@ export default function useAddSong() {
       composer: "",
       duration: formData.duration,
       lyrics: formData.lyrics,
-      release_date: "",
-      track_number: 0,
-      album_id: null,
-      artist_id: 1,
-      file_url: "",
-      image_url: formData.image_url,
+      releaseDate: "",
+      trackNumber: 0,
+      albumId: null,
+      artistId: 1,
+      fileUrl: "",
+      imageUrl: formData.imageUrl,
     };
 
     await fetch("http://localhost:8080/songs", {

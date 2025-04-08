@@ -4,7 +4,7 @@ import { useEntity } from "@/hooks";
 import { SongType } from "@/types";
 
 export const SongProvider = ({ children }: { children: ReactNode }) => {
-  const { state, addEntity, deleteEntity, updateEntity, getEntityById } =
+  const { state, addEntity, deleteEntity, updateEntity, getEntityById, searchEntityBy } =
     useEntity<SongType>( "http://localhost:8085/api/v1/song");
 
   return (
@@ -13,8 +13,9 @@ export const SongProvider = ({ children }: { children: ReactNode }) => {
         songsList: state,
         addSong: addEntity,
         deleteSong: deleteEntity,
-        updateSongsList: updateEntity,
+        updateSong: updateEntity,
         getSongById: getEntityById,
+        searchSongs: searchEntityBy,
       }}
     >
       {children}

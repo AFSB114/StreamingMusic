@@ -20,14 +20,15 @@ public class Song {
     @JoinColumn(name = "artist_id", nullable = false)
     private Artist artistId;
 
+    @ManyToOne
+    @JoinColumn(name = "genre_id")
+    private Genre genreId;
+
     @Column(name = "title", nullable = false)
     private String title;
 
     @Column(name = "duration", nullable = false)
     private int duration;
-
-    @Column(name = "track_number")
-    private int trackNumber;
 
     @Column(name = "release_date")
     private Date releaseDate;
@@ -45,24 +46,17 @@ public class Song {
     private String imageUrl;
 
     @OneToMany(mappedBy = "songId", cascade = CascadeType.ALL)
-    private List<SongGenre> SongGenres;
-
-    @OneToMany(mappedBy = "songId", cascade = CascadeType.ALL)
     private List<PlaylistSong> PlaylistSongs;
-
-    @OneToMany(mappedBy = "songId", cascade = CascadeType.ALL)
-    private List<Playback> Playbacks;
 
     public Song() {
 
     }
 
-    public Song(Album albumId, Artist artistId, String title, int duration, int trackNumber, Date releaseDate, String composer, String lyrics, String fileUrl, String imageUrl) {
+    public Song(Album albumId, Artist artistId, String title, int duration, Date releaseDate, String composer, String lyrics, String fileUrl, String imageUrl) {
         this.albumId = albumId;
         this.artistId = artistId;
         this.title = title;
         this.duration = duration;
-        this.trackNumber = trackNumber;
         this.releaseDate = releaseDate;
         this.composer = composer;
         this.lyrics = lyrics;
@@ -108,14 +102,6 @@ public class Song {
 
     public void setDuration(int duration) {
         this.duration = duration;
-    }
-
-    public int getTrackNumber() {
-        return trackNumber;
-    }
-
-    public void setTrackNumber(int track_number) {
-        this.trackNumber = track_number;
     }
 
     public Date getReleaseDate() {

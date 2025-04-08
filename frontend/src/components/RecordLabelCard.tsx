@@ -38,7 +38,7 @@ export default function RecordLabelCard({
           <div className="flex items-center gap-2">
             <Globe size={16} className="text-gray-500" />
             <span className="text-sm text-gray-600 dark:text-gray-300">
-              {recordLabel.country} • Fundada en{" "}
+              {recordLabel.country} • Foundation {" "}
               {recordLabel.foundationDate === null
                 ? "Unknown"
                 : new Date(recordLabel.foundationDate).getFullYear()}

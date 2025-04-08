@@ -15,13 +15,13 @@ export default function EditAlbumPage() {
   const { recordLabelsList } = useRecordLabelsList();
   const router = useRouter();
 
-    if (isFound === null) {
-      return <Loading />;
-    }
-    
-    if (!isFound) {
-      return <NotFound section="Artist" />;
-    }
+  if (isFound === null) {
+    return <Loading />;
+  }
+
+  if (!isFound) {
+    return <NotFound section="Artist" />;
+  }
 
   return (
     <div className="w-full mx-auto p-6 bg-zinc-900 rounded-xl overflow-y-auto">

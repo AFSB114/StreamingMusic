@@ -34,9 +34,6 @@ public class Artist {
     private List<Album> Albums;
 
     @OneToMany(mappedBy = "artistId", cascade = CascadeType.ALL)
-    private List<ArtistGenre> ArtistGenres;
-
-    @OneToMany(mappedBy = "artistId", cascade = CascadeType.ALL)
     private List<Song> Songs;
 
     public Artist() {

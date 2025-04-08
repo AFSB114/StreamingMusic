@@ -3,10 +3,10 @@
 import Link from "next/link";
 import { useSongsList } from "@/hooks";
 import SongCard from "@/components/SongCard";
-import { Disc3 } from "lucide-react";
+import { PlusCircle } from "lucide-react";
 
 export default function SongPage() {
-  const { songsList } = useSongsList(); // Usa el contexto compartido
+  const { songsList } = useSongsList();
 
   return (
     <div className="relative overflow-y-auto max-h-full rounded-xl bg-zinc-900 p-3 shadow-sm">
@@ -14,7 +14,7 @@ export default function SongPage() {
         <div className="w-max">
           <Link href="/sections/songs/add">
             <button className="text-1xl sm:text-2xl gap-2 rounded-xl flex flex-row items-center justify-center transition-colors duration-200 hover:bg-green-600 p-3 hover:cursor-pointer">
-              <Disc3 className="h-6 w-6" />
+              <PlusCircle className="h-6 w-6" />
               <span>Add Song</span>
             </button>
           </Link>
@@ -30,8 +30,8 @@ export default function SongPage() {
         </div>
       </div>
       <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
-        {songsList.map((song, index) => (
-          <SongCard key={index} song={song} />
+        {songsList.map((song) => (
+          <SongCard key={song.id} song={song} />
         ))}
       </div>
     </div>

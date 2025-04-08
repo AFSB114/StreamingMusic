@@ -89,26 +89,41 @@ export interface AlbumContextType {
   searchAlbums: (params: Record<string, string>) => void;
 }
 
+export interface GenreType {
+  id: number;
+  name: string;
+  description: string | null;
+}
+
+export interface GenreContextType {
+  genresList: GenreType[];
+  addGenre: (newGenre: Omit<GenreType, "id">) => void;
+  deleteGenre: (id: number) => void;
+  getGenreById: (id: number) => GenreType | null;
+  updateGenre: (id: number, updatedGenre: Partial<GenreType>) => void;
+  searchGenres: (params: Record<string, string>) => void;
+}
+
 export interface SongType {
   id: number;
+  albumId: Partial<AlbumType>;
+  artistId: Partial<ArtistType>;
   title: string;
   composer: string;
   duration: number;
   lyrics: string;
-  release_date: string;
-  track_number: number;
-  album_id: number | null;
-  artist_id: number;
-  file_url: string;
-  image_url: string;
+  releaseDate: string;
+  fileUrl: string;
+  imageUrl: string;
 }
 
 export interface SongContextType {
   songsList: SongType[];
-  addSong: (newSong: Omit<SongType, "id">) => void;
+  addSong: (newSong: Omit<SongType, "id" | "trackNumber">) => void;
   deleteSong: (id: number) => void;
   getSongById: (id: number) => SongType | null;
-  updateSongsList: (id: number, updatedSong: Partial<SongType>) => Response;
+  updateSong: (id: number, updatedSong: Partial<SongType>) => void;
+  searchSongs: (params: Record<string, string>) => void;
 }
 
 export interface LinkType {

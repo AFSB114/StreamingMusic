@@ -7,13 +7,10 @@ public class GenreDTO {
     private int id;
     private String name;
     private String description;
-    private Genre parentGenreId;
 
-    public GenreDTO(int id, String name, String description, Genre parentGenreId) {
-        this.id = id;
+    public GenreDTO(String name, String description) {
         this.name = name;
         this.description = description;
-        this.parentGenreId = parentGenreId;
     }
 
     private int parent_genre_id;
@@ -40,13 +37,5 @@ public class GenreDTO {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Genre getParentGenreId() {
-        return parentGenreId;
-    }
-
-    public void setParentGenreId(Genre parentGenreId) {
-        this.parentGenreId = parentGenreId;
     }
 }

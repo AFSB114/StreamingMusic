@@ -23,7 +23,7 @@ public class SongController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Object> addSong(@ModelAttribute SongDTO song) {
+    public ResponseEntity<Object> addSong(@RequestBody SongDTO song) {
         ResponseDTO res = songService.save(song);
         return new ResponseEntity(res, res.getStatus());
     }

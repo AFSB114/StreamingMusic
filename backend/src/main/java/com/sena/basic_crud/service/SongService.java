@@ -13,20 +13,20 @@ import java.util.Optional;
 
 @Service
 public class SongService {
+
+    private final ISong data;
+
     @Autowired
-    private ISong data;
+    public SongService(ISong data) {
+        this.data = data;
+    }
 
     public ResponseDTO save(SongDTO songDTO) {
-        ResponseDTO res;
         List<String> errors = validate(songDTO);
-        if (!errors.isEmpty()) {
-            res = ResponseDTO.error("Request made wrong", errors);
-        } else {
-            Song song = convertToModel(songDTO);
-            data.save(song);
-            res = ResponseDTO.ok("Request made successful, new Song created");
-        }
-        return res;
+        if (!errors.isEmpty()) return ResponseDTO.error("Request made wrong", errors);
+        Song song = convertToModel(songDTO);
+        data.save(song);
+        return ResponseDTO.ok("Request made successful, new Song created", song);
     }
 
     public List<Song> findAll() {
@@ -44,6 +44,37 @@ public class SongService {
         return res;
     }
 
+    public ResponseDTO delete(int id) {
+        Optional<Song> song = data.findById(id);
+        if (!song.isPresent()) return ResponseDTO.error("Song with id: " + id + " not found");
+        data.deleteById(id);
+        return ResponseDTO.ok("Song deleted");
+    }
+
+    public ResponseDTO update(int id, SongDTO songDTO) {
+        Optional<Song> optionalSong = data.findById(id);
+
+        if (!optionalSong.isPresent())
+            return ResponseDTO.error("Song with id: " + id + " not found");
+
+        Song currentSong = optionalSong.get();
+
+        currentSong.setAlbumId(songDTO.getAlbumId() != null ? songDTO.getAlbumId() : currentSong.getAlbumId());
+        currentSong.setArtistId(songDTO.getArtistId() != null ? songDTO.getArtistId() : currentSong.getArtistId());
+        currentSong.setTitle(songDTO.getTitle() != null ? songDTO.getTitle() : currentSong.getTitle());
+        currentSong.setDuration(songDTO.getDuration() != 0 ? songDTO.getDuration() : currentSong.getDuration());
+        currentSong.setReleaseDate(songDTO.getReleaseDate() != null ? songDTO.getReleaseDate() : currentSong.getReleaseDate());
+        currentSong.setComposer(songDTO.getComposer() != null ? songDTO.getComposer() : currentSong.getComposer());
+        currentSong.setLyrics(songDTO.getLyrics() != null ? songDTO.getLyrics() : currentSong.getLyrics());
+        currentSong.setFileUrl(songDTO.getFileUrl() != null ? songDTO.getFileUrl() : currentSong.getFileUrl());
+        currentSong.setImageUrl(songDTO.getImageUrl() != null ? songDTO.getImageUrl() : currentSong.getImageUrl());
+
+        data.save(currentSong);
+
+        return ResponseDTO.ok("Song updated", currentSong);
+    }
+
+
     public List<String> validate(SongDTO songDTO) {
         List<String> errors = new ArrayList<>();
 
@@ -60,11 +91,6 @@ public class SongService {
         // Validar duración
         if (songDTO.getDuration() <= 0) {
             errors.add("La duración debe ser mayor a 0");
-        }
-
-        // Validar número de pista (opcional, pero no puede ser negativo)
-        if (songDTO.getTrackNumber() < 0) {
-            errors.add("El número de pista no puede ser negativo");
         }
 
         // Validar URL del archivo
@@ -86,7 +112,6 @@ public class SongService {
                 songDTO.getArtistId(),
                 songDTO.getTitle(),
                 songDTO.getDuration(),
-                songDTO.getTrackNumber(),
                 songDTO.getReleaseDate(),
                 songDTO.getComposer(),
                 songDTO.getLyrics(),

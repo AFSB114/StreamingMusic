@@ -23,7 +23,7 @@ public class GenreController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Object> addGenre(@ModelAttribute GenreDTO genre) {
+    public ResponseEntity<Object> addGenre(@RequestBody GenreDTO genre) {
         ResponseDTO res = genreService.save(genre);
         return new ResponseEntity(res, res.getStatus());
     }
@@ -40,9 +40,26 @@ public class GenreController {
         return new ResponseEntity(res, res.getStatus());
     }
 
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<Object> deleteGenre(@PathVariable int id) {
-//        ResponseDTO res = genreService.delete(id);
-//        return new ResponseEntity(res, res.getStatus());
-//    }
+    @GetMapping("/search")
+    public ResponseEntity<Object> getGenreByFilters(
+            @RequestParam(required = false) String name
+    ) {
+        ResponseDTO res = genreService.search(name);
+        return new ResponseEntity(res, res.getStatus());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteGenre(@PathVariable int id) {
+        ResponseDTO res = genreService.delete(id);
+        return new ResponseEntity(res, res.getStatus());
+    }
+
+    @PutMapping(value = "/{id}", consumes = {"application/json"})
+    public ResponseEntity<Object> updateGenre(
+            @PathVariable int id,
+            @RequestBody GenreDTO genre
+    ) {
+        ResponseDTO res = genreService.update(id, genre);
+        return new ResponseEntity(res, res.getStatus());
+    }
 }

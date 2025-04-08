@@ -17,24 +17,13 @@ public class Genre {
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name = "parent_genre_id")
-    private Genre parentGenreId;
-
-    @OneToMany(mappedBy = "genreId", cascade = CascadeType.ALL)
-    private List<ArtistGenre> ArtistGenres;
-
-    @OneToMany(mappedBy = "genreId", cascade = CascadeType.ALL)
-    private List<SongGenre> SongGenres;
-
     public Genre() {
 
     }
 
-    public Genre(String name, String description, Genre parentGenreId) {
+    public Genre(String name, String description) {
         this.name = name;
         this.description = description;
-        this.parentGenreId = parentGenreId;
     }
 
     public int getId() {
@@ -59,13 +48,5 @@ public class Genre {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Genre getParentGenreId() {
-        return parentGenreId;
-    }
-
-    public void setParentGenreId(Genre parent_genre_id) {
-        this.parentGenreId = parent_genre_id;
     }
 }

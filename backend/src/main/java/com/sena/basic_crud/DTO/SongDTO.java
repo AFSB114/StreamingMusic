@@ -12,20 +12,17 @@ public class SongDTO {
     private Artist artistId;
     private String title;
     private int duration;
-    private int trackNumber;
     private Date releaseDate;
     private String composer;
     private String lyrics;
     private String fileUrl;
     private String imageUrl;
 
-    public SongDTO(int id, Album albumId, Artist artistId, String title, int duration, int trackNumber, Date releaseDate, String composer, String lyrics, String fileUrl, String imageUrl) {
-        this.id = id;
+    public SongDTO(Album albumId, Artist artistId, String title, int duration, Date releaseDate, String composer, String lyrics, String fileUrl, String imageUrl) {
         this.albumId = albumId;
         this.artistId = artistId;
         this.title = title;
         this.duration = duration;
-        this.trackNumber = trackNumber;
         this.releaseDate = releaseDate;
         this.composer = composer;
         this.lyrics = lyrics;
@@ -71,14 +68,6 @@ public class SongDTO {
 
     public void setDuration(int duration) {
         this.duration = duration;
-    }
-
-    public int getTrackNumber() {
-        return trackNumber;
-    }
-
-    public void setTrackNumber(int trackNumber) {
-        this.trackNumber = trackNumber;
     }
 
     public Date getReleaseDate() {
