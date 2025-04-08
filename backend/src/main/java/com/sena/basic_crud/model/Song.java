@@ -52,9 +52,10 @@ public class Song {
 
     }
 
-    public Song(Album albumId, Artist artistId, String title, int duration, Date releaseDate, String composer, String lyrics, String fileUrl, String imageUrl) {
+    public Song(Genre genreId,Album albumId, Artist artistId, String title, int duration, Date releaseDate, String composer, String lyrics, String fileUrl, String imageUrl) {
         this.albumId = albumId;
         this.artistId = artistId;
+        this.genreId = genreId;
         this.title = title;
         this.duration = duration;
         this.releaseDate = releaseDate;
@@ -142,5 +143,13 @@ public class Song {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public Genre getGenreId() {
+        return genreId;
+    }
+
+    public void setGenreId(Genre genreId) {
+        this.genreId = genreId;
     }
 }

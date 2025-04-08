@@ -4,13 +4,13 @@ import { AlbumProvider } from "@/context/providers/AlbumProvider";
 import { ArtistProvider } from "@/context/providers/ArtistProvider";
 import { ReactNode } from "react";
 
-export default function AddSongLayout({
+export default function EditSongLayout({
   children,
 }: Readonly<{ children: ReactNode }>) {
   return (
     <ArtistProvider>
       <AlbumProvider>
-        {children}
+       {children}
       </AlbumProvider>
     </ArtistProvider>
   );

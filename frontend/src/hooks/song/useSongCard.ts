@@ -1,13 +1,12 @@
 "use client";
 
 import { useSongsList } from "@/hooks";
-import type { SongType } from "@/types";
 
-export default function useSongCard({ song }: { song: SongType }) {
+export default function useSongCard({ id }: {id: number}) {
   const { deleteSong } = useSongsList();
 
   const handleDelete = () => {
-    deleteSong(song.id);
+    deleteSong(id);
   };
 
   return { handleDelete };

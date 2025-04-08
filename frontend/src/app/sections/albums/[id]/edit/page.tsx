@@ -25,7 +25,7 @@ export default function EditAlbumPage() {
 
   return (
     <div className="w-full mx-auto p-6 bg-zinc-900 rounded-xl overflow-y-auto">
-      <h2 className="text-2xl font-bold mb-6">Create Album {id}</h2>
+      <h2 className="text-2xl font-bold mb-6">Edit Album {id}</h2>
 
       <form className="space-y-4" onSubmit={handleSubmit}>
         <div>

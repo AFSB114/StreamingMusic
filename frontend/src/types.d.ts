@@ -106,15 +106,16 @@ export interface GenreContextType {
 
 export interface SongType {
   id: number;
-  albumId: Partial<AlbumType>;
+  albumId: Partial<AlbumType> | null;
   artistId: Partial<ArtistType>;
+  genreId: Partial<GenreType> | null;
   title: string;
-  composer: string;
+  composer: string | null;
   duration: number;
-  lyrics: string;
-  releaseDate: string;
-  fileUrl: string;
-  imageUrl: string;
+  lyrics: string | null;
+  releaseDate: string | null;
+  fileUrl: string | null;
+  imageUrl: string | null;
 }
 
 export interface SongContextType {

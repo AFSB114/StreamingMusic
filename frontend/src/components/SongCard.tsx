@@ -15,7 +15,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function SongCard({ song }: { song: SongType }) {
-  const { handleDelete } = useSongCard();
+  const { handleDelete } = useSongCard({ id: song.id });
 
   return (
     <Card className="overflow-hidden">
@@ -24,6 +24,8 @@ export default function SongCard({ song }: { song: SongType }) {
           <Image
             src={song.imageUrl || ""}
             alt={song.title}
+            width={100}
+            height={100}
             className="w-16 h-16 rounded object-cover"
           />
           <div>
@@ -37,7 +39,7 @@ export default function SongCard({ song }: { song: SongType }) {
           <div className="flex items-center gap-2">
             <Music size={16} className="text-gray-500" />
             <span className="text-sm text-gray-600 dark:text-gray-300">
-              Álbum: {song.albumId.title}
+              Álbum: {song.albumId === null ? "Nothing" : song.albumId.title}
             </span>
           </div>
           <div className="flex items-center gap-2">
@@ -49,14 +51,14 @@ export default function SongCard({ song }: { song: SongType }) {
           <div className="flex items-center gap-2">
             <Calendar size={16} className="text-gray-500" />
             <span className="text-sm text-gray-600 dark:text-gray-300">
-              {new Date(song.releaseDate).toLocaleDateString()}
+              {song.releaseDate === null ? "Unknown" : new Date(song.releaseDate).toLocaleDateString()}
             </span>
           </div>
         </div>
       </CardContent>
       <CardFooter className="grid grid-cols-2 p-3 pb-0 gap-2">
         <Link
-          href={`/sections/albums/${song.id}/edit`}
+          href={`/sections/songs/${song.id}/edit`}
           className="flex items-center justify-center gap-2 rounded-xl transition-colors duration-200 hover:bg-green-600 p-2 box-border"
         >
           <Edit className="h-[1em] w-[1em]" />

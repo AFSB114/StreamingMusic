@@ -7,6 +7,7 @@ export { default as useAddSong } from "@/hooks/song/useAddSong";
 export { default as useEditSong } from "@/hooks/song/useEditSong";
 export { default as useSongCard } from "@/hooks/song/useSongCard";
 export { default as useSongsList } from "@/hooks/song/useSongsList";
+export { default as useFiltersSong } from "@/hooks/song/useFiltersSong";
 
 // artist
 export { default as useAddArtist } from "@/hooks/artist/useAddArtist";

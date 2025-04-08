@@ -1,7 +1,12 @@
 "use client";
 
 import CustomSelect from "@/components/CustomSelect";
-import { useAddSong, useArtistsList } from "@/hooks";
+import {
+  useAddSong,
+  useAlbumsList,
+  useArtistsList,
+  useGenresList,
+} from "@/hooks";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -9,7 +14,7 @@ export default function AddSongPage() {
   const { formData, handleChange, handleSubmit, isLoading } = useAddSong();
   const { artistsList } = useArtistsList();
   const { albumsList } = useAlbumsList();
-  // const { genresList } = useGenresList();
+  const { genresList } = useGenresList();
   const router = useRouter();
 
   return (
@@ -23,7 +28,7 @@ export default function AddSongPage() {
             label="Album"
             options={albumsList}
             value={
-              formData.albumId.id === undefined
+              formData.albumId?.id === undefined || formData.albumId === null
                 ? ""
                 : formData.albumId.id.toString()
             }
@@ -78,7 +83,7 @@ export default function AddSongPage() {
             type="text"
             id="composer"
             name="composer"
-            value={formData.composer}
+            value={formData.composer === null ? "" : formData.composer}
             onChange={handleChange}
             className="w-full p-2 rounded bg-zinc-800 border border-zinc-700 focus:outline-none focus:ring-red-800 focus:border-red-800 caret-red-500"
           />
@@ -107,7 +112,7 @@ export default function AddSongPage() {
           <textarea
             id="lyrics"
             name="lyrics"
-            value={formData.lyrics}
+            value={formData.lyrics === null ? "" : formData.lyrics}
             onChange={handleChange}
             className="w-full p-2 rounded bg-zinc-800 border border-zinc-700 focus:outline-none focus:ring-red-800 focus:border-red-800 caret-red-500"
             rows={4}
@@ -139,7 +144,7 @@ export default function AddSongPage() {
             type="url"
             id="fileUrl"
             name="fileUrl"
-            value={formData.fileUrl}
+            value={formData.fileUrl === null ? "" : formData.fileUrl}
             onChange={handleChange}
             className="w-full p-2 rounded bg-zinc-800 border border-zinc-700 focus:outline-none focus:ring-red-800 focus:border-red-800 caret-red-500"
             required
@@ -155,7 +160,7 @@ export default function AddSongPage() {
             type="url"
             id="imageUrl"
             name="imageUrl"
-            value={formData.imageUrl}
+            value={formData.imageUrl === null ? "" : formData.imageUrl}
             onChange={handleChange}
             className="w-full p-2 rounded bg-zinc-800 border border-zinc-700 focus:outline-none focus:ring-red-800 focus:border-red-800 caret-red-500"
             required
@@ -175,14 +180,17 @@ export default function AddSongPage() {
           </div>
         )}
 
-        {/* Genre Select - Multiple */}
         <div>
           <CustomSelect
-            name={`genres[${index}]`}
-            label={`Genre ${index + 1}`}
+            name="genreId"
+            label="Genres"
             options={genresList}
-            value={genre?.id?.toString() || ""}
-            onChange={(e) => handleGenreChange(e, index)}
+            value={
+              formData.genreId?.id === undefined || formData.genreId === null
+                ? ""
+                : formData.genreId.id.toString()
+            }
+            onChange={handleChange}
             optionLabelKey="name"
             optionValueKey="id"
             placeholder="Select Genre"

@@ -1,5 +1,6 @@
 package com.sena.basic_crud.controller;
 
+import com.sena.basic_crud.DTO.ArtistDTO;
 import com.sena.basic_crud.DTO.ResponseDTO;
 import com.sena.basic_crud.DTO.SongDTO;
 import com.sena.basic_crud.model.Song;
@@ -40,9 +41,27 @@ public class SongController {
         return new ResponseEntity(res, res.getStatus());
     }
 
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<Object> deleteSong(@PathVariable int id) {
-//        ResponseDTO res = songService.delete(id);
-//        return new ResponseEntity(res, res.getStatus());
-//    }
+    @GetMapping("/search")
+    public ResponseEntity<Object> getArtistByFilters(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) Integer genre
+    ) {
+        ResponseDTO res = songService.search(name, genre);
+        return new ResponseEntity(res, res.getStatus());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteSong(@PathVariable int id) {
+        ResponseDTO res = songService.delete(id);
+        return new ResponseEntity(res, res.getStatus());
+    }
+
+    @PutMapping(value = "/{id}", consumes = {"application/json"})
+    public ResponseEntity<Object> updateSong(
+            @PathVariable int id,
+            @RequestBody SongDTO song
+    ) {
+        ResponseDTO res = songService.update(id, song);
+        return new ResponseEntity(res, res.getStatus());
+    }
 }

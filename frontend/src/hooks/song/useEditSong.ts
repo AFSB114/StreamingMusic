@@ -1,78 +1,126 @@
 "use client";
 
 import { useSongsList } from "@/hooks";
-import type { SongType } from "@/types";
-import { useState, useEffect, FormEvent } from "react";
+import { SongType } from "@/types";
 import { useParams, useRouter } from "next/navigation";
+import { useEffect, useState, type ChangeEvent, type FormEvent } from "react";
 
 export default function useEditSong() {
-  const { getSongById, updateSongsList } = useSongsList();
+  const { getSongById, updateSong } = useSongsList();
   const params = useParams();
   const router = useRouter();
   const id = parseInt(params.id as string);
 
-  const [song, setSong] = useState<SongType | null>(null);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<Omit<SongType, "id">>({
+    albumId: null,
+    artistId: {
+      id: undefined,
+    },
+    genreId: null,
     title: "",
-    lyrics: "",
+    composer: "",
     duration: 0,
-    image_url: "",
+    lyrics: "",
+    releaseDate: "",
+    fileUrl: "songs/.mp3",
+    imageUrl: "https://picsum.photos/seed//300/300",
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [isFound, setIsFound] = useState<boolean | null>(null);
 
-  // Cargar datos de la canción cuando se monta el componente
   useEffect(() => {
-    if (id) {
-      const songData = getSongById(id);
-      setSong(songData);
+    async function fetchSong() {
+      setIsFound(null);
 
+      const songData = getSongById(id);
       if (songData) {
+        setIsFound(true);
         setFormData({
+          albumId: songData.albumId,
+          artistId: songData.artistId,
+          genreId: songData.genreId,
           title: songData.title,
-          lyrics: songData.lyrics,
+          composer: songData.composer,
           duration: songData.duration,
-          image_url: songData.image_url,
+          lyrics: songData.lyrics,
+          releaseDate: songData.releaseDate,
+          fileUrl: songData.fileUrl,
+          imageUrl: songData.imageUrl,
         });
+      } else {
+        setIsFound(false);
       }
     }
+
+    fetchSong();
   }, [id, getSongById]);
 
-  // Manejar cambios en los campos del formulario
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
 
-    // Actualizar el estado según el campo que cambió
     if (name === "title") {
-      // Si el título cambia, actualizar tanto el título como la URL de la imagen
-      const formattedTitle = value.trim().replace(/\s+/g, "").toLowerCase(); // Eliminar espacios
+      const formattedTitle = value.trim().replace(/\s+/g, "").toLowerCase();
       setFormData((prev) => ({
         ...prev,
         title: value,
-        image_url: `https://picsum.photos/seed/${formattedTitle}/300/300`,
+        imageUrl: `https://picsum.photos/seed/${formattedTitle}/300/300`,
+        fileUrl: `songs/${formattedTitle}.mp3`,
       }));
-    } else {
-      // Para otros campos, actualizar normalmente
+      return;
+    }
+
+    if (name === "artistId") {
       setFormData((prev) => ({
         ...prev,
-        [name]: name === "duration" ? parseInt(value) : value,
+        artistId: {
+          id: parseInt(value),
+        },
       }));
+      return;
     }
+
+    if (name === "albumId") {
+      setFormData((prev) => ({
+        ...prev,
+        albumId: {
+          id: parseInt(value),
+        },
+      }));
+      return;
+    }
+
+    if (name === "genreId") {
+      setFormData((prev) => ({
+        ...prev,
+        genreId: {
+          id: parseInt(value),
+        },
+      }));
+      return;
+    }
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: name === "duration" ? parseInt(value) : value,
+    }));
   };
 
-  // Manejar envío del formulario
-  const handleSubmit = (e: FormEvent) => {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault();
+    if (formData.artistId.id === undefined) {
+      alert("Please select an artist");
+      return;
+    }
     setIsLoading(true);
-
-    updateSongsList(id, formData);
+    updateSong(id, formData);
 
     setTimeout(() => {
       setIsLoading(false);
-      router.push("/songs");
+      router.push("/sections/songs");
     }, 500);
-  };
+  }
 
-  return { song, formData, isLoading, handleChange, handleSubmit, router };
+  return { formData, handleChange, handleSubmit, isLoading, isFound, id };
 }

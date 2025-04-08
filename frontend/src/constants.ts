@@ -6,6 +6,7 @@ export const links: LinkType[] = [
   { name: "Record Labels", href: "/sections/record-labels" },
   { name: "Albums", href: "/sections/albums" },
   { name: "Genres", href: "/sections/genres" },
+  { name: "Songs", href: "/sections/songs" },
 ];
 
 export const albumTypes = [

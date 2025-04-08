@@ -2,9 +2,17 @@ package com.sena.basic_crud.service;
 
 import com.sena.basic_crud.DTO.ResponseDTO;
 import com.sena.basic_crud.DTO.SongDTO;
+import com.sena.basic_crud.model.Album;
+import com.sena.basic_crud.model.Artist;
+import com.sena.basic_crud.model.Genre;
 import com.sena.basic_crud.model.Song;
+import com.sena.basic_crud.repository.IAlbum;
+import com.sena.basic_crud.repository.IArtist;
+import com.sena.basic_crud.repository.IGenre;
 import com.sena.basic_crud.repository.ISong;
+import com.sena.basic_crud.specification.SongSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -31,6 +39,12 @@ public class SongService {
 
     public List<Song> findAll() {
         return data.findAll();
+    }
+
+    public ResponseDTO search(String title, Integer genreId){
+        Specification<Song> spec = Specification.where(SongSpecification.hasName(title)).and(SongSpecification.hasGenreId(genreId));
+        List<Song> songs = data.findAll(spec);
+        return ResponseDTO.ok("Request made successful, songs found", songs);
     }
 
     public ResponseDTO findById(int id) {
@@ -61,6 +75,7 @@ public class SongService {
 
         currentSong.setAlbumId(songDTO.getAlbumId() != null ? songDTO.getAlbumId() : currentSong.getAlbumId());
         currentSong.setArtistId(songDTO.getArtistId() != null ? songDTO.getArtistId() : currentSong.getArtistId());
+        currentSong.setGenreId(songDTO.getGenreId() != null ? songDTO.getGenreId() : currentSong.getGenreId());
         currentSong.setTitle(songDTO.getTitle() != null ? songDTO.getTitle() : currentSong.getTitle());
         currentSong.setDuration(songDTO.getDuration() != 0 ? songDTO.getDuration() : currentSong.getDuration());
         currentSong.setReleaseDate(songDTO.getReleaseDate() != null ? songDTO.getReleaseDate() : currentSong.getReleaseDate());
@@ -108,6 +123,7 @@ public class SongService {
 
     public Song convertToModel(SongDTO songDTO) {
         Song song = new Song(
+                songDTO.getGenreId(),
                 songDTO.getAlbumId(),
                 songDTO.getArtistId(),
                 songDTO.getTitle(),

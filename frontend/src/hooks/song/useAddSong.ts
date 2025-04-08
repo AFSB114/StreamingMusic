@@ -10,12 +10,11 @@ export default function useAddSong() {
   const router = useRouter();
 
   const [formData, setFormData] = useState<Omit<SongType, "id">>({
-    albumId: {
-      id: undefined,
-    },
+    albumId: null,
     artistId: {
       id: undefined,
     },
+    genreId: null,
     title: "",
     composer: "",
     duration: 0,
@@ -62,6 +61,16 @@ export default function useAddSong() {
       return;
     }
 
+    if (name === "genreId") {
+      setFormData((prev) => ({
+        ...prev,
+        genreId: {
+          id: parseInt(value),
+        },
+      }));
+      return;
+    }
+
       setFormData((prev) => ({
         ...prev,
         [name]: name === "duration" ? parseInt(value) : value,
@@ -70,29 +79,29 @@ export default function useAddSong() {
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
+    if (formData.artistId.id === undefined) {
+      alert("Please select an artist");
+      return;
+    }
     setIsLoading(true);
 
     const newSong = {
+      albumId: (formData.albumId && formData.albumId.id) ? { id: formData.albumId.id } : null,
+      artistId: {
+        id: formData.artistId.id,
+      },
+      genreId: (formData.genreId && formData.genreId.id) ? { id: formData.genreId.id } : null,
       title: formData.title,
-      composer: "",
+      composer: formData.composer === "" ? null : formData.composer,
       duration: formData.duration,
-      lyrics: formData.lyrics,
-      releaseDate: "",
-      trackNumber: 0,
-      albumId: null,
-      artistId: 1,
-      fileUrl: "",
+      lyrics: formData.lyrics === "" ? null : formData.lyrics,
+      releaseDate: formData.releaseDate === "" ? null : formData.releaseDate,
+      fileUrl: formData.fileUrl,
       imageUrl: formData.imageUrl,
     };
 
-    await fetch("http://localhost:8080/songs", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newSong),
-    });
-
+    // console.log(newSong)
+    
     addSong(newSong);
 
     setTimeout(() => {

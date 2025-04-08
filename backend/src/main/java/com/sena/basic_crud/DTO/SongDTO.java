@@ -2,6 +2,7 @@ package com.sena.basic_crud.DTO;
 
 import com.sena.basic_crud.model.Album;
 import com.sena.basic_crud.model.Artist;
+import com.sena.basic_crud.model.Genre;
 
 import java.sql.Date;
 
@@ -17,8 +18,10 @@ public class SongDTO {
     private String lyrics;
     private String fileUrl;
     private String imageUrl;
+    private Genre genreId;
 
-    public SongDTO(Album albumId, Artist artistId, String title, int duration, Date releaseDate, String composer, String lyrics, String fileUrl, String imageUrl) {
+    public SongDTO(int id, Album albumId, Artist artistId, String title, int duration, Date releaseDate, String composer, String lyrics, String fileUrl, String imageUrl, Genre genreId) {
+        this.id = id;
         this.albumId = albumId;
         this.artistId = artistId;
         this.title = title;
@@ -28,6 +31,7 @@ public class SongDTO {
         this.lyrics = lyrics;
         this.fileUrl = fileUrl;
         this.imageUrl = imageUrl;
+        this.genreId = genreId;
     }
 
     public int getId() {
@@ -108,5 +112,13 @@ public class SongDTO {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public Genre getGenreId() {
+        return genreId;
+    }
+
+    public void setGenreId(Genre genreId) {
+        this.genreId = genreId;
     }
 }
