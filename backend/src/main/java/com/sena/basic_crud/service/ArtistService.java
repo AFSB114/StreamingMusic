@@ -16,7 +16,7 @@ import java.util.Optional;
 @Service
 public class ArtistService {
 
-    private IArtist data;
+    private final IArtist data;
 
     @Autowired
     public ArtistService(IArtist data) {

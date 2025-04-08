@@ -13,6 +13,21 @@ export interface Response<T> {
   data: T[];
 }
 
+export type OptionType = Record<string, string | number>;
+
+interface CustomSelectProps<T> {
+  name: string;
+  label: string;
+  options: T[];
+  value: string;
+  onChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+  optionLabelKey: keyof T;
+  optionValueKey: keyof T;
+  placeholder?: string;
+  maxHeight?: string;
+  required?: boolean;
+}
+
 export interface ArtistType {
   id: number;
   name: string;
@@ -30,11 +45,6 @@ export interface ArtistContextType {
   getArtistById: (id: number) => ArtistType | null;
   updateArtist: (id: number, updatedArtist: Partial<ArtistType>) => void;
   searchArtists: (params: Record<string, string>) => void;
-}
-
-export interface ArtistParams {
-  name: string;
-  type: unknown;
 }
 
 export interface RecordLabelType {
@@ -58,21 +68,25 @@ export interface RecordLabelContextType {
   searchRecordLabels: (params: Record<string, string>) => void;
 }
 
-export interface RecordLabelParams {
-  name: string;
-  country: string;
-}
-
 export interface AlbumType {
   id: number;
+  artistId: Partial<ArtistType>;
+  recordLabelId: Partial<RecordLabelType>;
   title: string;
   releaseDate: string;
-  trackNumber: number;
-  totalDuration: number;
-  description: string;
-  recordLabelName: string;
-  imageUrl: string;
-  artistId: number;
+  coverUrl: string | null;
+  type: string | null;
+  totalDuration: number | null;
+  description: string | null;
+}
+
+export interface AlbumContextType {
+  albumsList: AlbumType[];
+  addAlbum: (newAlbum: Omit<AlbumType, "id" | "totalDuration">) => void;
+  deleteAlbum: (id: number) => void;
+  getAlbumById: (id: number) => AlbumType | null;
+  updateAlbum: (id: number, updatedAlbum: Partial<AlbumType>) => void;
+  searchAlbums: (params: Record<string, string>) => void;
 }
 
 export interface SongType {

@@ -16,7 +16,7 @@ import java.util.Optional;
 @Service
 public class RecordLabelService {
 
-    private IRecordLabel data;
+    private final IRecordLabel data;
 
     @Autowired
     public RecordLabelService(IRecordLabel data) {

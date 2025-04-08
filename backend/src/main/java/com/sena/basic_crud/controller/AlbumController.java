@@ -1,5 +1,6 @@
 package com.sena.basic_crud.controller;
 
+import com.sena.basic_crud.DTO.ArtistDTO;
 import com.sena.basic_crud.DTO.ResponseDTO;
 import com.sena.basic_crud.DTO.AlbumDTO;
 import com.sena.basic_crud.model.Album;
@@ -23,7 +24,7 @@ public class AlbumController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Object> addAlbum(@ModelAttribute AlbumDTO album) {
+    public ResponseEntity<Object> addAlbum(@RequestBody AlbumDTO album) {
         ResponseDTO res = albumService.save(album);
         return new ResponseEntity(res, res.getStatus());
     }
@@ -40,9 +41,18 @@ public class AlbumController {
         return new ResponseEntity(res, res.getStatus());
     }
 
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<Object> deleteAlbum(@PathVariable int id) {
-//        ResponseDTO res = albumService.delete(id);
-//        return new ResponseEntity(res, res.getStatus());
-//    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteAlbum(@PathVariable int id) {
+        ResponseDTO res = albumService.delete(id);
+        return new ResponseEntity(res, res.getStatus());
+    }
+
+    @PutMapping(value = "/{id}", consumes = {"application/json"})
+    public ResponseEntity<Object> updateAlbum(
+            @PathVariable int id,
+            @RequestBody AlbumDTO album
+    ) {
+        ResponseDTO res = albumService.update(id, album);
+        return new ResponseEntity(res, res.getStatus());
+    }
 }

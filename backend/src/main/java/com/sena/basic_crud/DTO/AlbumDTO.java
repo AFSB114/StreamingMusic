@@ -17,15 +17,13 @@ public class AlbumDTO {
     private int totalDuration;
     private String description;
 
-    public AlbumDTO(int id, Artist artistId, RecordLabel recordLabelId, String title, Date releaseDate, String coverUrl, String type, int totalDuration, String description) {
-        this.id = id;
+    public AlbumDTO(Artist artistId, RecordLabel recordLabelId, String title, Date releaseDate, String coverUrl, String type, String description) {
         this.artistId = artistId;
         this.recordLabelId = recordLabelId;
         this.title = title;
         this.releaseDate = releaseDate;
         this.coverUrl = coverUrl;
         this.type = type;
-        this.totalDuration = totalDuration;
         this.description = description;
     }
 

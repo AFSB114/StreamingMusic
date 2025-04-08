@@ -22,7 +22,7 @@ export default function useEntity<T extends { id: number }>(apiUrl: string) {
     fetchEntities();
   }, [fetchEntities]);
 
-  const addEntity = useCallback(async (newEntity: Omit<T, "id">) => {
+  const addEntity = useCallback(async (newEntity: Partial<T>) => {
     try {
       const res = await fetch(`${apiUrl}/`, {
         method: "POST",

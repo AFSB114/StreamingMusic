@@ -56,10 +56,12 @@ export default function RecordLabels() {
         </form>
       </div>
 
-      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-        {recordLabelsList.map((recordLabel) => (
-          <RecordLabelCard key={recordLabel.id} recordLabel={recordLabel} />
-        ))}
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+        {recordLabelsList
+          .sort((a, b) => a.id - b.id)
+          .map((recordLabel) => (
+            <RecordLabelCard key={recordLabel.id} recordLabel={recordLabel} />
+          ))}
       </div>
     </div>
   );

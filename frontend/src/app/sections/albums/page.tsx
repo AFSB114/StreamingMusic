@@ -1,23 +1,20 @@
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/ui/Card";
-import { Disc, Plus, Search, Calendar, Edit, Trash2 } from "lucide-react";
-import Badge from "@/ui/Badge";
-import Image from "next/image";
+"use client";
+
+import AlbumCard from "@/components/AlbumCard";
+import { useAlbumsList } from "@/hooks";
+import { PlusCircle, Search } from "lucide-react";
 import Link from "next/link";
 
 export default function Albums() {
+  const { albumsList } = useAlbumsList();
+
   return (
     <div className="relative overflow-y-auto max-h-full rounded-xl bg-zinc-900 p-3 shadow-sm">
       <div className="sticky top-0 z-40 flex justify-between items-center mb-5 bg-zinc-900 p-2 rounded-lg shadow-lg">
         <div className="w-max">
-          <Link href="/sections/artists/add">
+          <Link href="/sections/albums/add">
             <button className="text-1xl sm:text-2xl gap-2 rounded-xl flex flex-row items-center justify-center transition-colors duration-200 hover:bg-green-600 p-3 hover:cursor-pointer">
-              <Plus className="h-6 w-6" />
+              <PlusCircle className="h-6 w-6" />
               <span>Add Album</span>
             </button>
           </Link>
@@ -56,7 +53,11 @@ export default function Albums() {
       </div>
 
       <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-
+        {albumsList
+          .sort((a, b) => a.id - b.id)
+          .map((album) => (
+          <AlbumCard album={album} key={album.id} />
+        ))}
       </div>
     </div>
   );

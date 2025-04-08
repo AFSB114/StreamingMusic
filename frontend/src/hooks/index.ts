@@ -1,5 +1,6 @@
 // common
 export { default as useEntity } from "@/hooks/common/useEntity";
+export { default as useCustomSelect } from "@/hooks/common/useCustomSelect";
 
 // song
 export { default as useAddSong } from "@/hooks/song/useAddSong";
@@ -20,3 +21,9 @@ export { default as useEditRecordLabel } from "@/hooks/recordLabel/useEditRecord
 export { default as useFiltersRecordLabel } from "@/hooks/recordLabel/useFiltersRecordLabel";
 export { default as useRecordLabelCard } from "@/hooks/recordLabel/useRecordLabelCard";
 export { default as useRecordLabelsList } from "@/hooks/recordLabel/useRecordLabelsList";
+
+// Album
+export { default as useAddAlbum } from "@/hooks/album/useAddAlbum";
+export { default as useAlbumCard } from "@/hooks/album/useAlbumCard";
+export { default as useAlbumsList } from "@/hooks/album/useAlbumsList";
+export { default as useEditAlbum } from "@/hooks/album/useEditAlbum";
