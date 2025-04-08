@@ -49,7 +49,7 @@ export default function useAddAlbum() {
           id: parseInt(value),
         },
       }));
-      console.log(value);
+      // console.log(value);
       return;
     }
 
@@ -60,7 +60,7 @@ export default function useAddAlbum() {
           id: parseInt(value),
         },
       }));
-      console.log(value);
+      // console.log(value);
       return;
     }
 

@@ -8,7 +8,9 @@ import com.sena.basic_crud.model.RecordLabel;
 import com.sena.basic_crud.repository.IAlbum;
 import com.sena.basic_crud.repository.IArtist;
 import com.sena.basic_crud.repository.IRecordLabel;
+import com.sena.basic_crud.specification.AlbumSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -55,6 +57,12 @@ public class AlbumService {
             res = ResponseDTO.error("Album with id: " + id + " not found");
         }
         return res;
+    }
+
+    public ResponseDTO search(String name, String type){
+        Specification<Album> spec = Specification.where(AlbumSpecification.hasName(name)).and(AlbumSpecification.hasType(type));
+        List<Album> Albums = data.findAll(spec);
+        return ResponseDTO.ok("Albums found", Albums);
     }
 
     public ResponseDTO update(int id,AlbumDTO albumDTO) {

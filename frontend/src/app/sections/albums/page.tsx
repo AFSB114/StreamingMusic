@@ -1,12 +1,14 @@
 "use client";
 
 import AlbumCard from "@/components/AlbumCard";
-import { useAlbumsList } from "@/hooks";
+import { albumTypes } from "@/constants";
+import { useAlbumsList, useFiltersAlbum } from "@/hooks";
 import { PlusCircle, Search } from "lucide-react";
 import Link from "next/link";
 
 export default function Albums() {
   const { albumsList } = useAlbumsList();
+  const { filters, handleChange, handleSubmit } = useFiltersAlbum();
 
   return (
     <div className="relative overflow-y-auto max-h-full rounded-xl bg-zinc-900 p-3 shadow-sm">
@@ -19,7 +21,7 @@ export default function Albums() {
             </button>
           </Link>
         </div>
-        <form className="flex gap-2 items-center">
+        <form className="flex gap-2 items-center" onSubmit={handleSubmit}>
           <div>
             <button
               type="submit"
@@ -35,6 +37,8 @@ export default function Albums() {
               name="search"
               placeholder="Search..."
               className="w-full p-2 rounded bg-zinc-800 border border-zinc-700 focus:outline-none focus:ring-red-800 focus:border-red-800 caret-red-500"
+              value={filters.search}
+              onChange={handleChange}
             />
           </div>
           <div>
@@ -42,11 +46,15 @@ export default function Albums() {
               name="type"
               id="type"
               className="w-full p-2 rounded bg-zinc-800 border border-zinc-700 focus:outline-none focus:ring-red-800 focus:border-red-800 caret-red-500"
+              value={filters.type}
+              onChange={handleChange}
             >
               <option value="">Select Type</option>
-              <option value="Solo">Solo</option>
-              <option value="Band">Band</option>
-              <option value="Group">Group</option>
+              {albumTypes.map((type) => (
+                <option key={type.value} value={type.value}>
+                  {type.label}
+                </option>
+              ))}
             </select>
           </div>
         </form>

@@ -41,6 +41,15 @@ public class AlbumController {
         return new ResponseEntity(res, res.getStatus());
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<Object> getAlbumByFilters(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String type
+    ) {
+        ResponseDTO res = albumService.search(name, type);
+        return new ResponseEntity(res, res.getStatus());
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteAlbum(@PathVariable int id) {
         ResponseDTO res = albumService.delete(id);

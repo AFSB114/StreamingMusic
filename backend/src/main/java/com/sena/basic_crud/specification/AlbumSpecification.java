@@ -1,18 +1,18 @@
 package com.sena.basic_crud.specification;
 
-import com.sena.basic_crud.model.Song;
+import com.sena.basic_crud.model.Album;
 import org.springframework.data.jpa.domain.Specification;
 
-public class SongSpecification {
-    public static Specification<Song> hasName(String name) {
+public class AlbumSpecification {
+    public static Specification<Album> hasName(String name) {
         return (root, query, criteriaBuilder) ->
                 name == null ? criteriaBuilder.conjunction() :
                         criteriaBuilder.like(criteriaBuilder.lower(root.get("title")), "%" + name.toLowerCase() + "%");
     }
 
-    public static Specification<Song> hasGenreId(Integer genreId) {
+    public static Specification<Album> hasType(String type) {
         return (root, query, criteriaBuilder) ->
-                genreId == null ? criteriaBuilder.conjunction() :
-                        criteriaBuilder.equal(root.get("genreId").get("id"), genreId);
+                type == null ? criteriaBuilder.conjunction() :
+                        criteriaBuilder.equal(criteriaBuilder.lower(root.get("type")), type);
     }
 }
