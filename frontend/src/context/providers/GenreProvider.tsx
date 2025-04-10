@@ -4,8 +4,9 @@ import { useEntity } from "@/hooks";
 import { GenreType } from "@/types";
 
 export const GenreProvider = ({ children }: { children: ReactNode }) => {
+  const apiUrl = process.env.DEVELOP_NEXT_API_URL
   const { state, addEntity, deleteEntity, updateEntity, getEntityById, searchEntityBy } =
-    useEntity<GenreType>("http://localhost:8085/api/v1/genre");
+    useEntity<GenreType>(`${apiUrl}/genre`);
 
   return (
     <GenreContext.Provider

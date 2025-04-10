@@ -12,6 +12,10 @@ export interface Response<T> {
   errors: string[];
   data: T[];
 }
+export interface selectOptionsType{
+  label: string;
+  value: string | number;
+}
 
 export type OptionType = Record<string, string | number>;
 

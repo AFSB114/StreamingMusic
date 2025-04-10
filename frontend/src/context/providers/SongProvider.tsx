@@ -4,8 +4,9 @@ import { useEntity } from "@/hooks";
 import { SongType } from "@/types";
 
 export const SongProvider = ({ children }: { children: ReactNode }) => {
+  const apiUrl = process.env.DEVELOP_NEXT_API_URL
   const { state, addEntity, deleteEntity, updateEntity, getEntityById, searchEntityBy } =
-    useEntity<SongType>( "http://localhost:8085/api/v1/song");
+    useEntity<SongType>(`${apiUrl}/song`);
 
   return (
     <SongContext.Provider

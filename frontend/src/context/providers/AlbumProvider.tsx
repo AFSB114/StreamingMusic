@@ -4,8 +4,9 @@ import { useEntity } from "@/hooks";
 import { AlbumType } from "@/types";
 
 export const AlbumProvider = ({ children }: { children: ReactNode }) => {
+  const apiUrl = process.env.DEVELOP_NEXT_API_URL
   const { state, addEntity, deleteEntity, updateEntity, getEntityById, searchEntityBy } =
-    useEntity<AlbumType>("http://localhost:8085/api/v1/album");
+    useEntity<AlbumType>(`${apiUrl}/album`);
 
   return (
     <AlbumContext.Provider

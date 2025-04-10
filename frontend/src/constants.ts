@@ -1,4 +1,4 @@
-import { LinkType } from "@/types";
+import { LinkType, selectOptionsType } from "@/types";
 
 export const links: LinkType[] = [
   { name: "Home", href: "/" },
@@ -9,7 +9,26 @@ export const links: LinkType[] = [
   { name: "Songs", href: "/sections/songs" },
 ];
 
-export const albumTypes = [
+export const artistTypes: selectOptionsType[] = [
+  { label: 'Cantante', value: 'singer' },
+  { label: 'Banda', value: 'band' },
+  { label: 'Productor musical', value: 'producer' },
+  { label: 'DJ', value: 'dj' },
+  { label: 'Compositor', value: 'composer' },
+  { label: 'Instrumentista', value: 'instrumentalist' },
+  { label: 'Rapper', value: 'rapper' },
+  { label: 'Guitarrista', value: 'guitarist' },
+  { label: 'Pianista', value: 'pianist' },
+  { label: 'Bajista', value: 'bassist' },
+  { label: 'Percusionista', value: 'percussionist' },
+  { label: 'Cantautor', value: 'singer-songwriter' },
+  { label: 'Orquesta', value: 'orchestra' },
+  { label: 'Corista', value: 'chorus' },
+  { label: 'Solista', value: 'soloist' }
+];
+
+
+export const albumTypes: selectOptionsType[] = [
   { label: "Studio Album", value: "studio" },
   { label: "Live Album", value: "live" },
   { label: "Compilation", value: "compilation" },
