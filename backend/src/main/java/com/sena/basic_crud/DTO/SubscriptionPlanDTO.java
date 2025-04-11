@@ -6,7 +6,7 @@ public class SubscriptionPlanDTO {
 
     private String name;
     private BigDecimal price;
-    private String duration;
+    private int duration;
     private String features;
     private int audioQuality;
     private boolean allowsDownloads;
@@ -15,7 +15,7 @@ public class SubscriptionPlanDTO {
     public SubscriptionPlanDTO() {
     }
 
-    public SubscriptionPlanDTO(String name, BigDecimal price, String duration, String features, int audioQuality, boolean allowsDownloads, boolean adFree) {
+    public SubscriptionPlanDTO(String name, BigDecimal price, int duration, String features, int audioQuality, boolean allowsDownloads, boolean adFree) {
         this.name = name;
         this.price = price;
         this.duration = duration;
@@ -41,11 +41,11 @@ public class SubscriptionPlanDTO {
         this.price = price;
     }
 
-    public String getDuration() {
+    public int getDuration() {
         return duration;
     }
 
-    public void setDuration(String duration) {
+    public void setDuration(int duration) {
         this.duration = duration;
     }
 

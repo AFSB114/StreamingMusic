@@ -131,6 +131,13 @@ export interface SongContextType {
   searchSongs: (params: Record<string, string>) => void;
 }
 
+export interface SubscriptionPlanType {
+  id: number;
+  name: string;
+  price: number;
+  duration: number;
+}
+
 export interface LinkType {
   name: string;
   href: string;

@@ -28,6 +28,7 @@ export default function AddAlbumPage() {
             value={formData.title}
             onChange={handleChange}
             className="w-full p-2 rounded bg-zinc-800 border border-zinc-700 focus:outline-none focus:ring-red-800 focus:border-red-800 caret-red-500"
+            maxLength={255}
             required
           />
         </div>
@@ -37,7 +38,11 @@ export default function AddAlbumPage() {
             name="artistId"
             label="Artist"
             options={artistsList}
-            value={formData.artistId.id === undefined ? "" : formData.artistId.id.toLocaleString()}
+            value={
+              formData.artistId.id === undefined
+                ? ""
+                : formData.artistId.id.toLocaleString()
+            }
             onChange={handleChange}
             optionLabelKey="name"
             optionValueKey="id"
@@ -48,11 +53,15 @@ export default function AddAlbumPage() {
         </div>
 
         <div>
-        <CustomSelect
+          <CustomSelect
             name="recordLabeId"
             label="Record Label"
             options={recordLabelsList}
-            value={formData.recordLabelId.id === undefined ? "" : formData.recordLabelId.id.toLocaleString()}
+            value={
+              formData.recordLabelId.id === undefined
+                ? ""
+                : formData.recordLabelId.id.toLocaleString()
+            }
             onChange={handleChange}
             optionLabelKey="name"
             optionValueKey="id"
@@ -103,6 +112,7 @@ export default function AddAlbumPage() {
             name="coverUrl"
             value={formData.coverUrl || ""}
             onChange={handleChange}
+            maxLength={255}
             className="w-full p-2 rounded bg-zinc-800 border border-zinc-700 focus:outline-none focus:ring-red-800 focus:border-red-800 caret-red-500"
             required
             readOnly
@@ -122,7 +132,7 @@ export default function AddAlbumPage() {
         )}
 
         <div>
-        <CustomSelect
+          <CustomSelect
             name="type"
             label="Type"
             options={albumTypes}
@@ -146,6 +156,7 @@ export default function AddAlbumPage() {
           <button
             type="submit"
             className="px-4 py-2 rounded bg-red-600 hover:bg-red-500 transition-colors"
+            disabled={isLoading}
           >
             {isLoading ? "Saving..." : "Save"}
           </button>

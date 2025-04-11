@@ -26,7 +26,7 @@ export default function ArtistsPage() {
               </button>
             </Link>
           </div>
-          <form className="flex gap-2 items-center" onSubmit={handleSubmit}>|8*
+          <form className="flex gap-2 items-center" onSubmit={handleSubmit}>
             <div>
               <button type="submit" className="text-1xl sm:text-2xl rounded-xl flex flex-row items-center justify-center transition-colors duration-200 hover:bg-red-800 p-3 hover:cursor-pointer">
                 <Search className="h-6 w-6" />

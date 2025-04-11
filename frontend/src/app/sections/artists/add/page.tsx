@@ -1,8 +1,11 @@
 "use client";
 
+import CustomSelect from "@/components/CustomSelect";
+import { artistTypes, countries } from "@/constants";
 import { useAddArtist } from "@/hooks";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+export { countries } from "@/constants";
 
 export default function AddArtistPage() {
   const { formData, handleChange, handleSubmit, isLoading } = useAddArtist();
@@ -25,6 +28,7 @@ export default function AddArtistPage() {
             onChange={handleChange}
             className="w-full p-2 rounded bg-zinc-800 border border-zinc-700 focus:outline-none focus:ring-red-800 focus:border-red-800 caret-red-500"
             required
+            maxLength={255}
           />
         </div>
 
@@ -43,18 +47,19 @@ export default function AddArtistPage() {
         </div>
 
         <div>
-          <label htmlFor="countryOfOrigin" className="block mb-1">
-            Country of Origin
-          </label>
-          <input
-            type="text"
-            id="countryOfOrigin"
+          <CustomSelect
             name="countryOfOrigin"
+            label="Country of Origin"
+            options={countries}
             value={
               formData.countryOfOrigin === null ? "" : formData.countryOfOrigin
             }
             onChange={handleChange}
-            className="w-full p-2 rounded bg-zinc-800 border border-zinc-700 focus:outline-none focus:ring-red-800 focus:border-red-800 caret-red-500"
+            optionLabelKey="label"
+            optionValueKey="value"
+            placeholder="Select Country"
+            maxHeight="150px"
+            required
           />
         </div>
 
@@ -87,6 +92,7 @@ export default function AddArtistPage() {
             className="w-full p-2 rounded bg-zinc-800 border border-zinc-700 focus:outline-none focus:ring-red-800 focus:border-red-800 caret-red-500"
             required
             readOnly
+            maxLength={255}
           />
         </div>
 
@@ -103,21 +109,18 @@ export default function AddArtistPage() {
         )}
 
         <div>
-          <label htmlFor="type" className="block mb-1">
-            Type
-          </label>
-          <select
-            id="type"
+          <CustomSelect
             name="type"
-            className="w-full p-2 rounded bg-zinc-800 border border-zinc-700 focus:outline-none focus:ring-red-800 focus:border-red-800 caret-red-500"
+            label="Type"
+            options={artistTypes}
             value={formData.type === null ? "" : formData.type}
             onChange={handleChange}
-          >
-            <option value="">Select Type</option>
-            <option value="Solo">Solo</option>
-            <option value="Band">Band</option>
-            <option value="Group">Group</option>
-          </select>
+            optionLabelKey="label"
+            optionValueKey="value"
+            placeholder="Select Type"
+            maxHeight="150px"
+            required
+          />
         </div>
 
         <div className="flex space-x-4 pt-4">
@@ -131,6 +134,7 @@ export default function AddArtistPage() {
           <button
             type="submit"
             className="px-4 py-2 rounded bg-red-600 hover:bg-red-500 transition-colors"
+            disabled={isLoading}
           >
             {isLoading ? "Saving..." : "Save"}
           </button>

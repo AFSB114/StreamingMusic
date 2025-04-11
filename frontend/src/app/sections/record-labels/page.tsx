@@ -1,6 +1,7 @@
 "use client";
 
 import RecordLabelCard from "@/components/RecordLabelCard";
+import { countries } from "@/constants";
 import { useRecordLabelsList, useFiltersRecordLabel } from "@/hooks";
 import { PlusCircle, Search } from "lucide-react";
 import Link from "next/link";
@@ -49,8 +50,11 @@ export default function RecordLabels() {
               onChange={handleChange}
             >
               <option value="">Select Country</option>
-              <option value="UK">UK</option>
-              <option value="USA">USA</option>
+              {countries.map((country) => (
+                <option key={country.value} value={country.value}>
+                  {country.label}
+                </option>
+              ))}
             </select>
           </div>
         </form>

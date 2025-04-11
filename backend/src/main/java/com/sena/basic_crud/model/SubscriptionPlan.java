@@ -18,8 +18,8 @@ public class SubscriptionPlan {
     @Column(name = "price", precision = 10, scale = 2, nullable = false)
     private BigDecimal price;
 
-    @Column(name = "duration", length = 50, nullable = false)
-    private String duration;
+    @Column(name = "duration", nullable = false)
+    private int duration;
 
     @Column(name = "features", columnDefinition = "TEXT")
     private String features;
@@ -40,7 +40,7 @@ public class SubscriptionPlan {
 
     }
 
-    public SubscriptionPlan(String name, BigDecimal price, String duration, String features, int audioQuality, boolean allowsDownloads, boolean adFree) {
+    public SubscriptionPlan(String name, BigDecimal price, int duration, String features, int audioQuality, boolean allowsDownloads, boolean adFree) {
         this.name = name;
         this.price = price;
         this.duration = duration;
@@ -74,11 +74,11 @@ public class SubscriptionPlan {
         this.price = price;
     }
 
-    public String getDuration() {
+    public int getDuration() {
         return duration;
     }
 
-    public void setDuration(String duration) {
+    public void setDuration(int duration) {
         this.duration = duration;
     }
 

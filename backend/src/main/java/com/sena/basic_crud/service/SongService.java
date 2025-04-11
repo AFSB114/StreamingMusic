@@ -23,10 +23,12 @@ import java.util.Optional;
 public class SongService {
 
     private final ISong data;
+    private final IAlbum album;
 
     @Autowired
-    public SongService(ISong data) {
+    public SongService(ISong data, IAlbum album) {
         this.data = data;
+        this.album = album;
     }
 
     public ResponseDTO save(SongDTO songDTO) {
@@ -34,6 +36,13 @@ public class SongService {
         if (!errors.isEmpty()) return ResponseDTO.error("Request made wrong", errors);
         Song song = convertToModel(songDTO);
         data.save(song);
+        if (songDTO.getAlbumId() != null) {
+            Optional<Album> optionalAlbum = album.findById(song.getAlbumId().getId());
+            if (optionalAlbum.isPresent()) {
+                Album currentAlbum = optionalAlbum.get();
+                currentAlbum.setTotalDuration(songDTO.getDuration() + currentAlbum.getTotalDuration());
+            }
+        }
         return ResponseDTO.ok("Request made successful, new Song created", song);
     }
 
@@ -50,11 +59,7 @@ public class SongService {
     public ResponseDTO findById(int id) {
         ResponseDTO res;
         Optional<Song> song = data.findById(id);
-        if (song.isPresent()) {
-            res = ResponseDTO.ok("Song found", song.get());
-        } else {
-            res = ResponseDTO.error("Song with id: " + id + " not found");
-        }
+        res = song.map(value -> ResponseDTO.ok("Song found", value)).orElseGet(() -> ResponseDTO.error("Song with id: " + id + " not found"));
         return res;
     }
 

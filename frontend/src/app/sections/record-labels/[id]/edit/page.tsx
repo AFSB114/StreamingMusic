@@ -1,21 +1,30 @@
 "use client";
 
+import CustomSelect from "@/components/CustomSelect";
+import { countries } from "@/constants";
 import { useEditRecordLabel } from "@/hooks";
 import Loading from "@/ui/Loading";
 import NotFound from "@/ui/NotFound";
 import Image from "next/image";
 
 export default function EditRecordLabelPage() {
-  const { handleSubmit, handleChange, handleReturn, formData, isLoading, isFound, id } =
-    useEditRecordLabel();
-  
-    if (isFound === null) {
-      return <Loading />;
-    }
-    
-    if (!isFound) {
-      return <NotFound section="Artist" />;
-    }
+  const {
+    handleSubmit,
+    handleChange,
+    handleReturn,
+    formData,
+    isLoading,
+    isFound,
+    id,
+  } = useEditRecordLabel();
+
+  if (isFound === null) {
+    return <Loading />;
+  }
+
+  if (!isFound) {
+    return <NotFound section="Artist" />;
+  }
 
   return (
     <div className="w-full mx-auto p-6 bg-zinc-900 rounded-xl overflow-y-auto">
@@ -38,16 +47,19 @@ export default function EditRecordLabelPage() {
         </div>
 
         <div>
-          <label htmlFor="country" className="block mb-1">
-            Country
-          </label>
-          <input
-            type="text"
-            id="country"
+          <CustomSelect
             name="country"
-            value={formData.country === null ? "" : formData.country}
+            label="Country"
+            options={countries}
+            value={
+              formData.country === null ? "" : formData.country
+            }
             onChange={handleChange}
-            className="w-full p-2 rounded bg-zinc-800 border border-zinc-700 focus:outline-none focus:ring-red-800 focus:border-red-800 caret-red-500"
+            optionLabelKey="label"
+            optionValueKey="value"
+            placeholder="Select Country"
+            maxHeight="150px"
+            required
           />
         </div>
 
@@ -124,6 +136,7 @@ export default function EditRecordLabelPage() {
           <button
             type="submit"
             className="px-4 py-2 rounded bg-red-600 hover:bg-red-500 transition-colors"
+            disabled={isLoading}
           >
             {isLoading ? "Saving..." : "Save"}
           </button>

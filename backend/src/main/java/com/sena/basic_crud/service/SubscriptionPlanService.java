@@ -62,13 +62,6 @@ public class SubscriptionPlanService {
             errors.add("El precio no puede ser negativo");
         }
 
-        // Validar duración
-        if (planDTO.getDuration() == null || planDTO.getDuration().trim().isEmpty()) {
-            errors.add("La duración es obligatoria");
-        } else if (planDTO.getDuration().length() > 50) {
-            errors.add("La duración no puede exceder los 50 caracteres");
-        }
-
         // Validar calidad de audio (opcional)
         if (planDTO.getAudioQuality() !=  0 && (planDTO.getAudioQuality() < 0 || planDTO.getAudioQuality() > 10)){
             errors.add("La calidad de audio debe estar entre 0 y 10");

@@ -3,6 +3,8 @@
 import { useRouter } from "next/navigation";
 import useAddRecordLabel from "@/hooks/recordLabel/useAddRecordLabel";
 import Image from "next/image";
+import CustomSelect from "@/components/CustomSelect";
+import { countries } from "@/constants";
 
 export default function CreateRecordLabelForm() {
   const { formData, handleChange, handleSubmit, isLoading } =
@@ -26,20 +28,24 @@ export default function CreateRecordLabelForm() {
             onChange={handleChange}
             className="w-full p-2 rounded bg-zinc-800 border border-zinc-700 focus:outline-none focus:ring-red-800 focus:border-red-800 caret-red-500"
             required
+            maxLength={255}
           />
         </div>
 
         <div>
-          <label htmlFor="country" className="block mb-1">
-            Country
-          </label>
-          <input
-            type="text"
-            id="country"
+          <CustomSelect
             name="country"
-            value={formData.country === null ? "" : formData.country}
+            label="Country"
+            options={countries}
+            value={
+              formData.country === null ? "" : formData.country
+            }
             onChange={handleChange}
-            className="w-full p-2 rounded bg-zinc-800 border border-zinc-700 focus:outline-none focus:ring-red-800 focus:border-red-800 caret-red-500"
+            optionLabelKey="label"
+            optionValueKey="value"
+            placeholder="Select Country"
+            maxHeight="150px"
+            required
           />
         </div>
 
@@ -51,7 +57,9 @@ export default function CreateRecordLabelForm() {
             type="date"
             id="foundationDate"
             name="foundationDate"
-            value={formData.foundationDate === null ? "" : formData.foundationDate}
+            value={
+              formData.foundationDate === null ? "" : formData.foundationDate
+            }
             onChange={handleChange}
             max={new Date().toISOString().split("T")[0]}
             min={new Date(1900, 0, 1).toISOString().split("T")[0]}
@@ -114,6 +122,7 @@ export default function CreateRecordLabelForm() {
           <button
             type="submit"
             className="px-4 py-2 rounded bg-red-600 hover:bg-red-500 transition-colors"
+            disabled={isLoading}
           >
             {isLoading ? "Saving..." : "Save"}
           </button>

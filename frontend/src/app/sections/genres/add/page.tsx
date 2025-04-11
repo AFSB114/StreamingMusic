@@ -24,6 +24,7 @@ export default function AddGenrePage() {
             onChange={handleChange}
             className="w-full p-2 rounded bg-zinc-800 border border-zinc-700 focus:outline-none focus:ring-red-800 focus:border-red-800 caret-red-500"
             required
+            maxLength={255}
           />
         </div>
 
@@ -52,6 +53,7 @@ export default function AddGenrePage() {
           <button
             type="submit"
             className="px-4 py-2 rounded bg-red-600 hover:bg-red-500 transition-colors"
+            disabled={isLoading}
           >
             {isLoading ? "Saving..." : "Save"}
           </button>
