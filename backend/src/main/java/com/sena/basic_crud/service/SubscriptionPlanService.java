@@ -25,7 +25,7 @@ public class SubscriptionPlanService {
         } else {
             SubscriptionPlan plan = convertToModel(planDTO);
             data.save(plan);
-            res = ResponseDTO.ok("Request made successful, new SubscriptionPlan created");
+            res = ResponseDTO.ok("Request made successful, new SubscriptionPlan created", plan);
         }
         return res;
     }
@@ -37,12 +37,36 @@ public class SubscriptionPlanService {
     public ResponseDTO findById(int id) {
         ResponseDTO res;
         Optional<SubscriptionPlan> plan = data.findById(id);
-        if (plan.isPresent()) {
-            res = ResponseDTO.ok("Subscription Plan found", plan.get());
-        } else {
-            res = ResponseDTO.error("Subscription Plan with id: "+ id +" not found");
-        }
-        return res;
+        if (plan.isPresent()) return ResponseDTO.ok("Subscription Plan found", plan.get());
+
+        return ResponseDTO.error("Subscription Plan with id: "+ id +" not found");
+    }
+
+    public ResponseDTO delete(int id) {
+        Optional<SubscriptionPlan> plan = data.findById(id);
+        if (plan.isEmpty()) return  ResponseDTO.error("Subscription Plan with id: "+ id +" not found");
+        data.deleteById(id);
+        return ResponseDTO.ok("Subscription Plan deleted");
+    }
+
+    public ResponseDTO update(int id, SubscriptionPlanDTO planDTO) {
+        Optional<SubscriptionPlan> plan = data.findById(id);
+
+        if (plan.isEmpty()) return ResponseDTO.error("Subscription Plan with id: "+ id +" not found");
+
+        SubscriptionPlan currentPlan = plan.get();
+
+        currentPlan.setName(planDTO.getName() != null ? planDTO.getName() : currentPlan.getName());
+        currentPlan.setPrice(planDTO.getPrice() != null ? planDTO.getPrice() : currentPlan.getPrice());
+        currentPlan.setDuration(planDTO.getDuration() != 0 ? planDTO.getDuration() : currentPlan.getDuration());
+        currentPlan.setFeatures(planDTO.getFeatures() != null ? planDTO.getFeatures() : currentPlan.getFeatures());
+        currentPlan.setAudioQuality(planDTO.getAudioQuality() != 0 ? planDTO.getAudioQuality() : currentPlan.getAudioQuality());
+        currentPlan.setAllowsDownloads(planDTO.isAllowsDownloads() != currentPlan.isAllowsDownloads() ? planDTO.isAllowsDownloads() : currentPlan.isAllowsDownloads());
+        currentPlan.setAdFree(planDTO.isAdFree() != currentPlan.isAdFree() ? planDTO.isAdFree() : currentPlan.isAdFree());
+
+        data.save(currentPlan);
+
+        return ResponseDTO.ok("Subscription Plan updated successfully", currentPlan);
     }
 
     public List<String> validate(SubscriptionPlanDTO planDTO) {
@@ -60,11 +84,6 @@ public class SubscriptionPlanService {
             errors.add("El precio es obligatorio");
         } else if (planDTO.getPrice().compareTo(BigDecimal.ZERO) < 0) {
             errors.add("El precio no puede ser negativo");
-        }
-
-        // Validar calidad de audio (opcional)
-        if (planDTO.getAudioQuality() !=  0 && (planDTO.getAudioQuality() < 0 || planDTO.getAudioQuality() > 10)){
-            errors.add("La calidad de audio debe estar entre 0 y 10");
         }
 
         return errors;

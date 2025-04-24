@@ -1,3 +1,5 @@
+"use client";
+
 import { useAlbumsList } from "@/hooks";
 import { AlbumType } from "@/types";
 import { useParams, useRouter } from "next/navigation";

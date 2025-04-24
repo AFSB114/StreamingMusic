@@ -72,7 +72,7 @@ export default function AddSongPage() {
             onChange={handleChange}
             className="w-full p-2 rounded bg-zinc-800 border border-zinc-700 focus:outline-none focus:ring-red-800 focus:border-red-800 caret-red-500"
             required
-            maxLength={255}
+            maxLength={150}
           />
         </div>
 
@@ -87,7 +87,7 @@ export default function AddSongPage() {
             value={formData.composer === null ? "" : formData.composer}
             onChange={handleChange}
             className="w-full p-2 rounded bg-zinc-800 border border-zinc-700 focus:outline-none focus:ring-red-800 focus:border-red-800 caret-red-500"
-            maxLength={255}
+            maxLength={150}
           />
         </div>
 
@@ -99,7 +99,7 @@ export default function AddSongPage() {
             type="number"
             id="duration"
             name="duration"
-            value={formData.duration}
+            value={Number.isNaN(formData.duration) ? 0 : formData.duration}
             onChange={handleChange}
             className="w-full p-2 rounded bg-zinc-800 border border-zinc-700 focus:outline-none focus:ring-red-800 focus:border-red-800 caret-red-500"
             required
@@ -117,7 +117,8 @@ export default function AddSongPage() {
             value={formData.lyrics === null ? "" : formData.lyrics}
             onChange={handleChange}
             className="w-full p-2 rounded bg-zinc-800 border border-zinc-700 focus:outline-none focus:ring-red-800 focus:border-red-800 caret-red-500"
-            rows={4}
+            rows={3}
+            maxLength={500}
           />
         </div>
 
@@ -197,6 +198,7 @@ export default function AddSongPage() {
             optionValueKey="id"
             placeholder="Select Genre"
             maxHeight="150px"
+            variant="up"
             required
           />
         </div>

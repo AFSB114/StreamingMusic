@@ -41,6 +41,7 @@ public class SongService {
             if (optionalAlbum.isPresent()) {
                 Album currentAlbum = optionalAlbum.get();
                 currentAlbum.setTotalDuration(songDTO.getDuration() + currentAlbum.getTotalDuration());
+                album.save(currentAlbum);
             }
         }
         return ResponseDTO.ok("Request made successful, new Song created", song);
@@ -65,7 +66,7 @@ public class SongService {
 
     public ResponseDTO delete(int id) {
         Optional<Song> song = data.findById(id);
-        if (!song.isPresent()) return ResponseDTO.error("Song with id: " + id + " not found");
+        if (song.isEmpty()) return ResponseDTO.error("Song with id: " + id + " not found");
         data.deleteById(id);
         return ResponseDTO.ok("Song deleted");
     }
@@ -73,7 +74,7 @@ public class SongService {
     public ResponseDTO update(int id, SongDTO songDTO) {
         Optional<Song> optionalSong = data.findById(id);
 
-        if (!optionalSong.isPresent())
+        if (optionalSong.isEmpty())
             return ResponseDTO.error("Song with id: " + id + " not found");
 
         Song currentSong = optionalSong.get();

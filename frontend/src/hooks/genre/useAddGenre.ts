@@ -33,9 +33,9 @@ export default function useAddGenre() {
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setIsLoading(true);
     if (isSubmitting) return;
     setIsSubmitting(true);
-    setIsLoading(true);
 
     const newGenre = {
       name: formData.name,

@@ -14,10 +14,10 @@ export default function SongPage() {
     <div className="relative overflow-y-auto max-h-full rounded-xl bg-zinc-900 p-3 shadow-sm">
       <div className="sticky top-0 z-40 flex justify-between items-center mb-5 bg-zinc-900 p-2 rounded-lg shadow-lg">
         <div className="w-max">
-          <Link href="/sections/albums/add">
+          <Link href="/sections/songs/add">
             <button className="text-1xl sm:text-2xl gap-2 rounded-xl flex flex-row items-center justify-center transition-colors duration-200 hover:bg-green-600 p-3 hover:cursor-pointer">
               <PlusCircle className="h-6 w-6" />
-              <span>Add Album</span>
+              <span>Add Song</span>
             </button>
           </Link>
         </div>
@@ -60,7 +60,7 @@ export default function SongPage() {
         </form>
       </div>
 
-      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
         {songsList
           .sort((a, b) => a.id - b.id)
           .map((album) => (

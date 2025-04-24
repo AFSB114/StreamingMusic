@@ -43,11 +43,7 @@ public class ArtistService {
     public ResponseDTO findById(int id) {
         ResponseDTO res;
         Optional<Artist> artist = data.findById(id);
-        if (artist.isPresent()) {
-            res = ResponseDTO.ok("Artist found", artist.get());
-        } else {
-            res = ResponseDTO.error("Artist with id: " + id + " not found");
-        }
+        res = artist.map(value -> ResponseDTO.ok("Artist found", value)).orElseGet(() -> ResponseDTO.error("Artist with id: " + id + " not found"));
         return res;
     }
 
@@ -61,7 +57,7 @@ public class ArtistService {
     public ResponseDTO update(int id, ArtistDTO artistDTO) {
         Optional<Artist> optionalArtist = data.findById(id);
 
-        if (!optionalArtist.isPresent()) return ResponseDTO.error("Artist with id: " + id + " not found");
+        if (optionalArtist.isEmpty()) return ResponseDTO.error("Artist with id: " + id + " not found");
 
         Artist currentArtist = optionalArtist.get();
 
@@ -79,7 +75,7 @@ public class ArtistService {
 
     public  ResponseDTO delete(int id) {
         Optional<Artist> optionalArtist = data.findById(id);
-        if (!optionalArtist.isPresent()) return ResponseDTO.error("Artist with id: " + id + " not found");
+        if (optionalArtist.isEmpty()) return ResponseDTO.error("Artist with id: " + id + " not found");
         data.deleteById(id);
         return ResponseDTO.ok("Delete successfully");
     }
@@ -88,11 +84,11 @@ public class ArtistService {
         List<String> errors = new ArrayList<>();
 
         if (artist.getName() == null || artist.getName().trim().isEmpty()) {
-            errors.add("El nombre del artista es obligatorio");
+            errors.add("The artist's name is required.");
         }
 
         if (artist.getImageUrl() == null || artist.getImageUrl().trim().isEmpty()) {
-            errors.add("La URL de la imagen del artista es obligatoria");
+            errors.add("The artist's image URL is required.");
         }
 
         return errors;

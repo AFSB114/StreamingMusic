@@ -30,6 +30,7 @@ interface CustomSelectProps<T> {
   placeholder?: string;
   maxHeight?: string;
   required?: boolean;
+  variant?: string;
 }
 
 export interface ArtistType {
@@ -134,8 +135,41 @@ export interface SongContextType {
 export interface SubscriptionPlanType {
   id: number;
   name: string;
-  price: number;
+  price: float;
   duration: number;
+  features: string | null;
+  audioQuality: number | null;
+  allowsDownloads: boolean;
+  adFree: boolean;
+}
+
+export interface SubscriptionPlanContextType {
+  subscriptionPlansList: SubscriptionPlanType[];
+  addSubscriptionPlan: (newSubscriptionPlan: Omit<SubscriptionPlanType, "id">) => void;
+  deleteSubscriptionPlan: (id: number) => void;
+  getSubscriptionPlanById: (id: number) => SubscriptionPlanType | null;
+  updateSubscriptionPlan: (id: number, updatedSubscriptionPlan: Partial<SubscriptionPlanType>) => void;
+  searchSubscriptionPlans: (params: Record<string, string>) => void;
+}
+
+export interface UserType {
+  id: number;
+  name: string;
+  email: string;
+  password: string;
+  registrationDate: string;
+  country: string | null;
+  profileImage: string | null;
+  active: boolean;
+}
+
+export interface UserContextType {
+  usersList: Omit<UserType, "password">[];
+  addUser: (newUser: Omit<UserType, "id" | "registrationDate" | "isActive">) => void;
+  deleteUser: (id: number) => void;
+  getUserById: (id: number) => UserType | null;
+  updateUser: (id: number, updatedUser: Partial<UserType>) => void;
+  searchUsers: (params: Record<string, string>) => void;
 }
 
 export interface LinkType {

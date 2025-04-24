@@ -1,7 +1,5 @@
 package com.sena.basic_crud.DTO;
 
-import java.sql.Date;
-
 public class UserDTO {
 
     private String name;

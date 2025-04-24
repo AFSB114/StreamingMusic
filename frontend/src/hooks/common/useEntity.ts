@@ -10,7 +10,7 @@ export default function useEntity<T extends { id: number }>(apiUrl: string) {
   const fetchEntities = useCallback(async () => {
     try {
       const res = await fetch(`${apiUrl}/`, {
-        headers: { "Content-type": "application/json" },
+        headers: { "AUTH-KEY": "159753258456" },
       });
       if (!res.ok) throw new Error("Error fetching entities");
       const data: T[] = await res.json();
@@ -29,7 +29,7 @@ export default function useEntity<T extends { id: number }>(apiUrl: string) {
       try {
         const res = await fetch(`${apiUrl}/`, {
           method: "POST",
-          headers: { "Content-type": "application/json" },
+          headers: { "AUTH-KEY": "159753258456" , "Content-Type": "application/json" },
           body: JSON.stringify(newEntity),
         });
         if (!res.ok) throw new Error("Error adding entity");
@@ -47,7 +47,7 @@ export default function useEntity<T extends { id: number }>(apiUrl: string) {
       try {
         const res = await fetch(`${apiUrl}/${id}`, {
           method: "PUT",
-          headers: { "Content-type": "application/json" },
+          headers: { "AUTH-KEY": "159753258456" , "Content-Type": "application/json"},
           body: JSON.stringify(updatedEntity),
         });
         if (!res.ok) throw new Error("Error updating entity");
@@ -68,7 +68,7 @@ export default function useEntity<T extends { id: number }>(apiUrl: string) {
       try {
         const response = await fetch(`${apiUrl}/${id}`, {
           method: "DELETE",
-          headers: { "Content-type": "application/json" },
+          headers: { "AUTH-KEY": "159753258456" },
         });
         if (!response.ok) throw new Error("Error deleting entity");
         dispatch({ type: "DELETE", payload: id });
@@ -91,7 +91,7 @@ export default function useEntity<T extends { id: number }>(apiUrl: string) {
       const res = await fetch(
         `${apiUrl}/search?${new URLSearchParams(params)}`,
         {
-          headers: { "Content-type": "application/json" },
+          headers: { "AUTH-KEY": "159753258456" },
         }
       );
       if (!res.ok) throw new Error("Error fetching entity by filter");

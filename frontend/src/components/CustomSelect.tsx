@@ -1,5 +1,6 @@
 import { CustomSelectProps } from "@/types";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 export default function CustomSelect<T>({
   name,
@@ -12,6 +13,7 @@ export default function CustomSelect<T>({
   placeholder = "Select an option",
   maxHeight = "200px",
   required = false,
+  variant = "down",
 }: CustomSelectProps<T>) {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -47,27 +49,27 @@ export default function CustomSelect<T>({
             ? String(selectedOption[optionLabelKey])
             : placeholder}
         </span>
-        <svg
-          className={`w-4 h-4 transform transition-transform ${
-            isOpen ? "rotate-180" : ""
-          }`}
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M19 9l-7 7-7-7"
+        {variant === "up" ? (
+          <ChevronUp
+            className={`w-4 h-4 transform transition-transform ${
+              isOpen ? "rotate-180" : ""
+            }`}
           />
-        </svg>
+        ) : (
+          <ChevronDown
+            className={`w-4 h-4 transform transition-transform ${
+              isOpen ? "rotate-180" : ""
+            }`}
+          />
+        )}
       </div>
 
       <div
         className={`
           absolute z-10 mt-1 w-full bg-zinc-800 border border-zinc-700 rounded shadow-lg overflow-y-auto
-          transition-all duration-150 origin-top transform
+          transition-all duration-150 origin-top transform ${
+            variant === "up" ? "bottom-[65%]" : ""
+          }
           ${
             isOpen
               ? "scale-100 opacity-100 pointer-events-auto"

@@ -78,7 +78,7 @@ public class RecordLabelService {
 
     public ResponseDTO delete(int id) {
         Optional<RecordLabel> recordLabel = data.findById(id);
-        if (!recordLabel.isPresent()) return ResponseDTO.error("RecordLabel with id: " + id + " not found");
+        if (recordLabel.isEmpty()) return ResponseDTO.error("RecordLabel with id: " + id + " not found");
         data.deleteById(id);
         return ResponseDTO.ok("RecordLabel deleted");
     }
@@ -88,22 +88,22 @@ public class RecordLabelService {
 
         // Validar nombre
         if (recordLabelDTO.getName() == null || recordLabelDTO.getName().trim().isEmpty()) {
-            errors.add("El nombre es obligatorio");
+            errors.add("The name is required");
         }
 
         // Validar país
         if (recordLabelDTO.getCountry() != null && recordLabelDTO.getCountry().length() > 100) {
-            errors.add("El país no puede exceder los 100 caracteres");
+            errors.add("The country cannot exceed 100 characters.");
         }
 
         // Validar URL del sitio web
         if (recordLabelDTO.getWebsite() != null && recordLabelDTO.getWebsite().length() > 255) {
-            errors.add("La URL del sitio web no puede exceder los 255 caracteres");
+            errors.add("The website URL cannot exceed 255 characters.");
         }
 
         // Validar URL del logo
         if (recordLabelDTO.getLogoUrl() != null && recordLabelDTO.getLogoUrl().length() > 255) {
-            errors.add("La URL del logo no puede exceder los 255 caracteres");
+            errors.add("The logo URL cannot exceed 255 characters.");
         }
 
         return errors;

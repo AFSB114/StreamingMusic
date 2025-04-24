@@ -12,7 +12,7 @@ public class Artist {
     @Column(name = "id") // Column of the Entity
     private int id;
 
-    @Column(name = "name", length = 255, nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "type", length = 50)
@@ -27,7 +27,7 @@ public class Artist {
     @Column(name = "biography", columnDefinition = "TEXT")
     private String biography;
 
-    @Column(name = "image_url", length = 255, nullable = false)
+    @Column(name = "image_url", nullable = false)
     private String imageUrl;
 
     @OneToMany(mappedBy = "artistId", cascade = CascadeType.ALL)

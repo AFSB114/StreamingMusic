@@ -43,6 +43,7 @@ export default function EditArtistPage() {
             onChange={handleChange}
             className="w-full p-2 rounded bg-zinc-800 border border-zinc-700 focus:outline-none focus:ring-red-800 focus:border-red-800 caret-red-500"
             required
+            maxLength={150}
           />
         </div>
 
@@ -56,7 +57,8 @@ export default function EditArtistPage() {
             value={formData.biography === null ? "" : formData.biography}
             onChange={handleChange}
             className="w-full p-2 rounded bg-zinc-800 border border-zinc-700 focus:outline-none focus:ring-red-800 focus:border-red-800 caret-red-500"
-            rows={4}
+            rows={3}
+            maxLength={255}
           />
         </div>
 
@@ -106,6 +108,7 @@ export default function EditArtistPage() {
             className="w-full p-2 rounded bg-zinc-800 border border-zinc-700 focus:outline-none focus:ring-red-800 focus:border-red-800 caret-red-500"
             required
             readOnly
+            maxLength={255}
           />
         </div>
 
@@ -132,6 +135,7 @@ export default function EditArtistPage() {
             optionValueKey="value"
             placeholder="Select Type"
             maxHeight="150px"
+            variant="up"
             required
           />
         </div>

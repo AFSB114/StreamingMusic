@@ -20,7 +20,7 @@ export default function GenreCard({ genre }: { genre: GenreType }) {
       </CardHeader>
 
       <CardContent className="">
-        <p className="text-gray-600 dark:text-gray-300">{genre.description}</p>
+        <p className="text-gray-600 dark:text-gray-300 line-clamp-3">{genre.description}</p>
       </CardContent>
 
       <CardFooter className="grid grid-cols-2 p-3 pb-0 gap-2">

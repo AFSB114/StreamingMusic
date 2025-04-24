@@ -28,7 +28,7 @@ export default function AddAlbumPage() {
             value={formData.title}
             onChange={handleChange}
             className="w-full p-2 rounded bg-zinc-800 border border-zinc-700 focus:outline-none focus:ring-red-800 focus:border-red-800 caret-red-500"
-            maxLength={255}
+            maxLength={150}
             required
           />
         </div>
@@ -98,7 +98,8 @@ export default function AddAlbumPage() {
             value={formData.description || ""}
             onChange={handleChange}
             className="w-full p-2 rounded bg-zinc-800 border border-zinc-700 focus:outline-none focus:ring-red-800 focus:border-red-800 caret-red-500"
-            rows={4}
+            rows={3}
+            maxLength={255}
           />
         </div>
 
@@ -142,6 +143,7 @@ export default function AddAlbumPage() {
             optionValueKey="value"
             placeholder="Select Type"
             maxHeight="150px"
+            variant="up"
           />
         </div>
 

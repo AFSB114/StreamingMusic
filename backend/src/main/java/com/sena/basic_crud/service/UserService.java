@@ -3,6 +3,7 @@ package com.sena.basic_crud.service;
 import com.sena.basic_crud.DTO.ResponseDTO;
 import com.sena.basic_crud.DTO.UserDTO;
 import com.sena.basic_crud.model.User;
+import com.sena.basic_crud.projection.UserView;
 import com.sena.basic_crud.repository.IUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,8 +32,8 @@ public class UserService {
         return res;
     }
 
-    public List<User> findAll(){
-        return data.findAll();
+    public List<UserView> findAll(){
+        return data.findAllBy();
     }
 
     public ResponseDTO findById(int id){

@@ -1,6 +1,7 @@
 package com.sena.basic_crud.controller;
 
 import com.sena.basic_crud.DTO.ResponseDTO;
+import com.sena.basic_crud.DTO.SongDTO;
 import com.sena.basic_crud.DTO.SubscriptionPlanDTO;
 import com.sena.basic_crud.model.SubscriptionPlan;
 import com.sena.basic_crud.service.SubscriptionPlanService;
@@ -23,26 +24,35 @@ public class SubscriptionPlanController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Object> addSubscriptionPlan(@ModelAttribute SubscriptionPlanDTO subscriptionPlan) {
+    public ResponseEntity<Object> addSubscriptionPlan(@RequestBody SubscriptionPlanDTO subscriptionPlan) {
         ResponseDTO res = subscriptionPlanService.save(subscriptionPlan);
-        return new ResponseEntity(res, res.getStatus());
+        return new ResponseEntity<>(res, res.getStatus());
     }
 
     @GetMapping("/")
     public ResponseEntity<Object> getAllSubscriptionPlans() {
         List<SubscriptionPlan> subscriptionPlans = subscriptionPlanService.findAll();
-        return new ResponseEntity(subscriptionPlans, HttpStatus.OK);
+        return new ResponseEntity<>(subscriptionPlans, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> getSubscriptionPlanById(@PathVariable int id) {
         ResponseDTO res = subscriptionPlanService.findById(id);
-        return new ResponseEntity(res, res.getStatus());
+        return new ResponseEntity<>(res, res.getStatus());
     }
 
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<Object> deleteSubscriptionPlan(@PathVariable int id) {
-//        ResponseDTO res = subscriptionPlanService.delete(id);
-//        return new ResponseEntity(res, res.getStatus());
-//    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteSubscriptionPlan(@PathVariable int id) {
+        ResponseDTO res = subscriptionPlanService.delete(id);
+        return new ResponseEntity<>(res, res.getStatus());
+    }
+
+    @PutMapping(value = "/{id}", consumes = {"application/json"})
+    public ResponseEntity<Object> updatePlan(
+            @PathVariable int id,
+            @RequestBody SubscriptionPlanDTO plan
+    ) {
+        ResponseDTO res = subscriptionPlanService.update(id, plan);
+        return new ResponseEntity<>(res, res.getStatus());
+    }
 }

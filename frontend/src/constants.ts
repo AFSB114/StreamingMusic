@@ -1,15 +1,16 @@
 import { LinkType, selectOptionsType } from "@/types";
 
 export const links: LinkType[] = [
-  { name: "Home", href: "/" },
   { name: "Artists", href: "/sections/artists" },
   { name: "Record Labels", href: "/sections/record-labels" },
   { name: "Albums", href: "/sections/albums" },
   { name: "Genres", href: "/sections/genres" },
   { name: "Songs", href: "/sections/songs" },
+  { name: "Subscription Plans", href: "/sections/subscription-plans" },
+  { name: "Users", href: "/sections/users" },
 ];
 
-export const countries: selectOptionsType[]= [
+export const countries: selectOptionsType[] = [
   { value: "AR", label: "Argentina" },
   { value: "BR", label: "Brasil" },
   { value: "CL", label: "Chile" },
@@ -38,21 +39,21 @@ export const countries: selectOptionsType[]= [
 ];
 
 export const artistTypes: selectOptionsType[] = [
-  { label: 'Cantante', value: 'singer' },
-  { label: 'Banda', value: 'band' },
-  { label: 'Productor musical', value: 'producer' },
-  { label: 'DJ', value: 'dj' },
-  { label: 'Compositor', value: 'composer' },
-  { label: 'Instrumentista', value: 'instrumentalist' },
-  { label: 'Rapper', value: 'rapper' },
-  { label: 'Guitarrista', value: 'guitarist' },
-  { label: 'Pianista', value: 'pianist' },
-  { label: 'Bajista', value: 'bassist' },
-  { label: 'Percusionista', value: 'percussionist' },
-  { label: 'Cantautor', value: 'singer-songwriter' },
-  { label: 'Orquesta', value: 'orchestra' },
-  { label: 'Corista', value: 'chorus' },
-  { label: 'Solista', value: 'soloist' }
+  { label: "Singer", value: "singer" },
+  { label: "Band", value: "band" },
+  { label: "Music Producer", value: "producer" },
+  { label: "DJ", value: "dj" },
+  { label: "Composer", value: "composer" },
+  { label: "Instrumentalist", value: "instrumentalist" },
+  { label: "Rapper", value: "rapper" },
+  { label: "Guitarist", value: "guitarist" },
+  { label: "Pianist", value: "pianist" },
+  { label: "Bassist", value: "bassist" },
+  { label: "Percussionist", value: "percussionist" },
+  { label: "Singer-Songwriter", value: "singer-songwriter" },
+  { label: "Orchestra", value: "orchestra" },
+  { label: "Chorus", value: "chorus" },
+  { label: "Soloist", value: "soloist" },
 ];
 
 export const albumTypes: selectOptionsType[] = [

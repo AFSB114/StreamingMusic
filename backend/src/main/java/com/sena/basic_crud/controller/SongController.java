@@ -26,19 +26,19 @@ public class SongController {
     @PostMapping("/")
     public ResponseEntity<Object> addSong(@RequestBody SongDTO song) {
         ResponseDTO res = songService.save(song);
-        return new ResponseEntity(res, res.getStatus());
+        return new ResponseEntity<>(res, res.getStatus());
     }
 
     @GetMapping("/")
     public ResponseEntity<Object> getAllSongs() {
         List<Song> songs = songService.findAll();
-        return new ResponseEntity(songs, HttpStatus.OK);
+        return new ResponseEntity<>(songs, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> getSongById(@PathVariable int id) {
         ResponseDTO res = songService.findById(id);
-        return new ResponseEntity(res, res.getStatus());
+        return new ResponseEntity<>(res, res.getStatus());
     }
 
     @GetMapping("/search")
@@ -47,13 +47,13 @@ public class SongController {
             @RequestParam(required = false) Integer genre
     ) {
         ResponseDTO res = songService.search(name, genre);
-        return new ResponseEntity(res, res.getStatus());
+        return new ResponseEntity<>(res, res.getStatus());
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteSong(@PathVariable int id) {
         ResponseDTO res = songService.delete(id);
-        return new ResponseEntity(res, res.getStatus());
+        return new ResponseEntity<>(res, res.getStatus());
     }
 
     @PutMapping(value = "/{id}", consumes = {"application/json"})
@@ -62,6 +62,6 @@ public class SongController {
             @RequestBody SongDTO song
     ) {
         ResponseDTO res = songService.update(id, song);
-        return new ResponseEntity(res, res.getStatus());
+        return new ResponseEntity<>(res, res.getStatus());
     }
 }

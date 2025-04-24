@@ -81,9 +81,9 @@ public class GenreService {
 
         // Validar nombre
         if (genreDTO.getName() == null || genreDTO.getName().trim().isEmpty()) {
-            errors.add("El nombre es obligatorio");
+            errors.add("The name is required");
         } else if (genreDTO.getName().length() > 255) {
-            errors.add("El nombre no puede exceder los 255 caracteres");
+            errors.add("The name cannot exceed 255 characters.");
         }
 
         return errors;

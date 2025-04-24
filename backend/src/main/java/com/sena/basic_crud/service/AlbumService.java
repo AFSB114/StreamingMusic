@@ -51,11 +51,7 @@ public class AlbumService {
     public ResponseDTO findById(int id) {
         ResponseDTO res;
         Optional<Album> album = data.findById(id);
-        if (album.isPresent()) {
-            res = ResponseDTO.ok("Album found", album.get());
-        } else {
-            res = ResponseDTO.error("Album with id: " + id + " not found");
-        }
+        res = album.map(value -> ResponseDTO.ok("Album found", value)).orElseGet(() -> ResponseDTO.error("Album with id: " + id + " not found"));
         return res;
     }
 
@@ -68,7 +64,7 @@ public class AlbumService {
     public ResponseDTO update(int id,AlbumDTO albumDTO) {
         Optional<Album> optionalAlbum = data.findById(id);
 
-        if (!optionalAlbum.isPresent()) return ResponseDTO.error("Album with id: " + id + " not found");
+        if (optionalAlbum.isEmpty()) return ResponseDTO.error("Album with id: " + id + " not found");
 
         Album currentAlbum = optionalAlbum.get();
         currentAlbum.setArtistId(albumDTO.getArtistId() != null ? albumDTO.getArtistId() : currentAlbum.getArtistId());
@@ -86,7 +82,7 @@ public class AlbumService {
 
     public ResponseDTO delete(int id) {
         Optional<Album> album = data.findById(id);
-        if (!album.isPresent()) return ResponseDTO.error("Album with id: " + id + " not found");
+        if (album.isEmpty()) return ResponseDTO.error("Album with id: " + id + " not found");
         data.delete(album.get());
         return ResponseDTO.ok("Album deleted");
     }
@@ -95,19 +91,19 @@ public class AlbumService {
         List<String> errors = new ArrayList<>();
 
         if (albumDTO.getTitle() == null || albumDTO.getTitle().trim().isEmpty()) {
-            errors.add("El título del álbum es obligatorio " + albumDTO.getTitle());
+            errors.add("The album title is required " + albumDTO.getTitle());
         }
 
         if (albumDTO.getReleaseDate() == null) {
-            errors.add("La fecha de lanzamiento es obligatoria " + albumDTO.getReleaseDate());
+            errors.add("The release date is mandatory " + albumDTO.getReleaseDate());
         }
 
         if (albumDTO.getArtistId() == null || !artistRepository.existsById(albumDTO.getArtistId().getId())) {
-            errors.add("El artista con ID " + albumDTO.getArtistId().getId() + " no existe");
+            errors.add("The artist with ID " + albumDTO.getArtistId().getId() + " does not exist");
         }
 
         if (albumDTO.getRecordLabelId() == null || !recordLabelRepository.existsById(albumDTO.getRecordLabelId().getId())) {
-            errors.add("El sello discográfico con ID " + albumDTO.getRecordLabelId().getId() + " no existe");
+            errors.add("The record label with ID " + albumDTO.getRecordLabelId().getId() + " does not exist");
         }
 
         return errors;

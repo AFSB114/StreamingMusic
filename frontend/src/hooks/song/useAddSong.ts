@@ -38,6 +38,7 @@ export default function useAddSong() {
         imageUrl: `https://picsum.photos/seed/${formattedTitle}/300/300`,
         fileUrl: `songs/${formattedTitle}.mp3`,
       }));
+      // console.log(value);
       return;
     } 
 
@@ -79,11 +80,12 @@ export default function useAddSong() {
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
+    setIsLoading(true);
     if (formData.artistId.id === undefined) {
+      setIsLoading(false);
       alert("Please select an artist");
       return;
     }
-    setIsLoading(true);
 
     const newSong = {
       albumId: (formData.albumId && formData.albumId.id) ? { id: formData.albumId.id } : null,

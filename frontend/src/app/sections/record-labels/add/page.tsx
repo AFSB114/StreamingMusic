@@ -28,7 +28,7 @@ export default function CreateRecordLabelForm() {
             onChange={handleChange}
             className="w-full p-2 rounded bg-zinc-800 border border-zinc-700 focus:outline-none focus:ring-red-800 focus:border-red-800 caret-red-500"
             required
-            maxLength={255}
+            maxLength={150}
           />
         </div>
 

@@ -44,9 +44,9 @@ export default function useAddArtist() {
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setIsLoading(true);
     if (isSubmitting) return;
     setIsSubmitting(true);
-    setIsLoading(true);
 
     const newArtist = {
       name: formData.name,

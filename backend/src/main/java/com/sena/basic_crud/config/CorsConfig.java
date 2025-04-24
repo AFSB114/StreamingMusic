@@ -11,8 +11,8 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 @Configuration
 public class CorsConfig {
 
-    private static final String API_KEY_HEADER = "Content-type";
-    private static final String API_KEY_VALUE = "application/json"; // Mejor usar variables de entorno
+    private static final String API_KEY_HEADER = "AUTH-KEY";
+    private static final String API_KEY_VALUE = "159753258456"; // Mejor usar variables de entorno
 
     @Bean
     public FilterRegistrationBean<CorsFilter> corsFilter() {

@@ -1,3 +1,5 @@
+"use client";
+
 import { useAlbumsList } from "@/hooks";
 import { AlbumType } from "@/types";
 import { useRouter } from "next/navigation";
@@ -72,13 +74,13 @@ export default function useAddAlbum() {
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setIsLoading(true);
     if (isSubmitting) return;
     if (formData.artistId.id === undefined || formData.recordLabelId.id === undefined) {
       alert("Please select an artist and record label");
       return;
     }
     setIsSubmitting(true);
-    setIsLoading(true);
 
 
     const newAlbum = {
