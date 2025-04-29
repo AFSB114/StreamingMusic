@@ -6,8 +6,7 @@ export const links: LinkType[] = [
   { name: "Albums", href: "/sections/albums" },
   { name: "Genres", href: "/sections/genres" },
   { name: "Songs", href: "/sections/songs" },
-  { name: "Subscription Plans", href: "/sections/subscription-plans" },
-  { name: "Users", href: "/sections/users" },
+  { name: "Subscription Plans", href: "/sections/subscription-plans" }
 ];
 
 export const countries: selectOptionsType[] = [

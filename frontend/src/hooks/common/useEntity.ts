@@ -2,10 +2,12 @@
 
 import { entityReducer } from "@/reducers/entityReducer";
 import { Response } from "@/types";
+import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useReducer } from "react";
 
-export default function useEntity<T extends { id: number }>(apiUrl: string) {
+export default function useEntity<T extends { id: number }>(apiUrl: string, section: string) {
   const [state, dispatch] = useReducer(entityReducer<T>, []);
+  const router = useRouter();
 
   const fetchEntities = useCallback(async () => {
     try {
@@ -32,14 +34,24 @@ export default function useEntity<T extends { id: number }>(apiUrl: string) {
           headers: { "AUTH-KEY": "159753258456" , "Content-Type": "application/json" },
           body: JSON.stringify(newEntity),
         });
-        if (!res.ok) throw new Error("Error adding entity");
+        if (!res.ok) {
+          alert("Error adding entity");
+          const response = await res.json();
+
+          for (const error of response.errors) {
+            alert(error);
+          }
+
+          return;
+        };
         const addedEntity: Response<T> = await res.json();
         dispatch({ type: "ADD", payload: addedEntity });
+        router.push(`/sections/${section}}`);
       } catch (error) {
         console.error(error);
       }
     },
-    [apiUrl]
+    [apiUrl, section, router]
   );
 
   const updateEntity = useCallback(

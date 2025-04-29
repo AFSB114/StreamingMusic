@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useAddUser } from "@/hooks"; // Suponiendo que tienes este hook
+import { countries } from "@/constants";
+import CustomSelect from "@/components/CustomSelect";
 
 export default function AddUserPage() {
   const { formData, handleChange, handleSubmit, isLoading } = useAddUser();
@@ -25,7 +27,7 @@ export default function AddUserPage() {
             onChange={handleChange}
             className="w-full p-2 rounded bg-zinc-800 border border-zinc-700"
             required
-            maxLength={255}
+            maxLength={100}
           />
         </div>
 
@@ -57,22 +59,23 @@ export default function AddUserPage() {
             onChange={handleChange}
             className="w-full p-2 rounded bg-zinc-800 border border-zinc-700"
             required
+            minLength={8}
             maxLength={255}
           />
         </div>
 
         <div>
-          <label htmlFor="country" className="block mb-1">
-            Country
-          </label>
-          <input
-            type="text"
-            id="country"
+          <CustomSelect
             name="country"
-            value={formData.country ?? ""}
+            label="Country"
+            options={countries}
+            value={formData.country === null ? "" : formData.country}
             onChange={handleChange}
-            className="w-full p-2 rounded bg-zinc-800 border border-zinc-700"
-            maxLength={100}
+            optionLabelKey="label"
+            optionValueKey="value"
+            placeholder="Select Country"
+            maxHeight="150px"
+            required
           />
         </div>
 
@@ -88,6 +91,8 @@ export default function AddUserPage() {
             onChange={handleChange}
             className="w-full p-2 rounded bg-zinc-800 border border-zinc-700"
             maxLength={255}
+            readOnly
+            required
           />
         </div>
 

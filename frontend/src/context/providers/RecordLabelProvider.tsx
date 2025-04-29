@@ -6,7 +6,7 @@ import { RecordLabelType } from "@/types";
 export const RecordLabelProvider = ({ children }: { children: ReactNode }) => {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL
   const { state, addEntity, deleteEntity, updateEntity, getEntityById, searchEntityBy } =
-    useEntity<RecordLabelType>(`${apiUrl}/record-label`);
+    useEntity<RecordLabelType>(`${apiUrl}/record-label`, "record-labels");
 
   return (
     <RecordLabelContext.Provider

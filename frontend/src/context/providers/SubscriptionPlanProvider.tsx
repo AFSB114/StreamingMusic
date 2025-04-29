@@ -6,7 +6,7 @@ import { SubscriptionPlanType } from "@/types";
 export const SubscriptionPlanProvider = ({ children }: { children: ReactNode }) => {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL
   const { state, addEntity, deleteEntity, updateEntity, getEntityById, searchEntityBy } =
-    useEntity<SubscriptionPlanType>(`${apiUrl}/subscription-plan`);
+    useEntity<SubscriptionPlanType>(`${apiUrl}/subscription-plan`, "subscription-plans");
 
   return (
     <SubscriptionPlanContext.Provider

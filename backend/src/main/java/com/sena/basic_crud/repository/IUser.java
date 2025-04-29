@@ -19,6 +19,9 @@ public interface IUser extends JpaRepository <User, Integer>{
     @Query("SELECT u FROM user_account u")
     List<UserView> findAllBy();
 
+    @Query("SELECT u.email FROM user_account u WHERE u.email = :email")
+    String findByEmail(String email);
+
     @Query("SELECT u FROM user_account u WHERE u.isActive = true")
     List<UserView> findAllActive();
 

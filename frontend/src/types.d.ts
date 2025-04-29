@@ -9,8 +9,8 @@ export interface Response<T> {
   httpStatus: string;
   message: string;
   ok: boolean;
-  errors: string[];
-  data: T[];
+  errors: string[] | null;
+  data: T[] | null;
 }
 export interface selectOptionsType{
   label: string;
@@ -165,7 +165,7 @@ export interface UserType {
 
 export interface UserContextType {
   usersList: Omit<UserType, "password">[];
-  addUser: (newUser: Omit<UserType, "id" | "registrationDate" | "isActive">) => void;
+  addUser: (newUser: Omit<UserType, "id" | "registrationDate" | "active">) => void;
   deleteUser: (id: number) => void;
   getUserById: (id: number) => UserType | null;
   updateUser: (id: number, updatedUser: Partial<UserType>) => void;

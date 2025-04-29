@@ -97,6 +97,8 @@ public class UserService {
             errors.add("El email no puede exceder los 255 caracteres");
         } else if (!isValidEmail(userDTO.getEmail())) {
             errors.add("El formato del email no es válido");
+        } else if (data.findByEmail(userDTO.getEmail()) != null){
+            errors.add("El email ya existe");
         }
 
         // Validar contraseña

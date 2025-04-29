@@ -6,7 +6,7 @@ import { UserType } from "@/types";
 export const UserProvider = ({ children }: { children: ReactNode }) => {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL
   const { state, addEntity, deleteEntity, updateEntity, getEntityById, searchEntityBy } =
-    useEntity<UserType>(`${apiUrl}/user`);
+    useEntity<UserType>(`${apiUrl}/user`, "users");
 
   return (
     <UserContext.Provider
