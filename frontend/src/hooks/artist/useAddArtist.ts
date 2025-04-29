@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation";
 
 export default function useAddArtist() {
   const { addArtist } = useArtistsList();
-  const router = useRouter();
 
   const [formData, setFormData] = useState<Omit<ArtistType, "id">>({
     name: "",
@@ -62,7 +61,6 @@ export default function useAddArtist() {
       await addArtist(newArtist);
       setTimeout(() => {
         setIsLoading(false);
-        router.push("/sections/artists");
       }, 500); 
     } catch (error) {
       console.error(error);

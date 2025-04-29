@@ -4,6 +4,7 @@ import com.sena.basic_crud.DTO.ResponseDTO;
 import com.sena.basic_crud.DTO.SubscriptionDTO;
 import com.sena.basic_crud.model.Subscription;
 import com.sena.basic_crud.repository.ISubscription;
+import com.sena.basic_crud.repository.ISubscriptionPlan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,8 @@ import java.util.Optional;
 public class SubscriptionService {
     @Autowired
     private ISubscription data;
+    @Autowired
+    private ISubscriptionPlan  plan;
 
     public ResponseDTO save(SubscriptionDTO subscriptionDTO) {
         ResponseDTO res;
@@ -35,6 +38,13 @@ public class SubscriptionService {
         return data.findAll();
     }
 
+    public ResponseDTO delete(Integer id) {
+        Optional<Subscription> subscription = data.findById(id);
+        if (subscription.isEmpty()) return ResponseDTO.error("Subscription with id: " + id + " not found");
+        data.deleteById(id);
+        return ResponseDTO.ok("Subscription with id: " + id + " deleted");
+    }
+
     public ResponseDTO findById(int id) {
         ResponseDTO res;
         Optional<Subscription> subscription = data.findById(id);
@@ -51,19 +61,16 @@ public class SubscriptionService {
 
         // Validar usuario
         if (subscriptionDTO.getUserId() == null) {
+            System.out.println(subscriptionDTO.getUserId());
             errors.add("El usuario es obligatorio");
         }
 
         // Validar plan de suscripción
-        if (subscriptionDTO.getSubscriptionPlanId() == null) {
+        if (subscriptionDTO.getSubscriptionPlanId()  == null) {
+            System.out.println(subscriptionDTO.getSubscriptionPlanId());
             errors.add("El plan de suscripción es obligatorio");
-        }
-
-        // Validar estado
-        if (subscriptionDTO.getStatus() == null || subscriptionDTO.getStatus().trim().isEmpty()) {
-            errors.add("El estado es obligatorio");
-        } else if (subscriptionDTO.getStatus().length() > 50) {
-            errors.add("El estado no puede exceder los 50 caracteres");
+        } else if (plan.findById(subscriptionDTO.getSubscriptionPlanId().getId()).isEmpty()) {
+            errors.add("El id del plan de subscription no existe");
         }
 
         // Validar método de pago
@@ -75,12 +82,10 @@ public class SubscriptionService {
     }
 
     public Subscription convertToModel(SubscriptionDTO subscriptionDTO) {
-        Subscription subscription = new Subscription(
+        return new Subscription(
                 subscriptionDTO.getUserId(),
-                subscriptionDTO.getSubscriptionPlanId(),
-                subscriptionDTO.getStatus(),
+                plan.getById(subscriptionDTO.getSubscriptionPlanId().getId()),
                 subscriptionDTO.getPaymentMethod()
         );
-        return subscription;
     }
 }

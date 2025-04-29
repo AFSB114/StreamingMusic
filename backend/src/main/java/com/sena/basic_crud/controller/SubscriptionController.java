@@ -23,26 +23,26 @@ public class SubscriptionController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Object> addSubscription(@ModelAttribute SubscriptionDTO subscription) {
+    public ResponseEntity<Object> addSubscription(@RequestBody SubscriptionDTO subscription) {
         ResponseDTO res = subscriptionService.save(subscription);
-        return new ResponseEntity(res, res.getStatus());
+        return new ResponseEntity<>(res, res.getStatus());
     }
 
     @GetMapping("/")
     public ResponseEntity<Object> getAllSubscriptions() {
         List<Subscription> subscriptions = subscriptionService.findAll();
-        return new ResponseEntity(subscriptions, HttpStatus.OK);
+        return new ResponseEntity<>(subscriptions, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> getSubscriptionById(@PathVariable int id) {
         ResponseDTO res = subscriptionService.findById(id);
-        return new ResponseEntity(res, res.getStatus());
+        return new ResponseEntity<>(res, res.getStatus());
     }
 
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<Object> deleteSubscription(@PathVariable int id) {
-//        ResponseDTO res = subscriptionService.delete(id);
-//        return new ResponseEntity(res, res.getStatus());
-//    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteSubscription(@PathVariable int id) {
+        ResponseDTO res = subscriptionService.delete(id);
+        return new ResponseEntity<>(res, res.getStatus());
+    }
 }

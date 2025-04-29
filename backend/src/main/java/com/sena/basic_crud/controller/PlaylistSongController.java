@@ -23,7 +23,7 @@ public class PlaylistSongController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Object> addPlaylistSong(@ModelAttribute PlaylistSongDTO playlistSong) {
+    public ResponseEntity<Object> addPlaylistSong(@RequestBody PlaylistSongDTO playlistSong) {
         ResponseDTO res = playlistSongService.save(playlistSong);
         return new ResponseEntity<>(res, res.getStatus());
     }
@@ -40,9 +40,9 @@ public class PlaylistSongController {
         return new ResponseEntity<>(res, res.getStatus());
     }
 
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<Object> deletePlaylistSong(@PathVariable int id) {
-//        ResponseDTO res = playlistSongService.delete(id);
-//        return new ResponseEntity(res, res.getStatus());
-//    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deletePlaylistSong(@PathVariable int id) {
+        ResponseDTO res = playlistSongService.delete(id);
+        return new ResponseEntity<>(res, res.getStatus());
+    }
 }

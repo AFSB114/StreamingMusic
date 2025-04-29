@@ -9,8 +9,7 @@ public class PlaylistSongDTO {
     private Playlist playlistId;
     private Song songId;
 
-    public PlaylistSongDTO(int id, Playlist playlistId, Song songId) {
-        this.id = id;
+    public PlaylistSongDTO(Playlist playlistId, Song songId) {
         this.playlistId = playlistId;
         this.songId = songId;
     }

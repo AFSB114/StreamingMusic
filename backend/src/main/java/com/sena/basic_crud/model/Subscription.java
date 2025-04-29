@@ -5,6 +5,8 @@ import org.hibernate.annotations.ColumnDefault;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.OffsetDateTime;
+import java.util.Calendar;
 
 @Entity(name = "subscription")
 public class Subscription {
@@ -38,13 +40,23 @@ public class Subscription {
 
     }
 
-    public Subscription(User userId, SubscriptionPlan subscriptionPlanId, String status, String paymentMethod) {
+    public Subscription(User userId, SubscriptionPlan subscriptionPlanId, String paymentMethod) {
         this.userId = userId;
         this.subscriptionPlanId = subscriptionPlanId;
         this.startDate = Date.valueOf(LocalDate.now());
-        this.renewalDate = this.startDate;
-        this.status = status;
+        this.renewalDate = this.setRenewalDate();
+        this.status = "ACTIVE";
         this.paymentMethod = paymentMethod;
+    }
+
+    private Date setRenewalDate() {
+        Calendar calendar = Calendar.getInstance();
+
+        calendar.setTime(this.startDate);
+        System.out.println(this.subscriptionPlanId.getDuration());
+        calendar.add(Calendar.DAY_OF_MONTH, this.subscriptionPlanId.getDuration());
+
+        return new Date(calendar.getTimeInMillis());
     }
 
     public int getId() {
@@ -60,11 +72,11 @@ public class Subscription {
         this.userId = user_id;
     }
 
-    public SubscriptionPlan getSubscription_plan_id() {
+    public SubscriptionPlan getSubscriptionPlanId() {
         return subscriptionPlanId;
     }
 
-    public void setSubscription_plan_id(SubscriptionPlan subscriptionPlan_id) {
+    public void setSubscriptionPlanId(SubscriptionPlan subscriptionPlan_id) {
         this.subscriptionPlanId = subscriptionPlan_id;
     }
 
@@ -76,12 +88,8 @@ public class Subscription {
         this.startDate = start_date;
     }
 
-    public Date getRenewalDate() {
+    public java.util.Date getRenewalDate() {
         return renewalDate;
-    }
-
-    public void setRenewalDate(Date renewal_date) {
-        this.renewalDate = renewal_date;
     }
 
     public String getStatus() {

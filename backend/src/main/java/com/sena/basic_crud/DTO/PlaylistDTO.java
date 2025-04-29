@@ -6,30 +6,18 @@ import java.sql.Date;
 
 public class PlaylistDTO {
 
-    private int id;
     private User userId;
     private String name;
     private String description;
-    private Date creationDate;
     private boolean isPublic;
     private String imageUrl;
 
-    public PlaylistDTO(int id, User userId, String name, String description, Date creationDate, boolean isPublic, String imageUrl) {
-        this.id = id;
+    public PlaylistDTO(User userId, String name, String description, boolean isPublic, String imageUrl) {
         this.userId = userId;
         this.name = name;
         this.description = description;
-        this.creationDate = creationDate;
         this.isPublic = isPublic;
         this.imageUrl = imageUrl;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public User getUserId() {
@@ -56,20 +44,12 @@ public class PlaylistDTO {
         this.description = description;
     }
 
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
-
     public boolean isPublic() {
         return isPublic;
     }
 
     public void setPublic(boolean aPublic) {
-        this.isPublic = aPublic;
+        isPublic = aPublic;
     }
 
     public String getImageUrl() {

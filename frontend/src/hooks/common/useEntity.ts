@@ -46,7 +46,7 @@ export default function useEntity<T extends { id: number }>(apiUrl: string, sect
         };
         const addedEntity: Response<T> = await res.json();
         dispatch({ type: "ADD", payload: addedEntity });
-        router.push(`/sections/${section}}`);
+        router.push(`/sections/${section}`);
       } catch (error) {
         console.error(error);
       }
