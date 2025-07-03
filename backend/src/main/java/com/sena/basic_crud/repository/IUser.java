@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IUser extends JpaRepository <User, Integer>{
     @Modifying
@@ -20,7 +21,10 @@ public interface IUser extends JpaRepository <User, Integer>{
     List<UserView> findAllBy();
 
     @Query("SELECT u.email FROM user_account u WHERE u.email = :email")
-    String findByEmail(String email);
+    String findByEmailString(String email);
+
+    @Query("SELECT u FROM user_account u WHERE u.email = :email")
+    Optional<User> findByEmail(String email);
 
     @Query("SELECT u FROM user_account u WHERE u.isActive = true")
     List<UserView> findAllActive();

@@ -2,11 +2,12 @@ package com.sena.basic_crud.service;
 
 import com.sena.basic_crud.DTO.ResponseDTO;
 import com.sena.basic_crud.DTO.UserDTO;
+import com.sena.basic_crud.DTO.UserLogin;
+import com.sena.basic_crud.DTO.UserRegister;
 import com.sena.basic_crud.model.User;
 import com.sena.basic_crud.projection.UserView;
 import com.sena.basic_crud.repository.IUser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,17 +20,21 @@ public class UserService {
     @Autowired
     private IUser data;
 
-    public ResponseDTO save(UserDTO userDTO){
+    public ResponseDTO register(UserRegister userRegister){
         ResponseDTO res;
-        List<String> errors = validateUser(userDTO);
+        List<String> errors = validateUser(userRegister);
         if (errors != null && !errors.isEmpty()) {
             res = ResponseDTO.error("Request made wrong", errors);
         } else {
-            User user = convertToModel(userDTO);
+            User user = convertToModel(userRegister);
             data.save(user);
             res = ResponseDTO.ok("User saved successfully");
         }
         return res;
+    }
+
+    public ResponseDTO login(UserLogin user) {
+        return null;
     }
 
     public List<UserView> findAll(){
@@ -80,7 +85,7 @@ public class UserService {
         return res;
     }
 
-    public List<String> validateUser(UserDTO userDTO) {
+    public List<String> validateUser(UserRegister userDTO) {
         List<String> errors = new ArrayList<>();
 
         // Validar nombre
@@ -97,7 +102,7 @@ public class UserService {
             errors.add("El email no puede exceder los 255 caracteres");
         } else if (!isValidEmail(userDTO.getEmail())) {
             errors.add("El formato del email no es válido");
-        } else if (data.findByEmail(userDTO.getEmail()) != null){
+        } else if (data.findByEmailString(userDTO.getEmail()) != null){
             errors.add("El email ya existe");
         }
 
@@ -134,14 +139,14 @@ public class UserService {
         return pattern.matcher(email).matches();
     }
 
-    public User convertToModel(UserDTO userDTO){
-        User user = new User(
-                userDTO.getName(),
-                userDTO.getEmail(),
-                userDTO.getPassword(),
-                userDTO.getCountry(),
-                userDTO.getProfileImage()
+    public User convertToModel(UserRegister userRegister){
+        return new User(
+                userRegister.getName(),
+                userRegister.getEmail(),
+                userRegister.getPassword(),
+                userRegister.getCountry(),
+                userRegister.getProfileImage()
         );
-        return user;
     }
+
 }

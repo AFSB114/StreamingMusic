@@ -43,6 +43,9 @@ public class User {
     @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL)
     private List<Playlist> Playlists;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Token> tokens;
+
     public User() {
 
     }
@@ -59,6 +62,10 @@ public class User {
 
     public int getId() {
         return id;
+    }
+
+    public String getIdString() {
+        return String.valueOf(id);
     }
 
     public void setId(int user_id) {

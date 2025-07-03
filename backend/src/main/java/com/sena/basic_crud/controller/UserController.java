@@ -1,9 +1,9 @@
 package com.sena.basic_crud.controller;
 
-import com.sena.basic_crud.DTO.ResponseDTO;
-import com.sena.basic_crud.DTO.UserDTO;
+import com.sena.basic_crud.DTO.*;
 import com.sena.basic_crud.model.User;
 import com.sena.basic_crud.projection.UserView;
+import com.sena.basic_crud.service.AuthService;
 import com.sena.basic_crud.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,16 +17,25 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    private final AuthService authService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, AuthService authService) {
         this.userService = userService;
+        this.authService = authService;
     }
 
-    @PostMapping("/")
-    public ResponseEntity<Object> addUserForm(@RequestBody UserDTO user) {
-        ResponseDTO res = userService.save(user);
-        return new ResponseEntity<>(res, res.getStatus());
+    @PostMapping("/register")
+    public ResponseEntity<TokenResponse> registerUser(@RequestBody UserRegister user) {
+        System.out.print("Security Filter Chain <UNK>");
+        var res = authService.register(user);
+        return ResponseEntity.ok(res);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<TokenResponse> loginUser(@RequestBody UserLogin user) {
+        TokenResponse res = authService.login(user);
+        return ResponseEntity.ok(res);
     }
 
     @GetMapping("/")
