@@ -4,6 +4,7 @@ import com.sena.basic_crud.DTO.*;
 import com.sena.basic_crud.model.User;
 import com.sena.basic_crud.projection.UserView;
 import com.sena.basic_crud.service.AuthService;
+import com.sena.basic_crud.service.JwtService;
 import com.sena.basic_crud.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,25 +18,13 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
-    private final AuthService authService;
+    private final JwtService jwtService;
+
 
     @Autowired
-    public UserController(UserService userService, AuthService authService) {
+    public UserController(UserService userService, AuthService authService, JwtService jwtService) {
         this.userService = userService;
-        this.authService = authService;
-    }
-
-    @PostMapping("/register")
-    public ResponseEntity<TokenResponse> registerUser(@RequestBody UserRegister user) {
-        System.out.print("Security Filter Chain <UNK>");
-        var res = authService.register(user);
-        return ResponseEntity.ok(res);
-    }
-
-    @PostMapping("/login")
-    public ResponseEntity<TokenResponse> loginUser(@RequestBody UserLogin user) {
-        TokenResponse res = authService.login(user);
-        return ResponseEntity.ok(res);
+        this.jwtService = jwtService;
     }
 
     @GetMapping("/")
@@ -60,5 +49,12 @@ public class UserController {
     public ResponseEntity<Object> updateUser(@PathVariable int id, @ModelAttribute UserDTO user) {
         ResponseDTO res = userService.update(id, user);
         return new ResponseEntity<>(res, res.getStatus());
+    }
+
+    @PostMapping("/change-pass")
+    public ResponseEntity<?> changePassUser(@RequestBody NewPass newPass, @RequestHeader("Authorization") String authHeader) {
+        String token = authHeader.substring(7);
+        var res = userService.changePass(newPass, token);
+        return ResponseEntity.ok(res);
     }
 }

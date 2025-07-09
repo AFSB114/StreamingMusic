@@ -26,16 +26,23 @@ public class JwtService {
     @Value("${spring.security.jwt.refresh-token.expiration}")
     private Long refreshTokenExpiration;
 
+    @Value("${spring.security.jwt.recovery-pass.expiration}")
+    private Long recoveryPassExpiration;
+
     public JwtService(IToken iToken) {
         this.iToken = iToken;
     }
 
     public String generateToken(User user){
-        return buildToken(user, tokenExpiration);
+        return buildToken(user, tokenExpiration, Map.of("type", "access_token"));
     }
 
     public String generateRefreshToken(User user){
         return buildToken(user, refreshTokenExpiration);
+    }
+
+    public String generateRecoveryPassToken(User user){
+        return buildToken(user, recoveryPassExpiration, Map.of("type", "recovery_pass_token"));
     }
 
     private String buildToken(User user, Long expiration) {
@@ -49,18 +56,36 @@ public class JwtService {
                 .compact();
     }
 
+    private String buildToken(User user, Long expiration, Map<String, Object> claims) {
+        return Jwts.builder()
+                .id(user.getIdString())
+                .claims(claims)
+                .subject(user.getEmail())
+                .issuedAt(new Date(System.currentTimeMillis()))
+                .expiration(new Date(System.currentTimeMillis() + expiration))
+                .signWith(getSecretKey())
+                .compact();
+    }
+
     private SecretKey getSecretKey() {
         byte[] encodedKey = Decoders.BASE64.decode(secretKey);
         return Keys.hmacShaKeyFor(encodedKey);
     }
 
-    public String extractUserEmail(String refreshToken) {
-        Claims claims = Jwts.parser()
+    private Claims getClaimsFromToken(String token) {
+        return Jwts.parser()
                 .verifyWith(getSecretKey())
                 .build()
-                .parseSignedClaims(refreshToken)
+                .parseSignedClaims(token)
                 .getPayload();
-        return claims.getSubject();
+    }
+
+    public String extractUserEmail(String token) {
+        return getClaimsFromToken(token).getSubject();
+    }
+
+    public String extractTypeToken(String token) {
+        return getClaimsFromToken(token).get("type").toString();
     }
 
     public boolean isTokenValid(String token, User user) {

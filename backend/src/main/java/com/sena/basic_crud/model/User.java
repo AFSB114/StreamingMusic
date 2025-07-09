@@ -1,5 +1,6 @@
 package com.sena.basic_crud.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.hibernate.annotations.ColumnDefault;
 
@@ -44,7 +45,12 @@ public class User {
     private List<Playlist> Playlists;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Token> tokens;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<RecoveryRequest> recoveryRequests;
 
     public User() {
 

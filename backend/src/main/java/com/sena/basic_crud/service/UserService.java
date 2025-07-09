@@ -1,13 +1,13 @@
 package com.sena.basic_crud.service;
 
-import com.sena.basic_crud.DTO.ResponseDTO;
-import com.sena.basic_crud.DTO.UserDTO;
-import com.sena.basic_crud.DTO.UserLogin;
-import com.sena.basic_crud.DTO.UserRegister;
+import com.sena.basic_crud.DTO.*;
 import com.sena.basic_crud.model.User;
 import com.sena.basic_crud.projection.UserView;
 import com.sena.basic_crud.repository.IUser;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,9 +16,12 @@ import java.util.Optional;
 import java.util.regex.Pattern;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
-    @Autowired
-    private IUser data;
+    private final IUser data;
+    private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
+    private final RecoveryRequestService recoveryRequestService;
 
     public ResponseDTO register(UserRegister userRegister){
         ResponseDTO res;
@@ -149,4 +152,15 @@ public class UserService {
         );
     }
 
+    public boolean changePass(NewPass newPass, String token) {
+        String userEmail = jwtService.extractUserEmail(token);
+        User user = data.findByEmail(userEmail).orElse(null);
+        if (user == null) throw new IllegalArgumentException("El email no existe");
+
+        user.setPassword(passwordEncoder.encode(newPass.getPassword()));
+        data.save(user);
+
+        recoveryRequestService.revokeUserToken(token);
+        return true;
+    }
 }
