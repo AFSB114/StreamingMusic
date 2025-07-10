@@ -1,6 +1,5 @@
 package com.sena.basic_crud.jwt;
 
-import com.sena.basic_crud.model.Token;
 import com.sena.basic_crud.model.User;
 import com.sena.basic_crud.model.Validation;
 import com.sena.basic_crud.repository.IRecoveryRequest;
@@ -42,9 +41,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     ) throws ServletException, IOException {
 
         String path = request.getServletPath();
-        System.out.println("Path: " + path);
-        if (path.contains("/api/v1/auth") && !path.equals("/api/v1/auth/logout")) {
-
+        if (path.equals("/api/v1/auth")) {
+            System.out.println("Path: " + path);
             filterChain.doFilter(request, response);
             return;
         }
