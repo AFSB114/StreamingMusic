@@ -21,7 +21,8 @@ public class RecoveryRequestService {
 
     public void revokeAllUserToken(User user){
         List<RecoveryRequest> validUserTokens = recoveryRequestRepository.findAllValidTokensByUser(user.getId());
-        if (validUserTokens.isEmpty()) throw new UsernameNotFoundException("Invalid email or password");
+        if (validUserTokens.isEmpty()) return;
+        System.out.println("Revoke All User Tokens");
         for (RecoveryRequest recoveryRequest : validUserTokens) {
             recoveryRequest.setExpired(true);
             recoveryRequest.setLocked(true);

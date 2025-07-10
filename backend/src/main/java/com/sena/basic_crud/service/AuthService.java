@@ -123,7 +123,11 @@ public class AuthService {
         User user = userRepository.findByEmail(recoveryPass.getEmail()).orElse(null);
         if (user == null) throw new UsernameNotFoundException("Invalid email");
 
+        System.out.println("Recovery Pass Request Get User");
+
         String token = jwtService.generateRecoveryPassToken(user);
+
+        System.out.println("Recovery Pass Token Get User");
 
         recoveryRequestService.revokeAllUserToken(user);
         saveRecoveryPassToken(user, token);
@@ -134,7 +138,7 @@ public class AuthService {
         context.setVariable("token", token);
 
         String emailHtml = templateEngine.process("RecoveryPassEmail.html", context);
-
+        System.out.println("Begin Send Mail");
         mailService.sendMail(emailHtml, user.getEmail(), "Reset Password");
 
         return null;

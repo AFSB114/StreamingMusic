@@ -21,7 +21,6 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<TokenResponse> registerUser(@RequestBody UserRegister user) {
-        System.out.print("Security Filter Chain <UNK>");
         var res = authService.register(user);
         return ResponseEntity.ok(res);
     }
@@ -34,6 +33,7 @@ public class AuthController {
 
     @PostMapping("/recovery-pass")
     public ResponseEntity<?> recoveryPassUser(@RequestBody RecoveryPassDTO recoveryPass) {
+        System.out.println("Recovery Pass Request");
         var res = authService.recoveryPass(recoveryPass);
         return ResponseEntity.ok(res);
     }
